@@ -15,10 +15,9 @@ const PlusPage = () => {
   const [userInfo, setUserInfo] = useState<UserInfo>({});
 
   useEffect(() => {
-    console.log(window.receiveUserInfo);
-    window.receiveUserInfo = (info: UserInfo) => {
+    window.receiveUserInfo = function (info: UserInfo) {
       setUserInfo(info);
-      console.log(userInfo);
+      console.log('Received user info : ', info);
     };
   }, []);
 
