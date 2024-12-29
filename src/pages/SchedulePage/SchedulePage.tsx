@@ -13,7 +13,7 @@ const SchedulePage = () => {
       window.webkit.messageHandlers &&
       window.webkit.messageHandlers.webViewReady
     ) {
-      window.webkit.messageHandlers.webViewReady.postMessage('WebView Ready');
+      window.webkit.messageHandlers.webViewReady.postMessage('WebViewReady');
     }
 
     // receiveUserInfo 함수 정의
