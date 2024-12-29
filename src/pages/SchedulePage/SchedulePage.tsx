@@ -20,7 +20,6 @@ const SchedulePage = () => {
     window.receiveUserInfo = function (info) {
       console.log('Received info:', info);
       setUserInfo(info);
-      alert(`네이티브 통신 성공! 받은 데이터: ${JSON.stringify(info)}`);
       return info;
     };
   }, []);
