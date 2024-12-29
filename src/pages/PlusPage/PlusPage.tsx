@@ -26,7 +26,7 @@ const PlusPage = () => {
 
   return (
     <S.AddPageContainer>
-      {<p>{userInfo}</p>}
+      <p>{userInfo}</p>
       <UserProfile />
       <S.AddPageBelowContainer>
         <AddPageContainer title={'정보'} contentTitles={addPageInfoTitles} />
