@@ -14,13 +14,19 @@ const PlusPage = () => {
   const addPageSettingTitles = ['로그아웃', '회원탈퇴'];
   const [userInfo, setUserInfo] = useState('');
 
-  window.receiveUserInfo = function (info: string) {
-    setUserInfo(info);
-    console.log('Received user info : ', info);
-  };
+  useEffect(() => {
+    window.receiveUserInfo = function (info: string) {
+      console.log('connected!');
+      setUserInfo(info);
+      console.log('Received user info : ', info);
+      alert(`네이티브 통신 성공! 받은 데이터: ${JSON.stringify(info)}`);
+      return info;
+    };
+  }, []);
 
   return (
     <S.AddPageContainer>
+      {<p>{userInfo}</p>}
       <UserProfile />
       <S.AddPageBelowContainer>
         <AddPageContainer title={'정보'} contentTitles={addPageInfoTitles} />
