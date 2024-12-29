@@ -14,12 +14,10 @@ const PlusPage = () => {
   const addPageSettingTitles = ['로그아웃', '회원탈퇴'];
   const [userInfo, setUserInfo] = useState('');
 
-  useEffect(() => {
-    window.receiveUserInfo = function (info: string) {
-      setUserInfo(info);
-      console.log('Received user info : ', info);
-    };
-  }, []);
+  window.receiveUserInfo = function (info: string) {
+    setUserInfo(info);
+    console.log('Received user info : ', info);
+  };
 
   return (
     <S.AddPageContainer>
