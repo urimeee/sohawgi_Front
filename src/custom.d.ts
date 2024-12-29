@@ -16,6 +16,9 @@ interface Window {
       webViewReady?: {
         postMessage: (message: any) => void;
       };
+      logoutHandler?: {
+        postMessage: (message: any) => void;
+      };
     };
   };
 }
