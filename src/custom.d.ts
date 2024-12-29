@@ -10,4 +10,11 @@ declare module '*.png' {
 
 interface Window {
   receiveUserInfo?: (userInfo: import('./types/userInfo').UserInfo) => void;
+  webkit?: {
+    messageHandlers?: {
+      webViewReady?: {
+        postMessage: (message: any) => void;
+      };
+    };
+  };
 }

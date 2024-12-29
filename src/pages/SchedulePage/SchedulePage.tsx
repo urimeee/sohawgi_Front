@@ -7,12 +7,19 @@ const SchedulePage = () => {
   const [userInfo, setUserInfo] = useState();
 
   useEffect(() => {
-    window.receiveUserInfo = function (info: any) {
-      console.log('connected!');
-      setUserInfo(info);
-      console.log('Received user info : ', info);
+    // WebView가 로드 완료되었음을 Swift에 알림
+    if (
+      window.webkit &&
+      window.webkit.messageHandlers &&
+      window.webkit.messageHandlers.webViewReady
+    ) {
+      window.webkit.messageHandlers.webViewReady.postMessage('WebView Ready');
+    }
+
+    // receiveUserInfo 함수 정의
+    window.receiveUserInfo = function (info) {
+      console.log('Received info:', info);
       alert(`네이티브 통신 성공! 받은 데이터: ${JSON.stringify(info)}`);
-      return 'success';
     };
   }, []);
 
