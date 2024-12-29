@@ -20,7 +20,7 @@ const PlusPage = () => {
       setUserInfo(info);
       console.log('Received user info : ', info);
       alert(`네이티브 통신 성공! 받은 데이터: ${JSON.stringify(info)}`);
-      return info;
+      return 'success';
     };
   }, []);
 
