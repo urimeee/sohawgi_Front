@@ -4,10 +4,10 @@ import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
 import * as S from './SchedulePage.style';
 
 const SchedulePage = () => {
-  const [userInfo, setUserInfo] = useState('');
+  const [userInfo, setUserInfo] = useState();
 
   useEffect(() => {
-    window.receiveUserInfo = function (info: string) {
+    window.receiveUserInfo = function (info: any) {
       console.log('connected!');
       setUserInfo(info);
       console.log('Received user info : ', info);
