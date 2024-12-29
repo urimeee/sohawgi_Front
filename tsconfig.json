@@ -11,10 +11,14 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-
+    "typeRoots": [
+      "@types"
+    ]
   },
   "include": [
-    "src/**/*"
+    "src",
+    "src/custom.d.ts",
+    ".eslintrc.cjs"
   ],
   "exclude": [
     "node_modules"

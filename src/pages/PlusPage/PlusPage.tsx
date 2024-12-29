@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // import css
 import * as S from './PlusPage.style';
@@ -7,10 +7,20 @@ import * as S from './PlusPage.style';
 import UserProfile from '../../components/UserProfile/UserProfile';
 import AddPageContainer from '../../components/AddPageContainer/AddPageContainer';
 import VersionInfo from '../../components/VersionInfo/VersionInfo';
+import { UserInfo } from '../../types/userInfo';
 
 const PlusPage = () => {
   const addPageInfoTitles = ['서비스 이용약관', '개인정보 처리방침'];
   const addPageSettingTitles = ['로그아웃', '회원탈퇴'];
+  const [userInfo, setUserInfo] = useState<UserInfo>({});
+
+  useEffect(() => {
+    console.log(window.receiveUserInfo);
+    window.receiveUserInfo = (info: UserInfo) => {
+      setUserInfo(info);
+      console.log(userInfo);
+    };
+  }, []);
 
   return (
     <S.AddPageContainer>
