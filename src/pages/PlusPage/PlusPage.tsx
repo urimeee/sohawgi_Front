@@ -12,21 +12,9 @@ import VersionInfo from '../../components/VersionInfo/VersionInfo';
 const PlusPage = () => {
   const addPageInfoTitles = ['서비스 이용약관', '개인정보 처리방침'];
   const addPageSettingTitles = ['로그아웃', '회원탈퇴'];
-  const [userInfo, setUserInfo] = useState('');
-
-  useEffect(() => {
-    window.receiveUserInfo = function (info: string) {
-      console.log('connected!');
-      setUserInfo(info);
-      console.log('Received user info : ', info);
-      alert(`네이티브 통신 성공! 받은 데이터: ${JSON.stringify(info)}`);
-      return 'success';
-    };
-  }, []);
 
   return (
     <S.AddPageContainer>
-      <p>{userInfo}</p>
       <UserProfile />
       <S.AddPageBelowContainer>
         <AddPageContainer title={'정보'} contentTitles={addPageInfoTitles} />
