@@ -39,14 +39,14 @@ const ScheduleCard = () => {
 
       const data = await response.json();
       console.log(response);
-      setScheduleList(data);
+      // setScheduleList(data);
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    getSchedules();
+    // getSchedules();
   }, []);
 
   return (
