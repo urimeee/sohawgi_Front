@@ -19,7 +19,9 @@ const SchedulePage = () => {
     // receiveUserInfo 함수 정의
     window.receiveUserInfo = function (info) {
       console.log('Received info:', info);
+      setUserInfo(info);
       alert(`네이티브 통신 성공! 받은 데이터: ${JSON.stringify(info)}`);
+      return info;
     };
   }, []);
 
@@ -30,6 +32,7 @@ const SchedulePage = () => {
   return (
     <S.Container>
       <button onClick={buttonOnClick}>버튼</button>
+
       <TextField />
       <ScheduleCard />
     </S.Container>
