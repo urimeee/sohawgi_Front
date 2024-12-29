@@ -21,14 +21,30 @@ const AddPageContainer = ({ title, contentTitles }: Props) => {
         console.log('접근 가능한 링크가 없습니다.');
       }
     } else {
-      if (
-        window.webkit &&
-        window.webkit.messageHandlers &&
-        window.webkit.messageHandlers.logoutHandler
-      ) {
-        window.webkit.messageHandlers.logoutHandler.postMessage('logout');
-      } else {
-        console.error('Logout handler not found');
+      // title === '설정'
+      if (contentTitle === '로그아웃') {
+        if (
+          window.webkit &&
+          window.webkit.messageHandlers &&
+          window.webkit.messageHandlers.logoutHandler
+        ) {
+          window.webkit.messageHandlers.logoutHandler.postMessage('logout');
+        } else {
+          console.error('Logout handler not found');
+        }
+      }
+      if (contentTitle === '회원탈퇴') {
+        if (
+          window.webkit &&
+          window.webkit.messageHandlers &&
+          window.webkit.messageHandlers.deleteAccountHandler
+        ) {
+          window.webkit.messageHandlers.deleteAccountHandler.postMessage(
+            'deleteAccount',
+          );
+        } else {
+          console.error('DeleteAccount handler not found');
+        }
       }
     }
   };

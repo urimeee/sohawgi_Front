@@ -19,6 +19,9 @@ interface Window {
       logoutHandler?: {
         postMessage: (message: any) => void;
       };
+      deleteAccountHandler?: {
+        postMessage: (message: any) => void;
+      };
     };
   };
 }
