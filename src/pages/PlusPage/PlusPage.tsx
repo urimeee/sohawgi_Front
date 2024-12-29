@@ -7,15 +7,15 @@ import * as S from './PlusPage.style';
 import UserProfile from '../../components/UserProfile/UserProfile';
 import AddPageContainer from '../../components/AddPageContainer/AddPageContainer';
 import VersionInfo from '../../components/VersionInfo/VersionInfo';
-import { UserInfo } from '../../types/userInfo';
+// import { UserInfo } from '../../types/userInfo';
 
 const PlusPage = () => {
   const addPageInfoTitles = ['서비스 이용약관', '개인정보 처리방침'];
   const addPageSettingTitles = ['로그아웃', '회원탈퇴'];
-  const [userInfo, setUserInfo] = useState<UserInfo>({});
+  const [userInfo, setUserInfo] = useState('');
 
   useEffect(() => {
-    window.receiveUserInfo = function (info: UserInfo) {
+    window.receiveUserInfo = function (info: string) {
       setUserInfo(info);
       console.log('Received user info : ', info);
     };
