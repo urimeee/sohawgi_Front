@@ -10,8 +10,8 @@ export const api = axios.create({
 // 요청 인터셉터
 api.interceptors.request.use(
   (config) => {
-    // const accessToken = localStorage.getItem('accessToken');
-    const accessToken = `${process.env.REACT_APP_X_ACCESS_TOKEN}`;
+    const accessToken = localStorage.getItem('accessToken');
+    // const accessToken = `${process.env.REACT_APP_X_ACCESS_TOKEN}`;
     const refreshToken = `${process.env.REACT_APP_X_REFRESH_TOKEN}`;
 
     if (accessToken) {
@@ -53,8 +53,8 @@ function handleErrorInTokenRefresh() {
   if (
     window.webkit &&
     window.webkit.messageHandlers &&
-    window.webkit.messageHandlers.webViewReady
+    window.webkit.messageHandlers.logoutHandler
   ) {
-    window.webkit.messageHandlers.webViewReady.postMessage('errorOccured');
-  }
+    window.webkit.messageHandlers.logoutHandler.postMessage('logout');
+  } else console.log('Logout handler not found');
 }
