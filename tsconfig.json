@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": [
+      "@types"
+    ]
+  },
+  "include": [
+    "src",
+    "src/custom.d.ts",
+    ".eslintrc.cjs"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
