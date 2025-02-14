@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { api } from '../../utils/axios';
 
 import * as S from './TextField.style';
 
@@ -8,7 +9,7 @@ const TextField: React.FC = () => {
 
   const postSchedule = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
-      const response = await fetch(
+      const response = await api.post(
         `${process.env.REACT_APP_BASE_SERVER_URL}/schedules`,
         {
           method: 'POST',
@@ -21,11 +22,6 @@ const TextField: React.FC = () => {
           body: JSON.stringify({ text: schedule }),
         },
       );
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      const data = await response.json();
-      console.log('response', data);
     } catch (e) {
       console.log(e);
     }
