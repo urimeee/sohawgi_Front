@@ -7,6 +7,15 @@ export const api = axios.create({
   },
 });
 
+export const apiWithToken = axios.create({
+  baseURL: `${process.env.REACT_APP_BASE_SERVER_URL}`,
+  headers: {
+    'content-type': 'application/json',
+    'X-ACCESS-TOKEN': `${process.env.REACT_APP_X_ACCESS_TOKEN}`,
+    'X-REFRESH-TOKEN': `${process.env.REACT_APP_X_REFRESH_TOKEN}`,
+  },
+});
+
 // 요청 인터셉터
 api.interceptors.request.use(
   (config) => {

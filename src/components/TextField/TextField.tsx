@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { api } from '../../utils/axios';
+import { api, apiWithToken } from '../../utils/axios';
 
 import * as S from './TextField.style';
 
@@ -9,15 +9,7 @@ const TextField: React.FC = () => {
 
   const postSchedule = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
-      await api.post(`${process.env.REACT_APP_BASE_SERVER_URL}/schedules`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-ACCESS-TOKEN': `${process.env.REACT_APP_X_ACCESS_TOKEN}`,
-          'X-REFRESH-TOKEN': `${process.env.REACT_APP_X_REFRESH_TOKEN}`,
-        },
-        body: JSON.stringify({ text: schedule }),
-      });
+      await apiWithToken.post(`/schedules`, { text: schedule });
     } catch (e) {
       console.log(e.message);
     }
