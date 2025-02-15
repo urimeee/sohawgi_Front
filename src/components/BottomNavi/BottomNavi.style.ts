@@ -15,7 +15,7 @@ export const BottomNavWrapper = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.White}; /* 배경 흰색 */
   height: 4rem;
-  padding: 0 1.5rem 0 1.5rem;
+  padding: 0 1.5rem 2rem 1.5rem;
   border-top: 1px solid ${({ theme }) => theme.colors.Grey_03}; /* 상단에 얇은 회색선 추가 */
   box-shadow: none;
   z-index: 1000;
