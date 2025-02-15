@@ -18,6 +18,7 @@ api.interceptors.request.use(
       config.headers['X-ACCESS-TOKEN'] = `${accessToken}`;
       config.headers['X-REFRESH-TOKEN'] = `${refreshToken}`;
     }
+    console.log(config);
     return config;
   },
   (error) => {
