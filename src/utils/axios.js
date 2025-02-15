@@ -4,8 +4,6 @@ export const api = axios.create({
   baseURL: `${process.env.REACT_APP_BASE_SERVER_URL}`,
   headers: {
     'content-type': 'application/json',
-    // 'X-ACCESS-TOKEN': localStorage.getItem('accessToken'),
-    // 'X-REFRESH-TOKEN': localStorage.getItem('refreshToken'),
   },
 });
 
@@ -13,7 +11,6 @@ export const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken');
-    // const accessToken = `${process.env.REACT_APP_X_ACCESS_TOKEN}`;
     const refreshToken = localStorage.getItem('refreshToken');
 
     if (accessToken) {
@@ -32,26 +29,26 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     console.log(error);
-    const originalRequest = error.config;
-    if (error.response.status === 403 && !originalRequest._retry) {
-      // 만료된 access token일 때
-      originalRequest._retry = true;
-      console.log('error occured');
-
-      try {
-        const refreshToken = localStorage.getItem('refreshToken');
-        const getNewAccessToken = error.response.data?.newAccessToken;
-        if (refreshToken && getNewAccessToken) {
-          localStorage.setItem('accessToken', getNewAccessToken);
-          originalRequest.headers['X-ACCESS-TOKEN'] = `${getNewAccessToken}`;
-        }
-        return axios(originalRequest);
-      } catch (error) {
-        // refreshtoken으로 인한 재발급에서도 오류가 나는 상황 -> swift에 브릿지 연결
-        console.error('Token failed', error);
-        handleErrorInTokenRefresh();
-      }
-    }
+    // const originalRequest = error.config;
+    // if (error.response.status === 403 && !originalRequest._retry) {
+    //   // 만료된 access token일 때
+    //   originalRequest._retry = true;
+    //   console.log('error occured');
+    //
+    //   try {
+    //     const refreshToken = localStorage.getItem('refreshToken');
+    //     const getNewAccessToken = error.response.data?.newAccessToken;
+    //     if (refreshToken && getNewAccessToken) {
+    //       localStorage.setItem('accessToken', getNewAccessToken);
+    //       originalRequest.headers['X-ACCESS-TOKEN'] = `${getNewAccessToken}`;
+    //     }
+    //     return axios(originalRequest);
+    //   } catch (error) {
+    //     // refreshtoken으로 인한 재발급에서도 오류가 나는 상황 -> swift에 브릿지 연결
+    //     console.error('Token failed', error);
+    //     handleErrorInTokenRefresh();
+    //   }
+    // }
   },
 );
 
