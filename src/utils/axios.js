@@ -11,9 +11,9 @@ export const api = axios.create({
 // 요청 인터셉터
 api.interceptors.request.use(
   (config) => {
-    console.log('요청 인터셉터', accessToken, refreshToken);
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
+    console.log('요청 인터셉터', accessToken, refreshToken);
 
     if (accessToken) {
       config.headers['X-ACCESS-TOKEN'] = `${accessToken}`;
