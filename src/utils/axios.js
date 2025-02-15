@@ -34,7 +34,7 @@ api.interceptors.response.use(
   async (error) => {
     console.log('응답 인터셉터 error', error);
     const originalRequest = error.config;
-    if (error.response?.status === 403) {
+    if (error.response?.data?.status === 403) {
       console.log('403 forbidden');
       //만료된 access token일 때
       originalRequest._retry = true;
