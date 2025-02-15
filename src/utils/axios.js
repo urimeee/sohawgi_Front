@@ -5,6 +5,7 @@ export const api = axios.create({
   headers: {
     'content-type': 'application/json',
   },
+  withCredentials: true,
 });
 
 // 요청 인터셉터
