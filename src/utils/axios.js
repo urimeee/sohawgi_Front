@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-export const api = axios.create({
-  baseURL: `${process.env.REACT_APP_BASE_SERVER_URL}`,
-  headers: {
-    'content-type': 'application/json',
-  },
-});
+// export const api = axios.create({
+//   baseURL: `${process.env.REACT_APP_BASE_SERVER_URL}`,
+//   headers: {
+//     'content-type': 'application/json',
+//   },
+// });
 
-export const apiWithToken = axios.create({
+export const api = axios.create({
   baseURL: `${process.env.REACT_APP_BASE_SERVER_URL}`,
   headers: {
     'content-type': 'application/json',
@@ -59,6 +59,23 @@ api.interceptors.response.use(
     }
   },
 );
+
+// apiWithToken.interceptors.response.use(
+//   (config) => {
+//     const accessToken = localStorage.getItem('accessToken');
+//     // const accessToken = `${process.env.REACT_APP_X_ACCESS_TOKEN}`;
+//     const refreshToken = `${process.env.REACT_APP_X_REFRESH_TOKEN}`;
+//
+//     if (accessToken) {
+//       config.headers['X-ACCESS-TOKEN'] = `${accessToken}`;
+//       config.headers['X-REFRESH-TOKEN'] = `${refreshToken}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   },
+// );
 
 function handleErrorInTokenRefresh() {
   if (
