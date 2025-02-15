@@ -30,11 +30,13 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => {
     console.log('응답 인터셉터 response', response);
+    return response;
   },
   async (error) => {
     console.log('응답 인터셉터 error', error);
     const originalRequest = error.config;
-    if (error.response?.data?.status === 403) {
+
+    if (error.response?.status === 403 && !originalRequest._retry) {
       console.log('403 forbidden');
       //만료된 access token일 때
       originalRequest._retry = true;
@@ -43,15 +45,17 @@ api.interceptors.response.use(
       try {
         const refreshToken = localStorage.getItem('refreshToken');
         const getNewAccessToken = error.response.data?.newAccessToken;
+
         if (refreshToken && getNewAccessToken) {
           localStorage.setItem('accessToken', getNewAccessToken);
           originalRequest.headers['X-ACCESS-TOKEN'] = `${getNewAccessToken}`;
         }
-        return axios(originalRequest);
+        return api(originalRequest);
       } catch (error) {
         // refreshtoken으로 인한 재발급에서도 오류가 나는 상황 -> swift에 브릿지 연결
         console.error('Token failed', error);
         handleErrorInTokenRefresh();
+        return Promise.reject(error);
       }
     }
   },
