@@ -11,8 +11,8 @@ export const apiWithToken = axios.create({
   baseURL: `${process.env.REACT_APP_BASE_SERVER_URL}`,
   headers: {
     'content-type': 'application/json',
-    'X-ACCESS-TOKEN': `${process.env.REACT_APP_X_ACCESS_TOKEN}`,
-    'X-REFRESH-TOKEN': `${process.env.REACT_APP_X_REFRESH_TOKEN}`,
+    'X-ACCESS-TOKEN': localStorage.getItem('accessToken'),
+    'X-REFRESH-TOKEN': localStorage.getItem('refreshToken'),
   },
 });
 
@@ -47,9 +47,9 @@ api.interceptors.response.use(
 
       try {
         const refreshToken = localStorage.getItem('refreshToken');
-        const newAccessToken = error.response.headers['New-access-token'];
+        const newAccessToken = error.response.headers['NEW-ACCESS-TOKEN'];
         if (refreshToken && newAccessToken) {
-          originalRequest.headers['New-access-token'] = `${newAccessToken}`;
+          originalRequest.headers['X-ACCESS-TOKEN'] = `${newAccessToken}`;
         }
         return axios(originalRequest);
       } catch (error) {
