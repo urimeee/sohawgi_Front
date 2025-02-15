@@ -42,12 +42,13 @@ api.interceptors.response.use(
     if (error.response.status === 403 && !originalRequest._retry) {
       // 만료된 access token일 때
       originalRequest._retry = true;
+      console.log('error occured');
 
       try {
-        const refreshToken = `${process.env.REACT_APP_X_REFRESH_TOKEN}`;
-        if (refreshToken) {
-          originalRequest.headers['New-access-token'] =
-            `${process.env.REACT_APP_NEW_ACCESS_TOKEN}`;
+        const refreshToken = localStorage.getItem('refreshToken');
+        const newAccessToken = error.response.headers['New-access-token'];
+        if (refreshToken && newAccessToken) {
+          originalRequest.headers['New-access-token'] = `${newAccessToken}`;
         }
         return axios(originalRequest);
       } catch (error) {
