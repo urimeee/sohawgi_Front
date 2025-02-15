@@ -24,6 +24,7 @@ const ScheduleCard = () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
       const refreshToken = localStorage.getItem('refreshToken');
+      console.log('get 호출 하기 전 getSchedules:', accessToken, refreshToken);
       const response = await api.get('/schedules');
 
       if (response.data.length < 0) {
@@ -31,7 +32,7 @@ const ScheduleCard = () => {
       }
 
       // const data = await response.json();
-      console.log(response.data);
+      console.log('getschedules의 response.data', response.data);
       setScheduleList(response.data);
     } catch (e) {
       console.log(e);
