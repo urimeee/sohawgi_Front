@@ -27,7 +27,9 @@ api.interceptors.request.use(
 
 // 응답 인터셉터
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log(response);
+  },
   async (error) => {
     console.log(error.response);
     console.log('gggg');
