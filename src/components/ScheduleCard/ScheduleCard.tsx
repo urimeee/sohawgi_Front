@@ -54,6 +54,7 @@ const ScheduleCard = () => {
               day={schedule.day}
               dayOfWeek={schedule.dayOfWeek}
               month={schedule.month}
+              onClick={() => setSheetOpen(true)}
             />
           </div>
         ))}

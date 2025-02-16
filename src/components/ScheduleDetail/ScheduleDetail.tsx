@@ -7,11 +7,12 @@ type Props = {
   day: number;
   dayOfWeek: string;
   title: string;
+  onClick: () => void;
 };
 
-const ScheduleDetail = ({ month, day, dayOfWeek, title }: Props) => {
+const ScheduleDetail = ({ month, day, dayOfWeek, title, onClick }: Props) => {
   return (
-    <S.Container>
+    <S.Container onClick={onClick}>
       <S.Image src={hamtori} alt="Hamtori" />
       <S.InfoContainer>
         <S.DateText>
