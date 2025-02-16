@@ -15,29 +15,27 @@ interface Schedule {
 const ScheduleCard = () => {
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
   const [scheduleList, setScheduleList] = useState<Schedule[] | null>([]);
-  const [clickedSchedule, setClickedSchedule] = useState<number>(null);
+  const [clickedSchedule, setClickedSchedule] = useState<number | null>(null);
 
   const handleSheet = () => {
     setSheetOpen(!isSheetOpen);
+    setClickedSchedule(null);
   };
 
   const onClickHandler = (scheduleId: number) => {
+    setClickedSchedule(scheduleId);
     setSheetOpen(true);
     console.log(scheduleId);
   };
 
   const getSchedules = async () => {
     try {
-      const accessToken = localStorage.getItem('accessToken');
-      const refreshToken = localStorage.getItem('refreshToken');
-      console.log('get 호출 하기 전 getSchedules:', accessToken, refreshToken);
       const response = await api.get('/schedules');
 
       if (response.data.length < 0) {
         throw new Error(response.statusText);
       }
 
-      // const data = await response.json();
       console.log('getschedules의 response.data', response.data);
       setScheduleList(response.data);
     } catch (e) {

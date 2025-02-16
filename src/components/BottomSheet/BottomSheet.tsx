@@ -19,7 +19,6 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
     try {
       const result = await api.delete(`/schedules/${scheduleId}`);
       console.log(result);
-
       onClose();
     } catch (e) {
       console.error(e);
