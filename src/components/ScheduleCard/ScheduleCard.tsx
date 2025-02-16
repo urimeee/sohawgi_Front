@@ -15,9 +15,15 @@ interface Schedule {
 const ScheduleCard = () => {
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
   const [scheduleList, setScheduleList] = useState<Schedule[] | null>([]);
+  const [clickedSchedule, setClickedSchedule] = useState<number>(null);
 
   const handleSheet = () => {
     setSheetOpen(!isSheetOpen);
+  };
+
+  const onClickHandler = (scheduleId: number) => {
+    setSheetOpen(true);
+    console.log(scheduleId);
   };
 
   const getSchedules = async () => {
@@ -54,12 +60,16 @@ const ScheduleCard = () => {
               day={schedule.day}
               dayOfWeek={schedule.dayOfWeek}
               month={schedule.month}
-              onClick={() => setSheetOpen(true)}
+              onClick={() => onClickHandler(schedule.scheduleId)}
             />
           </div>
         ))}
       </S.GridContainer>
-      <BottomSheet isOpen={isSheetOpen} onClose={handleSheet} />
+      <BottomSheet
+        isOpen={isSheetOpen}
+        onClose={handleSheet}
+        scheduleId={clickedSchedule}
+      />
     </S.WrapperContainer>
   );
 };
