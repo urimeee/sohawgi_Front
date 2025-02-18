@@ -67,7 +67,7 @@ const SchedulePage = () => {
   return (
     <S.Container>
       <S.SchedulePageContent>
-        <TextField />
+        <TextField getSchedules={getSchedules} />
         <ScheduleCard scheduleList={scheduleList} />
       </S.SchedulePageContent>
     </S.Container>

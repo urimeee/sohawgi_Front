@@ -18,7 +18,6 @@ interface Props {
 
 const ScheduleCard = ({ scheduleList }: Props) => {
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
-  // const [scheduleList, setScheduleList] = useState<Schedule[] | null>([]);
   const [clickedSchedule, setClickedSchedule] = useState<number | null>(null);
 
   const handleSheet = () => {
@@ -32,21 +31,6 @@ const ScheduleCard = ({ scheduleList }: Props) => {
     console.log(scheduleId);
   };
 
-  // const getSchedules = async () => {
-  //   try {
-  //     const response = await api.get('/schedules');
-  //
-  //     if (response.data.length < 0) {
-  //       throw new Error(response.statusText);
-  //     }
-  //
-  //     console.log('getschedules의 response.data', response.data);
-  //     setScheduleList(response.data);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   const handleDelete = async (clickedSchedule: number) => {
     try {
       await api.delete(`/schedules/${clickedSchedule}`);
@@ -55,10 +39,6 @@ const ScheduleCard = ({ scheduleList }: Props) => {
       console.log(e);
     }
   };
-
-  // useEffect(() => {
-  //   getSchedules();
-  // }, []);
 
   return (
     <S.WrapperContainer>

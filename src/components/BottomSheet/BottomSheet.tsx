@@ -29,7 +29,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
           maxHeight: '7.5rem', // 최대 높이를 화면의 50%로 제한
           marginLeft: '1.13rem', // 좌우 여백 설정
           marginRight: '1.13rem',
-          marginBottom: '2.75rem', // 아래 여백 설정
+          marginBottom: '2rem', // 아래 여백 설정
           padding: '10px 20px 20px 20px', // 내부 여백 설정
           boxSizing: 'border-box', // Padding을 포함한 전체 크기 설정
           overflowY: 'auto', // 내용이 많을 경우 스크롤 가능하도록 설정
