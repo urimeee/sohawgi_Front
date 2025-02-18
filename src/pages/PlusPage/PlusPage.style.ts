@@ -16,6 +16,6 @@ export const AddPageContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 17px;
-  padding-top: calc(env(safe-area-inset-top) + 4rem);
+  padding-top: 4rem;
   padding-right: 17px;
 `;
