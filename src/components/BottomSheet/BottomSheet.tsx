@@ -8,22 +8,24 @@ interface BottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
   scheduleId: number | null;
+  onDelete: (deleteId: number) => void;
 }
 
 const BottomSheet: React.FC<BottomSheetProps> = ({
   isOpen,
   onClose,
   scheduleId,
+  onDelete,
 }) => {
-  const deleteHandler = async () => {
-    try {
-      const result = await api.delete(`/schedules/${scheduleId}`);
-      console.log(result);
-      onClose();
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  // const deleteHandler = async () => {
+  //   try {
+  //     const result = await api.delete(`/schedules/${scheduleId}`);
+  //     console.log(result);
+  //     onClose();
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
   return (
     <Sheet
       isOpen={isOpen}
@@ -48,7 +50,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
         <Sheet.Header />
         <Sheet.Content>
           <Sheet.Scroller>
-            <S.DeleteContainer onClick={deleteHandler}>
+            <S.DeleteContainer onClick={() => onDelete}>
               <S.DeleteIcon src={Delete} alt="delete icon" />
               <S.DeleteText>삭제하기</S.DeleteText>
             </S.DeleteContainer>

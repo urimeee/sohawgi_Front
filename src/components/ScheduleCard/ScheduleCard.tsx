@@ -43,6 +43,16 @@ const ScheduleCard = () => {
     }
   };
 
+  const handleDelete = async (clickedSchedule: number) => {
+    try {
+      await api.delete(`/schedules/${clickedSchedule}`);
+      getSchedules();
+      handleSheet();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     getSchedules();
   }, []);
@@ -67,6 +77,7 @@ const ScheduleCard = () => {
         isOpen={isSheetOpen}
         onClose={handleSheet}
         scheduleId={clickedSchedule}
+        onDelete={handleDelete}
       />
     </S.WrapperContainer>
   );
