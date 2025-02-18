@@ -22,7 +22,12 @@ const TextField: React.FC<Props> = ({ getSchedules }) => {
   };
   return (
     <S.Form>
-      <S.Input type="text" placeholder="일정을 입력하세요" />
+      <S.Input
+        type="text"
+        placeholder="일정을 입력하세요"
+        value={schedule}
+        onChange={(e) => setSchedule(e.target.value)}
+      />
       <S.Button type="button" onClick={postSchedule}>
         등록
       </S.Button>
