@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import TextField from '../../components/TextField/TextField';
 import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
