@@ -1,24 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import ScheduleDetail from '../ScheduleDetail/ScheduleDetail'; // ScheduleDetail 컴포넌트 경로에 맞게 수정
 import BottomSheet from '../BottomSheet/BottomSheet'; // BottomSheet 컴포넌트 불러오기
 import * as S from './ScheduleCard.style';
-import { api } from '../../utils/axios';
 
-interface Schedule {
-  scheduleId: number;
-  title: string;
-  month: number;
-  day: number;
-  dayOfWeek: string;
-}
+import useSchedules from '../../hooks/useSchedule';
 
-interface Props {
-  scheduleList: Schedule[] | null;
-}
-
-const ScheduleCard = ({ scheduleList }: Props) => {
+const ScheduleCard = () => {
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
   const [clickedSchedule, setClickedSchedule] = useState<number | null>(null);
+
+  const { deleteSchedule, scheduleList } = useSchedules();
 
   const handleSheet = () => {
     setSheetOpen(!isSheetOpen);
@@ -31,35 +22,29 @@ const ScheduleCard = ({ scheduleList }: Props) => {
     console.log(scheduleId);
   };
 
-  const handleDelete = async (clickedSchedule: number) => {
-    try {
-      await api.delete(`/schedules/${clickedSchedule}`);
-      handleSheet();
-    } catch (e) {
-      console.log(e);
-    }
+  const handleDelete = async () => {
+    deleteSchedule(clickedSchedule);
   };
 
   return (
     <S.WrapperContainer>
       <S.Title>일정</S.Title>
       <S.GridContainer>
-        {scheduleList?.map((schedule) => (
-          <div key={schedule.scheduleId}>
+        {scheduleList.length > 0 &&
+          scheduleList.map((schedule) => (
             <ScheduleDetail
+              key={schedule.scheduleId}
               title={schedule.title}
               day={schedule.day}
               dayOfWeek={schedule.dayOfWeek}
               month={schedule.month}
               onClick={() => onClickHandler(schedule.scheduleId)}
             />
-          </div>
-        ))}
+          ))}
       </S.GridContainer>
       <BottomSheet
         isOpen={isSheetOpen}
         onClose={handleSheet}
-        scheduleId={clickedSchedule}
         onDelete={handleDelete}
       />
     </S.WrapperContainer>

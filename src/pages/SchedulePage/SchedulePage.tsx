@@ -4,7 +4,8 @@ import TextField from '../../components/TextField/TextField';
 import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
 
 import * as S from './SchedulePage.style';
-import { api } from '../../utils/axios';
+
+import useSchedules from '../../hooks/useSchedule';
 
 interface Schedule {
   scheduleId: number;
@@ -15,7 +16,7 @@ interface Schedule {
 }
 
 const SchedulePage = () => {
-  const [scheduleList, setScheduleList] = useState<Schedule[] | null>([]);
+  const { getSchedules } = useSchedules();
 
   useEffect(() => {
     if (
@@ -46,29 +47,29 @@ const SchedulePage = () => {
     };
   }, []);
 
+  // const getSchedules = async () => {
+  //   try {
+  //     const response = await api.get('/schedules');
+  //
+  //     if (response.data.length < 0) {
+  //       throw new Error(response.statusText);
+  //     }
+  //     console.log('getschedules의 response.data', response.data);
+  //     setScheduleList(response.data);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
   useEffect(() => {
     getSchedules();
   }, []);
 
-  const getSchedules = async () => {
-    try {
-      const response = await api.get('/schedules');
-
-      if (response.data.length < 0) {
-        throw new Error(response.statusText);
-      }
-      console.log('getschedules의 response.data', response.data);
-      setScheduleList(response.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
     <S.Container>
       <S.SchedulePageContent>
-        <TextField getSchedules={getSchedules} />
-        <ScheduleCard scheduleList={scheduleList} />
+        <TextField />
+        <ScheduleCard />
       </S.SchedulePageContent>
     </S.Container>
   );

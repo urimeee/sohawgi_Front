@@ -1,27 +1,12 @@
-import React, { FormEvent, useState } from 'react';
-import { api } from '../../utils/axios';
+import React from 'react';
 
 import * as S from './TextField.style';
 
-interface Props {
-  getSchedules: () => Promise<void>;
-}
+import useSchedules from '../../hooks/useSchedule';
 
-const TextField: React.FC<Props> = ({ getSchedules }) => {
-  const [schedule, setSchedule] = useState<string>('');
+const TextField: React.FC = () => {
+  const { postSchedule, setSchedule, schedule } = useSchedules();
 
-  const postSchedule = async (
-    e: React.MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>,
-  ) => {
-    try {
-      e.preventDefault();
-      await api.post('/schedules', { text: schedule });
-      setSchedule('');
-      await getSchedules();
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
   return (
     <S.Form onSubmit={postSchedule}>
       <S.Input

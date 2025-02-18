@@ -6,8 +6,7 @@ import * as S from './BottomSheet.style';
 interface BottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
-  scheduleId: number | null;
-  onDelete: (deleteId: number) => void;
+  onDelete: () => void;
 }
 
 const BottomSheet: React.FC<BottomSheetProps> = ({
@@ -39,7 +38,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
         <Sheet.Header />
         <Sheet.Content>
           <Sheet.Scroller>
-            <S.DeleteContainer onClick={() => onDelete}>
+            <S.DeleteContainer onClick={onDelete}>
               <S.DeleteIcon src={Delete} alt="delete icon" />
               <S.DeleteText>삭제하기</S.DeleteText>
             </S.DeleteContainer>
