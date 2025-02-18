@@ -40,7 +40,6 @@ function App() {
           <ContentWrapper>
             <Routes>
               <Route path="/" element={<SchedulePage />} />
-              <Route path="/SchedulePage" element={<SchedulePage />} />
               <Route path="/PlusPage" element={<PlusPage />} />
             </Routes>
           </ContentWrapper>

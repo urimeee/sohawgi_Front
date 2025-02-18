@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { api } from '../../utils/axios';
 
 import * as S from './TextField.style';
@@ -8,11 +8,13 @@ interface Props {
 }
 
 const TextField: React.FC<Props> = ({ getSchedules }) => {
-  const [isFocused, setIsFocused] = useState(false);
   const [schedule, setSchedule] = useState<string>('');
 
-  const postSchedule = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const postSchedule = async (
+    e: React.MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>,
+  ) => {
     try {
+      e.preventDefault();
       await api.post('/schedules', { text: schedule });
       setSchedule('');
       await getSchedules();
@@ -21,7 +23,7 @@ const TextField: React.FC<Props> = ({ getSchedules }) => {
     }
   };
   return (
-    <S.Form>
+    <S.Form onSubmit={postSchedule}>
       <S.Input
         type="text"
         placeholder="일정을 입력하세요"
