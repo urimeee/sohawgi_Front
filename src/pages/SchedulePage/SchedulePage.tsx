@@ -5,19 +5,7 @@ import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
 
 import * as S from './SchedulePage.style';
 
-import useSchedules from '../../hooks/useSchedule';
-
-interface Schedule {
-  scheduleId: number;
-  title: string;
-  month: number;
-  day: number;
-  dayOfWeek: string;
-}
-
 const SchedulePage = () => {
-  const { getSchedules } = useSchedules();
-
   useEffect(() => {
     if (
       window.webkit &&
@@ -45,24 +33,6 @@ const SchedulePage = () => {
       );
       return info;
     };
-  }, []);
-
-  // const getSchedules = async () => {
-  //   try {
-  //     const response = await api.get('/schedules');
-  //
-  //     if (response.data.length < 0) {
-  //       throw new Error(response.statusText);
-  //     }
-  //     console.log('getschedules의 response.data', response.data);
-  //     setScheduleList(response.data);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  useEffect(() => {
-    getSchedules();
   }, []);
 
   return (

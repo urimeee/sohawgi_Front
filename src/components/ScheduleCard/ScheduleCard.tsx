@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ScheduleDetail from '../ScheduleDetail/ScheduleDetail'; // ScheduleDetail 컴포넌트 경로에 맞게 수정
 import BottomSheet from '../BottomSheet/BottomSheet'; // BottomSheet 컴포넌트 불러오기
 import * as S from './ScheduleCard.style';
@@ -9,7 +9,7 @@ const ScheduleCard = () => {
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
   const [clickedSchedule, setClickedSchedule] = useState<number | null>(null);
 
-  const { deleteSchedule, scheduleList } = useSchedules();
+  const { deleteSchedule, scheduleList, getSchedules } = useSchedules();
 
   const handleSheet = () => {
     setSheetOpen(!isSheetOpen);
@@ -23,24 +23,27 @@ const ScheduleCard = () => {
   };
 
   const handleDelete = async () => {
-    deleteSchedule(clickedSchedule);
+    await deleteSchedule(clickedSchedule);
   };
+
+  useEffect(() => {
+    getSchedules();
+  }, []);
 
   return (
     <S.WrapperContainer>
       <S.Title>일정</S.Title>
       <S.GridContainer>
-        {scheduleList.length > 0 &&
-          scheduleList.map((schedule) => (
-            <ScheduleDetail
-              key={schedule.scheduleId}
-              title={schedule.title}
-              day={schedule.day}
-              dayOfWeek={schedule.dayOfWeek}
-              month={schedule.month}
-              onClick={() => onClickHandler(schedule.scheduleId)}
-            />
-          ))}
+        {scheduleList.map((schedule) => (
+          <ScheduleDetail
+            key={schedule.scheduleId}
+            title={schedule.title}
+            day={schedule.day}
+            dayOfWeek={schedule.dayOfWeek}
+            month={schedule.month}
+            onClick={() => onClickHandler(schedule.scheduleId)}
+          />
+        ))}
       </S.GridContainer>
       <BottomSheet
         isOpen={isSheetOpen}
