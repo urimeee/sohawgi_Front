@@ -4,8 +4,19 @@ import TextField from '../../components/TextField/TextField';
 import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
 
 import * as S from './SchedulePage.style';
+import { api } from '../../utils/axios';
+
+interface Schedule {
+  scheduleId: number;
+  title: string;
+  month: number;
+  day: number;
+  dayOfWeek: string;
+}
 
 const SchedulePage = () => {
+  const [scheduleList, setScheduleList] = useState<Schedule[] | null>([]);
+
   useEffect(() => {
     if (
       window.webkit &&
@@ -35,11 +46,29 @@ const SchedulePage = () => {
     };
   }, []);
 
+  useEffect(() => {
+    getSchedules();
+  }, []);
+
+  const getSchedules = async () => {
+    try {
+      const response = await api.get('/schedules');
+
+      if (response.data.length < 0) {
+        throw new Error(response.statusText);
+      }
+      console.log('getschedules의 response.data', response.data);
+      setScheduleList(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <S.Container>
       <S.SchedulePageContent>
         <TextField />
-        <ScheduleCard />
+        <ScheduleCard scheduleList={scheduleList} />
       </S.SchedulePageContent>
     </S.Container>
   );

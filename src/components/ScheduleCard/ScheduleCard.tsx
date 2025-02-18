@@ -12,9 +12,13 @@ interface Schedule {
   dayOfWeek: string;
 }
 
-const ScheduleCard = () => {
+interface Props {
+  scheduleList: Schedule[] | null;
+}
+
+const ScheduleCard = ({ scheduleList }: Props) => {
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
-  const [scheduleList, setScheduleList] = useState<Schedule[] | null>([]);
+  // const [scheduleList, setScheduleList] = useState<Schedule[] | null>([]);
   const [clickedSchedule, setClickedSchedule] = useState<number | null>(null);
 
   const handleSheet = () => {
@@ -28,34 +32,33 @@ const ScheduleCard = () => {
     console.log(scheduleId);
   };
 
-  const getSchedules = async () => {
-    try {
-      const response = await api.get('/schedules');
-
-      if (response.data.length < 0) {
-        throw new Error(response.statusText);
-      }
-
-      console.log('getschedules의 response.data', response.data);
-      setScheduleList(response.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const getSchedules = async () => {
+  //   try {
+  //     const response = await api.get('/schedules');
+  //
+  //     if (response.data.length < 0) {
+  //       throw new Error(response.statusText);
+  //     }
+  //
+  //     console.log('getschedules의 response.data', response.data);
+  //     setScheduleList(response.data);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const handleDelete = async (clickedSchedule: number) => {
     try {
       await api.delete(`/schedules/${clickedSchedule}`);
-      getSchedules();
       handleSheet();
     } catch (e) {
       console.log(e);
     }
   };
 
-  useEffect(() => {
-    getSchedules();
-  }, []);
+  // useEffect(() => {
+  //   getSchedules();
+  // }, []);
 
   return (
     <S.WrapperContainer>
