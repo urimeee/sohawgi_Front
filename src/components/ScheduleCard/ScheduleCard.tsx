@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import ScheduleDetail from '../ScheduleDetail/ScheduleDetail'; // ScheduleDetail 컴포넌트 경로에 맞게 수정
 import BottomSheet from '../BottomSheet/BottomSheet'; // BottomSheet 컴포넌트 불러오기
 import * as S from './ScheduleCard.style';
-
 import useSchedules from '../../hooks/useSchedule';
 
 const ScheduleCard = () => {
@@ -31,7 +30,7 @@ const ScheduleCard = () => {
   }, []);
 
   useEffect(() => {
-    console.log('scheduleList 변경');
+    console.log('scheduleList 변경', scheduleList);
   }, [scheduleList]);
 
   return (
