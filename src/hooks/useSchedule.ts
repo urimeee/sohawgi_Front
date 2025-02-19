@@ -12,7 +12,9 @@ const useSchedules = () => {
   }, []);
 
   useEffect(() => {
-    console.log('scheduleList 변경됨 useSchedule' + scheduleList);
+    console.log(
+      'scheduleList 변경됨 useSchedule' + scheduleList + scheduleList.length,
+    );
   }, [scheduleList]);
 
   const getSchedules = async () => {

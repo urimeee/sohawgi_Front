@@ -13,7 +13,6 @@ api.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken');
     const refreshToken = localStorage.getItem('refreshToken');
-    console.log('요청 인터셉터', accessToken, refreshToken);
 
     if (accessToken) {
       config.headers['X-ACCESS-TOKEN'] = `${accessToken}`;
@@ -29,18 +28,14 @@ api.interceptors.request.use(
 // 응답 인터셉터
 api.interceptors.response.use(
   (response) => {
-    console.log('응답 인터셉터 response', response);
     return response;
   },
   async (error) => {
-    console.log('응답 인터셉터 error', error);
     const originalRequest = error.config;
 
     if (error.response?.status === 403 && !originalRequest._retry) {
-      console.log('403 forbidden');
       //만료된 access token일 때
       originalRequest._retry = true;
-      console.log('error occured');
 
       try {
         const refreshToken = localStorage.getItem('refreshToken');

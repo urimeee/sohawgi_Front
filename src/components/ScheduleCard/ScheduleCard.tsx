@@ -18,7 +18,6 @@ const ScheduleCard = () => {
   const onClickHandler = (scheduleId: number) => {
     setClickedSchedule(scheduleId);
     setSheetOpen(true);
-    console.log(scheduleId);
   };
 
   const handleDelete = async () => {
@@ -26,11 +25,7 @@ const ScheduleCard = () => {
   };
 
   useEffect(() => {
-    getSchedules();
-  }, []);
-
-  useEffect(() => {
-    console.log('scheduleList 변경', scheduleList);
+    console.log('scheduleList 변경' + scheduleList + scheduleList.length);
   }, [scheduleList]);
 
   return (
