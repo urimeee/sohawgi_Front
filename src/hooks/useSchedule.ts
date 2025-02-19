@@ -11,12 +11,13 @@ const useSchedules = () => {
 
   const getSchedules = async () => {
     try {
-      const response = await api.get('/schedules');
-      if (response.data.length < 0) {
-        throw new Error(response.statusText);
-      }
-      console.log(response.data);
-      setScheduleList([...response.data]);
+      await api.get('/schedules').then((response) => {
+        setScheduleList(response.data);
+
+        if (response.data.length < 0) {
+          throw new Error(response.statusText);
+        }
+      });
     } catch (e) {
       console.error(e);
     }
@@ -25,8 +26,11 @@ const useSchedules = () => {
   const postSchedule = async () => {
     try {
       setSchedule('');
-      await api.post('/schedules', { text: schedule });
-      await getSchedules();
+
+      await api
+        .post('/schedules', { text: schedule })
+        .then(() => getSchedules());
+      // .catch((e) => console.error(e));
     } catch (e) {
       console.error(e);
     }
@@ -34,8 +38,9 @@ const useSchedules = () => {
 
   const deleteSchedule = async (clickedSchedule: number) => {
     try {
-      await api.delete(`/schedules/${clickedSchedule}`);
-      await getSchedules();
+      await api
+        .delete(`/schedules/${clickedSchedule}`)
+        .then(() => getSchedules());
     } catch (e) {
       console.error(e);
     }
