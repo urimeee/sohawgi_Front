@@ -12,11 +12,11 @@ const useSchedules = () => {
   const getSchedules = async () => {
     try {
       await api.get('/schedules').then((response) => {
-        setScheduleList(response.data);
-
         if (response.data.length < 0) {
           throw new Error(response.statusText);
         }
+        setScheduleList(response.data);
+        return response.data;
       });
     } catch (e) {
       console.error(e);
@@ -30,9 +30,9 @@ const useSchedules = () => {
       setSchedule('');
       e.preventDefault();
 
-      await api.post('/schedules', { text: schedule });
-      await getSchedules();
-      console.log(scheduleList);
+      await api.post('/schedules', { text: schedule }).then(() => {
+        getSchedules();
+      });
     } catch (e) {
       console.error(e);
     }
