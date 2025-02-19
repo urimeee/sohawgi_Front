@@ -9,6 +9,10 @@ const useSchedules = () => {
     getSchedules();
   }, []);
 
+  useEffect(() => {
+    console.log('scheduleList 변경됨 useSchedule');
+  }, [scheduleList]);
+
   const getSchedules = async () => {
     try {
       await api.get('/schedules').then((response) => {
@@ -30,8 +34,9 @@ const useSchedules = () => {
       setSchedule('');
       e.preventDefault();
 
-      await api.post('/schedules', { text: schedule }).then(() => {
-        getSchedules();
+      await api.post('/schedules', { text: schedule }).then(async () => {
+        const updatedSchedules = await getSchedules();
+        setScheduleList((prev) => [...prev, updatedSchedules]);
       });
     } catch (e) {
       console.error(e);
