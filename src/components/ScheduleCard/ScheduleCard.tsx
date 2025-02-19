@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 import ScheduleDetail from '../ScheduleDetail/ScheduleDetail'; // ScheduleDetail 컴포넌트 경로에 맞게 수정
 import BottomSheet from '../BottomSheet/BottomSheet'; // BottomSheet 컴포넌트 불러오기
 import * as S from './ScheduleCard.style';
-import useSchedules from '../../hooks/useSchedule';
+import { Schedule } from '../../types/schedule';
 
-const ScheduleCard = () => {
+interface ScheduleCardProps {
+  deleteSchedule: (scheduleId: number) => Promise<void>;
+  scheduleList: Schedule[];
+}
+
+const ScheduleCard = ({ deleteSchedule, scheduleList }: ScheduleCardProps) => {
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
   const [clickedSchedule, setClickedSchedule] = useState<number | null>(null);
-
-  const { deleteSchedule, scheduleList, getSchedules } = useSchedules();
 
   const handleSheet = () => {
     setSheetOpen(!isSheetOpen);

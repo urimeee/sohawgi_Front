@@ -4,8 +4,11 @@ import TextField from '../../components/TextField/TextField';
 import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
 
 import * as S from './SchedulePage.style';
+import useSchedules from '../../hooks/useSchedule';
 
 const SchedulePage = () => {
+  const { postSchedule, setSchedule, deleteSchedule, scheduleList, schedule } =
+    useSchedules();
   useEffect(() => {
     if (
       window.webkit &&
@@ -38,8 +41,15 @@ const SchedulePage = () => {
   return (
     <S.Container>
       <S.SchedulePageContent>
-        <TextField />
-        <ScheduleCard />
+        <TextField
+          postSchedule={postSchedule}
+          schedule={schedule}
+          setSchedule={setSchedule}
+        />
+        <ScheduleCard
+          deleteSchedule={deleteSchedule}
+          scheduleList={scheduleList}
+        />
       </S.SchedulePageContent>
     </S.Container>
   );

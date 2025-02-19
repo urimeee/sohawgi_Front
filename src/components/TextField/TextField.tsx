@@ -2,11 +2,19 @@ import React from 'react';
 
 import * as S from './TextField.style';
 
-import useSchedules from '../../hooks/useSchedule';
+interface TextFieldProps {
+  postSchedule: (
+    e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
+  ) => void;
+  schedule: string;
+  setSchedule: (e: string) => void;
+}
 
-const TextField: React.FC = () => {
-  const { postSchedule, setSchedule, schedule } = useSchedules();
-
+const TextField: React.FC<TextFieldProps> = ({
+  postSchedule,
+  setSchedule,
+  schedule,
+}: TextFieldProps) => {
   return (
     <S.Form onSubmit={postSchedule}>
       <S.Input
