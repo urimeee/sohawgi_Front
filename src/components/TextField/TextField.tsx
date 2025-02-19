@@ -15,7 +15,7 @@ const TextField: React.FC = () => {
         value={schedule}
         onChange={(e) => setSchedule(e.target.value)}
       />
-      <S.Button type="button" onClick={postSchedule}>
+      <S.Button type="button" onClick={(e) => postSchedule(e)}>
         등록
       </S.Button>
     </S.Form>

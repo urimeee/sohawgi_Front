@@ -23,7 +23,7 @@ const ScheduleCard = () => {
   };
 
   const handleDelete = async () => {
-    await deleteSchedule(clickedSchedule);
+    await deleteSchedule(clickedSchedule).then(() => setSheetOpen(false));
   };
 
   useEffect(() => {

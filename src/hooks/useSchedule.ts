@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { api } from '../utils/axios';
 
 const useSchedules = () => {
@@ -23,14 +23,15 @@ const useSchedules = () => {
     }
   };
 
-  const postSchedule = async () => {
+  const postSchedule = async (
+    e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
+  ) => {
     try {
       setSchedule('');
-
+      e.preventDefault();
       await api
         .post('/schedules', { text: schedule })
         .then(() => getSchedules());
-      // .catch((e) => console.error(e));
     } catch (e) {
       console.error(e);
     }
