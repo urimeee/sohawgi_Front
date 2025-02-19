@@ -30,6 +30,10 @@ const ScheduleCard = () => {
     getSchedules();
   }, []);
 
+  useEffect(() => {
+    console.log('scheduleList 변경');
+  }, [scheduleList]);
+
   return (
     <S.WrapperContainer>
       <S.Title>일정</S.Title>

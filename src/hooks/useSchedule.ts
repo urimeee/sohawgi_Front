@@ -32,6 +32,7 @@ const useSchedules = () => {
 
       await api.post('/schedules', { text: schedule });
       await getSchedules();
+      console.log(scheduleList);
     } catch (e) {
       console.error(e);
     }
