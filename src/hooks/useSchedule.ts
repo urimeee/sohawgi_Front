@@ -29,9 +29,9 @@ const useSchedules = () => {
     try {
       setSchedule('');
       e.preventDefault();
-      await api
-        .post('/schedules', { text: schedule })
-        .then(() => getSchedules());
+
+      await api.post('/schedules', { text: schedule });
+      await getSchedules();
     } catch (e) {
       console.error(e);
     }
