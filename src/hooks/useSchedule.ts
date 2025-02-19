@@ -25,11 +25,11 @@ const useSchedules = () => {
         throw new Error(response.statusText);
       }
 
-      setScheduleList((prev) => {
-        return JSON.stringify(prev) === JSON.stringify(response.data)
-          ? [...response.data]
-          : response.data;
-      });
+      setScheduleList((prev) =>
+        JSON.stringify(prev) === JSON.stringify(response.data)
+          ? prev
+          : [...response.data],
+      );
     } catch (e) {
       console.error(e);
     }
