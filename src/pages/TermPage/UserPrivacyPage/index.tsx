@@ -9,6 +9,7 @@ const StyledPrivacyPageContainer = styled.div`
   flex-direction: column;
   padding: 1rem;
   overflow-y: scroll;
+  margin-top: 4rem;
 `;
 
 function UserPrivacyPage() {
