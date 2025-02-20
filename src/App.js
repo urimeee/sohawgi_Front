@@ -9,6 +9,9 @@ import BottomNavi from './components/BottomNavi/BottomNavi.tsx';
 // 페이지 컴포넌트 import
 import SchedulePage from './pages/SchedulePage/SchedulePage.tsx';
 import PlusPage from './pages/PlusPage/PlusPage.tsx';
+import TermPage from './pages/TermPage';
+import UserPrivacyPage from './pages/TermPage/UserPrivacyPage';
+import UsePolicyPage from './pages/TermPage/UsePolicyPage';
 
 // 상위 컨테이너 스타일
 const Container = styled.div`
@@ -37,6 +40,8 @@ function App() {
             <Routes>
               <Route path="/" element={<SchedulePage />} />
               <Route path="/PlusPage" element={<PlusPage />} />
+              <Route path="/info/usePolicy" element={<UsePolicyPage />} />
+              <Route path="/info/privacy" element={<UserPrivacyPage />} />
             </Routes>
           </ContentWrapper>
           <BottomNavi />
