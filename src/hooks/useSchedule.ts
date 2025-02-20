@@ -1,8 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { api } from '../utils/axios';
 import { Schedule } from '../types/schedule';
-
-// const ScheduleContext = createContext(null);
 
 const useSchedules = () => {
   const [scheduleList, setScheduleList] = useState<Schedule[]>([]);

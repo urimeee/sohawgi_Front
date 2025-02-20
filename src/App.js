@@ -12,23 +12,19 @@ import PlusPage from './pages/PlusPage/PlusPage.tsx';
 
 // 상위 컨테이너 스타일
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: flex;
 `;
 
 // 콘텐츠를 감싸는 래퍼에 패딩 적용
 const ContentWrapper = styled.div`
-  word-wrap: break-word;
-  word-break: break-all;
-  white-space: normal;
-  min-width: 340px;
-  width: 100%;
-  height: 100%;
-  display: flex;
   justify-content: center;
+  flex: 1;
+  overflow-y: hidden;
+  margin-bottom: 6rem;
+  display: flex;
 `;
 
 function App() {

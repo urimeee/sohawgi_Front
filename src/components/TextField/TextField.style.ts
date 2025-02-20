@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
+  left: 0;
   position: relative;
   display: flex; /* inline-block 대신 flex 사용 */
   width: 100%; /* 부모 요소에 따라 너비가 조정되도록 설정 */
-  max-width: 100%; /* 최대 너비를 제한하여 너무 커지지 않도록 설정 */
   padding: 0 0; /* 좌우에 적절한 패딩 추가 */
 `;
 

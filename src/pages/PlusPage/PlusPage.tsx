@@ -15,11 +15,6 @@ interface UserInfo {
   email: string;
 }
 
-type Props = {
-  name: string;
-  email: string;
-};
-
 const PlusPage = () => {
   const addPageInfoTitles = ['서비스 이용약관', '개인정보 처리방침'];
   const addPageSettingTitles = ['로그아웃', '회원탈퇴'];

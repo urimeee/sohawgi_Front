@@ -40,17 +40,15 @@ const SchedulePage = () => {
 
   return (
     <S.Container>
-      <S.SchedulePageContent>
-        <TextField
-          postSchedule={postSchedule}
-          schedule={schedule}
-          setSchedule={setSchedule}
-        />
-        <ScheduleCard
-          deleteSchedule={deleteSchedule}
-          scheduleList={scheduleList}
-        />
-      </S.SchedulePageContent>
+      <TextField
+        postSchedule={postSchedule}
+        schedule={schedule}
+        setSchedule={setSchedule}
+      />
+      <ScheduleCard
+        deleteSchedule={deleteSchedule}
+        scheduleList={scheduleList}
+      />
     </S.Container>
   );
 };
