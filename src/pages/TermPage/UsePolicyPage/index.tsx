@@ -7,6 +7,7 @@ const StyledPrivacyContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const StyledPrivacyPageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,7 +19,6 @@ function UsePoliciesPage() {
   return (
     <StyledPrivacyContainer>
       <HeadTitle headTitle={'서비스 이용약관'} />
-
       <StyledPrivacyPageContainer>
         <BodyContent title={'제 1조 목적'}>
           본 약관은 (주)소화기(이하 “회사”)가 제공하는 소화기 서비스의 이용과

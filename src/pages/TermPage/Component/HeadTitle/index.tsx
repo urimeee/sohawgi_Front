@@ -17,6 +17,12 @@ const StyledTitle = styled.div`
   width: 100%;
 `;
 
+const StyledTitleComponent = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+`;
+
 const StyledTitleText = styled.div`
   height: 100%;
   font-size: 1.2rem;
@@ -25,14 +31,18 @@ const StyledTitleText = styled.div`
 const LeftArrow = styled.img`
   width: 24px;
   height: 24px;
+  position: absolute;
+  left: 0;
 `;
 
 function HeadTitle({ headTitle }: Term) {
   const navigate = useNavigate();
   return (
     <StyledTitle>
-      <LeftArrow src={arrow} alt={'arrow '} onClick={() => navigate(-1)} />
-      <StyledTitleText>{headTitle} </StyledTitleText>
+      <StyledTitleComponent>
+        <LeftArrow src={arrow} alt={'arrow '} onClick={() => navigate(-1)} />
+        <StyledTitleText>{headTitle} </StyledTitleText>
+      </StyledTitleComponent>
     </StyledTitle>
   );
 }
