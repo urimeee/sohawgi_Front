@@ -14,7 +14,6 @@ const StyledTitle = styled.div`
   align-items: center;
   padding: 4.25rem 0 1rem 0;
   flex: 1;
-  position: fixed;
   width: 100%;
 `;
 

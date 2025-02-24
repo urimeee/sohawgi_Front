@@ -7,6 +7,7 @@ import BodyTab from '../Component/BodyTab';
 const StyledPrivacyContainer = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
 `;
 
 const StyledPrivacyPageContainer = styled.div`
