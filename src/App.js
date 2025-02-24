@@ -30,8 +30,9 @@ const Container = styled.div`
 const ContentWrapper = styled.div`
   justify-content: center;
   flex: 1;
-  overflow-y: hidden;
-  margin-bottom: 6rem;
+  //overflow-y: hidden;
+  //margin-bottom: 6rem;
+  padding-bottom: 5rem;
   display: flex;
 `;
 

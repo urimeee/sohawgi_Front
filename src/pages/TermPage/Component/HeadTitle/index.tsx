@@ -12,12 +12,15 @@ const StyledTitle = styled.div`
   display: flex;
   justify-content: stretch;
   align-items: center;
-  padding: 1rem;
+  padding: 4.25rem 0 1rem 0;
   flex: 1;
+  position: fixed;
+  width: 100%;
 `;
 
 const StyledTitleText = styled.div`
   height: 100%;
+  font-size: 1.2rem;
 `;
 
 const LeftArrow = styled.img`
@@ -30,7 +33,7 @@ function HeadTitle({ headTitle }: Term) {
   return (
     <StyledTitle>
       <LeftArrow src={arrow} alt={'arrow '} onClick={() => navigate(-1)} />
-      <StyledTitleText>{headTitle}</StyledTitleText>
+      <StyledTitleText>{headTitle} </StyledTitleText>
     </StyledTitle>
   );
 }

@@ -11,10 +11,9 @@ export const BottomNavWrapper = styled.div`
   bottom: 0;
   display: flex;
   justify-content: space-around;
-  align-items: center;
   background-color: ${({ theme }) => theme.colors.White}; /* 배경 흰색 */
-  height: 4rem;
-  padding: 0 0 2rem 0;
+  height: 6rem;
+  padding: 1rem 0 2rem 0;
   border-top: 1px solid ${({ theme }) => theme.colors.Grey_03}; /* 상단에 얇은 회색선 추가 */
   box-shadow: none;
   z-index: 1000;
