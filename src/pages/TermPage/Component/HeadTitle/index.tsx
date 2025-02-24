@@ -32,7 +32,7 @@ const LeftArrow = styled.img`
   width: 24px;
   height: 24px;
   position: absolute;
-  left: 0;
+  left: 1.5rem;
 `;
 
 function HeadTitle({ headTitle }: Term) {
