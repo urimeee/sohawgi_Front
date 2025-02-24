@@ -1,6 +1,11 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 import styled from 'styled-components';
 import theme from './style/theme.ts';
 import GlobalStyle from './style/globalStyles.ts';
@@ -30,22 +35,31 @@ const ContentWrapper = styled.div`
   display: flex;
 `;
 
+function AppContent() {
+  const location = useLocation();
+  const showBottomNavi =
+    location.pathname === '/' || location.pathname === '/PlusPage';
+  return (
+    <Container>
+      <ContentWrapper>
+        <Routes>
+          <Route path="/" element={<SchedulePage />} />
+          <Route path="/PlusPage" element={<PlusPage />} />
+          <Route path="/info/usePolicy" element={<UsePolicyPage />} />
+          <Route path="/info/privacy" element={<UserPrivacyPage />} />
+        </Routes>
+        {showBottomNavi && <BottomNavi />}
+      </ContentWrapper>
+    </Container>
+  );
+}
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
-        <Container>
-          <ContentWrapper>
-            <Routes>
-              <Route path="/" element={<SchedulePage />} />
-              <Route path="/PlusPage" element={<PlusPage />} />
-              <Route path="/info/usePolicy" element={<UsePolicyPage />} />
-              <Route path="/info/privacy" element={<UserPrivacyPage />} />
-            </Routes>
-          </ContentWrapper>
-          <BottomNavi />
-        </Container>
+        <AppContent />
       </Router>
     </ThemeProvider>
   );
