@@ -13,6 +13,7 @@ const StyledPrivacyPageContainer = styled.div`
   flex-direction: column;
   overflow-y: scroll;
   padding: 1rem;
+  background-color: white;
 `;
 
 function UsePoliciesPage() {

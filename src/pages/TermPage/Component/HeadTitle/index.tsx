@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Term } from '../../../../types/term';
 
-import arrow from '../../../../assets/images/TermPage/arrow.png';
+import arrow from '../../../../assets/images/TermPage/arrow.svg';
 import { useNavigate } from 'react-router-dom';
 
 const StyledTitle = styled.div`
