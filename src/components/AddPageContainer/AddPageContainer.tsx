@@ -1,11 +1,5 @@
-// import css
-import * as S from './AddPageContainer.style';
-
-// import svg
-import rightArrow from '../../assets/images/rightArrow.svg';
-
-// import constants
 import { useNavigate } from 'react-router-dom';
+import rightArrow from '../../assets/images/rightArrow.svg';
 
 type Props = {
   title: string;
@@ -15,6 +9,7 @@ type Props = {
 
 const AddPageContainer = ({ title, contentTitles, onClick }: Props) => {
   const navigate = useNavigate();
+
   const onClickHandler = (contentTitle: string) => {
     if (title === '정보') {
       if (contentTitle === '서비스 이용약관') navigate('/info/usePolicy');
@@ -49,20 +44,31 @@ const AddPageContainer = ({ title, contentTitles, onClick }: Props) => {
   };
 
   return (
-    <S.AppPageContainer>
-      <S.Title>{title}</S.Title>
-      <S.ContentTitleContainer>
+    <div className="flex flex-col gap-5">
+      {/* Title */}
+      <div className="text-[#74767c] text-[0.8125rem]">{title}</div>
+
+      {/* Content Title List */}
+      <div className="flex flex-col gap-[1.6875rem]">
         {contentTitles.map((contentTitle, index) => (
-          <S.ContentContainer
+          <div
             key={index}
             onClick={() => onClickHandler(contentTitle)}
+            className="flex justify-between hover:cursor-pointer"
           >
-            <S.ContentTitle>{contentTitle}</S.ContentTitle>
-            <S.RightArrowImage src={rightArrow} alt={'rightArrow'} />
-          </S.ContentContainer>
+            <div className="text-[#343845] font-bold text-[0.9375rem]">
+              {contentTitle}
+            </div>
+            <img
+              src={rightArrow}
+              alt="right arrow"
+              className="w-[13px] h-[13px]"
+            />
+          </div>
         ))}
-      </S.ContentTitleContainer>
-    </S.AppPageContainer>
+      </div>
+    </div>
   );
 };
+
 export default AddPageContainer;

@@ -2,7 +2,6 @@ import React from 'react';
 
 import hamtori from '../../assets/images/hamtori.svg';
 import UserInfo from './UserInfo/UserInfo';
-import * as S from './UserProfile.style';
 
 type Props = {
   name: string;
@@ -11,10 +10,10 @@ type Props = {
 
 const UserProfile = ({ name, email }: Props) => {
   return (
-    <S.Container>
+    <div className={'flex flex-row pb-[3.75rem] gap-[1.25rem]'}>
       <img src={hamtori} alt={'hamtori'} />
       <UserInfo name={name} email={email} />
-    </S.Container>
+    </div>
   );
 };
 export default UserProfile;

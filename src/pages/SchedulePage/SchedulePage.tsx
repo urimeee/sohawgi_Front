@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import TextField from '../../components/TextField/TextField';
 import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
 
-import * as S from './SchedulePage.style';
 import useSchedules from '../../hooks/useSchedule';
 
 const SchedulePage = () => {
@@ -39,7 +38,7 @@ const SchedulePage = () => {
   }, []);
 
   return (
-    <S.Container>
+    <div className="flex flex-col px-[17.5px] pt-[44px] gap-[37px]">
       <TextField
         postSchedule={postSchedule}
         schedule={schedule}
@@ -49,7 +48,7 @@ const SchedulePage = () => {
         deleteSchedule={deleteSchedule}
         scheduleList={scheduleList}
       />
-    </S.Container>
+    </div>
   );
 };
 

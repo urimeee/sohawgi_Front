@@ -1,13 +1,4 @@
 import { ReactNode } from 'react';
-import styled from 'styled-components';
-
-const BodyContentContainer = styled.div`
-  margin-bottom: 1rem;
-`;
-
-const BodyContentTitle = styled.div`
-  font-weight: bold;
-`;
 
 interface BodycontentProps {
   title: string;
@@ -16,10 +7,10 @@ interface BodycontentProps {
 
 function BodyContent({ title, children }: BodycontentProps) {
   return (
-    <BodyContentContainer>
-      <BodyContentTitle>{title}</BodyContentTitle>
+    <div className={'mb-4'}>
+      <div className={'font-bold'}>{title}</div>
       <div>{children}</div>
-    </BodyContentContainer>
+    </div>
   );
 }
 

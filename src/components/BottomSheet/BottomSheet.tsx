@@ -1,7 +1,6 @@
 import React from 'react';
 import { Sheet } from 'react-modal-sheet';
 import Delete from '../../assets/images/delete.svg';
-import * as S from './BottomSheet.style';
 
 interface BottomSheetProps {
   isOpen: boolean;
@@ -15,38 +14,29 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   onDelete,
 }) => {
   return (
-    <Sheet
-      isOpen={isOpen}
-      onClose={onClose} // 이 부분은 Sheet.Backdrop에서도 사용됨
-      snapPoints={[0.5, 0.75]} // 바텀시트의 스냅 포인트를 설정 (optional)
-    >
+    <Sheet isOpen={isOpen} onClose={onClose} snapPoints={[0.5, 0.75]}>
       <Sheet.Container
-        style={{
-          width: '90vw', // 너비를 뷰포트의 90%로 설정
-          maxWidth: '500px', // 최대 너비를 500px로 제한
-          height: '10rem', // 높이를 콘텐츠에 맞게 자동으로 설정
-          maxHeight: '7.5rem', // 최대 높이를 화면의 50%로 제한
-          marginLeft: '1.13rem', // 좌우 여백 설정
-          marginRight: '1.13rem',
-          marginBottom: '2rem', // 아래 여백 설정
-          padding: '10px 20px 20px 20px', // 내부 여백 설정
-          boxSizing: 'border-box', // Padding을 포함한 전체 크기 설정
-          overflowY: 'auto', // 내용이 많을 경우 스크롤 가능하도록 설정
-          borderRadius: '1.3125rem', // 모서리를 둥글게 설정
-        }}
+        className="w-[90vw] max-w-[500px] h-[10rem] max-h-[7.5rem]
+                   mx-[1.13rem] mb-8 p-[10px] px-5
+                   box-border overflow-y-auto rounded-[1.3125rem]"
       >
         <Sheet.Header />
         <Sheet.Content>
           <Sheet.Scroller>
-            <S.DeleteContainer onClick={onDelete}>
-              <S.DeleteIcon src={Delete} alt="delete icon" />
-              <S.DeleteText>삭제하기</S.DeleteText>
-            </S.DeleteContainer>
+            <div
+              className="flex items-center cursor-pointer"
+              onClick={onDelete}
+            >
+              <img
+                src={Delete}
+                alt="delete icon"
+                className="w-[2.2rem] h-[2.2rem] mr-[0.31rem]"
+              />
+              <span className="text-Grey_04 text-body_03">삭제하기</span>
+            </div>
           </Sheet.Scroller>
         </Sheet.Content>
       </Sheet.Container>
-
-      {/* Backdrop 클릭 시 자동으로 onClose 실행 */}
       <Sheet.Backdrop onTap={onClose} />
     </Sheet>
   );

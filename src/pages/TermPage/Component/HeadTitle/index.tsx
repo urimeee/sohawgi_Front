@@ -1,49 +1,22 @@
-import styled from 'styled-components';
-import { Term } from '../../../../types/term';
-
-import arrow from '../../../../assets/images/TermPage/arrow.svg';
 import { useNavigate } from 'react-router-dom';
-
-const StyledTitle = styled.div`
-  font-size: 1.5rem;
-  background-color: white;
-  font-weight: bold;
-  color: #333;
-  display: flex;
-  justify-content: stretch;
-  align-items: center;
-  padding: 4.25rem 0 1rem 0;
-  flex: 1;
-  width: 100%;
-`;
-
-const StyledTitleComponent = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-`;
-
-const StyledTitleText = styled.div`
-  height: 100%;
-  font-size: 1.2rem;
-`;
-
-const LeftArrow = styled.img`
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  left: 1.5rem;
-`;
+import { Term } from '../../../../types/term';
+import arrow from '../../../../assets/images/TermPage/arrow.svg';
 
 function HeadTitle({ headTitle }: Term) {
   const navigate = useNavigate();
+
   return (
-    <StyledTitle>
-      <StyledTitleComponent>
-        <LeftArrow src={arrow} alt={'arrow '} onClick={() => navigate(-1)} />
-        <StyledTitleText>{headTitle} </StyledTitleText>
-      </StyledTitleComponent>
-    </StyledTitle>
+    <div className="flex items-center justify-stretch bg-white font-bold text-[#333] text-[1.5rem] py-[4.25rem] pb-4 w-full">
+      <div className="flex justify-around w-full relative">
+        <img
+          src={arrow}
+          alt="arrow"
+          onClick={() => navigate(-1)}
+          className="w-6 h-6 absolute left-6 cursor-pointer"
+        />
+        <div className="text-[1.2rem]">{headTitle}</div>
+      </div>
+    </div>
   );
 }
 

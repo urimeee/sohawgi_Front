@@ -1,6 +1,5 @@
 import React from 'react';
 import hamtori from '../../assets/images/hamtori.svg';
-import * as S from './ScheduleDetail.style';
 
 type Props = {
   month: number;
@@ -12,15 +11,18 @@ type Props = {
 
 const ScheduleDetail = ({ month, day, dayOfWeek, title, onClick }: Props) => {
   return (
-    <S.Container onClick={onClick}>
-      <S.Image src={hamtori} alt="Hamtori" />
-      <S.InfoContainer>
-        <S.DateText>
+    <div
+      className="flex items-center justify-start gap-[0.9rem] w-full cursor-pointer"
+      onClick={onClick}
+    >
+      <img src={hamtori} alt="Hamtori" className="w-10 h-10" />
+      <div className="flex flex-col gap-[0.05rem]">
+        <div className="text-Grey_05 text-body_05">
           {month}월 {day}일 ({dayOfWeek})
-        </S.DateText>
-        <S.ContentText>{title}</S.ContentText>
-      </S.InfoContainer>
-    </S.Container>
+        </div>
+        <div className="text-Grey_06 text-body_02">{title}</div>
+      </div>
+    </div>
   );
 };
 

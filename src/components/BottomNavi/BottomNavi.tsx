@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom';
-
-import * as S from './BottomNavi.style';
+import { Link } from 'react-router-dom';
 import plus_act from '../../assets/images/BottomNavi/plus_act.svg';
 import plus_nonact from '../../assets/images/BottomNavi/plus_nonact.svg';
 import schedule_act from '../../assets/images/BottomNavi/schedule_act.svg';
@@ -8,34 +7,43 @@ import schedule_nonact from '../../assets/images/BottomNavi/schedule_nonact.svg'
 
 const BottomNavi = () => {
   const location = useLocation();
-
   const isScheduleActive = location.pathname === '/';
   const isMoreActive = location.pathname === '/PlusPage';
 
   return (
-    <S.BottomNavWrapper>
+    <div className="fixed bottom-0 w-screen flex justify-around bg-White p-4 pb-8 border-t border-Grey_03 shadow-none z-[1000]">
       {/* 일정 영역 */}
-      <S.StyledLink to="/">
-        <S.ScheduleContainer>
-          <S.ScheduleIcon
+      <Link to="/" className="no-underline">
+        <div className="flex flex-col items-center cursor-pointer">
+          <img
             src={isScheduleActive ? schedule_act : schedule_nonact}
             alt="일정 아이콘"
+            className="w-6 h-6 mb-1"
           />
-          <S.ScheduleText $isActive={isScheduleActive}>일정</S.ScheduleText>
-        </S.ScheduleContainer>
-      </S.StyledLink>
+          <span
+            className={`text-body_05 ${isScheduleActive ? 'text-Grey_06' : 'text-Grey_02'}`}
+          >
+            일정
+          </span>
+        </div>
+      </Link>
 
       {/* 더보기 영역 */}
-      <S.StyledLink to="/PlusPage">
-        <S.MoreContainer>
-          <S.MoreIcon
+      <Link to="/PlusPage" className="no-underline">
+        <div className="flex flex-col items-center cursor-pointer">
+          <img
             src={isMoreActive ? plus_act : plus_nonact}
             alt="더보기 아이콘"
+            className="w-6 h-6 mb-1"
           />
-          <S.MoreText $isActive={isMoreActive}>더보기</S.MoreText>
-        </S.MoreContainer>
-      </S.StyledLink>
-    </S.BottomNavWrapper>
+          <span
+            className={`text-body_05 ${isMoreActive ? 'text-Grey_06' : 'text-Grey_02'}`}
+          >
+            더보기
+          </span>
+        </div>
+      </Link>
+    </div>
   );
 };
 

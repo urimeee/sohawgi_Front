@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import { api } from '../../utils/axios';
 
-// import css
-import * as S from './PlusPage.style';
-
-//import Components
+// Import Components
 import UserProfile from '../../components/UserProfile/UserProfile';
 import AddPageContainer from '../../components/AddPageContainer/AddPageContainer';
 import VersionInfo from '../../components/VersionInfo/VersionInfo';
@@ -18,7 +14,7 @@ interface UserInfo {
 const PlusPage = () => {
   const addPageInfoTitles = ['서비스 이용약관', '개인정보 처리방침'];
   const addPageSettingTitles = ['로그아웃', '회원탈퇴'];
-  const [user, setUser] = useState<UserInfo | null>();
+  const [user, setUser] = useState<UserInfo | null>(null);
 
   const getUserInfo = async () => {
     try {
@@ -34,19 +30,16 @@ const PlusPage = () => {
   }, []);
 
   return (
-    <S.AddPageContainer>
-      <S.AddPageContentContainer>
+    <div className="bg-white w-full h-full">
+      <div className="flex flex-col pl-[17px] pt-20 pr-[17px]">
         <UserProfile name={user?.name} email={user?.email} />
-        <S.AddPageBelowContainer>
-          <AddPageContainer title={'정보'} contentTitles={addPageInfoTitles} />
-          <AddPageContainer
-            title={'설정'}
-            contentTitles={addPageSettingTitles}
-          />
-        </S.AddPageBelowContainer>
+        <div className="flex flex-col gap-[2.3125rem]">
+          <AddPageContainer title="정보" contentTitles={addPageInfoTitles} />
+          <AddPageContainer title="설정" contentTitles={addPageSettingTitles} />
+        </div>
         <VersionInfo />
-      </S.AddPageContentContainer>
-    </S.AddPageContainer>
+      </div>
+    </div>
   );
 };
 
