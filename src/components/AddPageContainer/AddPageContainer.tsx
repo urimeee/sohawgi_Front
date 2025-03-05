@@ -46,7 +46,7 @@ const AddPageContainer = ({ title, contentTitles, onClick }: Props) => {
   return (
     <div className="flex flex-col gap-5">
       {/* Title */}
-      <div className="text-[#74767c] text-[0.8125rem]">{title}</div>
+      <div className="body_05">{title}</div>
 
       {/* Content Title List */}
       <div className="flex flex-col gap-[1.6875rem]">
@@ -56,9 +56,7 @@ const AddPageContainer = ({ title, contentTitles, onClick }: Props) => {
             onClick={() => onClickHandler(contentTitle)}
             className="flex justify-between hover:cursor-pointer"
           >
-            <div className="text-[#343845] font-bold text-[0.9375rem]">
-              {contentTitle}
-            </div>
+            <div className="body_03">{contentTitle}</div>
             <img
               src={rightArrow}
               alt="right arrow"

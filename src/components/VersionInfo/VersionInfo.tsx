@@ -1,6 +1,6 @@
 const VersionInfo = () => {
   return (
-    <div className={'flex justify-between color-[#9ea4b6] pt-[1.6875rem]'}>
+    <div className={'flex pt-27 justify-between text-Grey_04 '}>
       <p>버전정보</p>
       <p>1.0.0</p>
     </div>

@@ -17,10 +17,10 @@ const ScheduleDetail = ({ month, day, dayOfWeek, title, onClick }: Props) => {
     >
       <img src={hamtori} alt="Hamtori" className="w-10 h-10" />
       <div className="flex flex-col gap-[0.05rem]">
-        <div className="text-Grey_05 text-body_05">
+        <div className="text-Grey_05 body_05">
           {month}월 {day}일 ({dayOfWeek})
         </div>
-        <div className="text-Grey_06 text-body_02">{title}</div>
+        <div className="text-Grey_06 body_02">{title}</div>
       </div>
     </div>
   );

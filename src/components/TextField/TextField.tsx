@@ -17,7 +17,7 @@ const TextField: React.FC<TextFieldProps> = ({
     <form className={'relative flex w-full'} onSubmit={postSchedule}>
       <input
         className={
-          'w-full px-[1.0625rem] py-[0.8125rem] pr-[3.6rem] text-Grey_06 text-body_03 border border-Grey_02 bg-Grey_02 rounded-[10px] outline-none focus:bg-Grey_03 focus:border-Grey placeholder:text-Grey_04 placeholder:text-[14px]'
+          'w-full px-[1.0625rem] py-[0.8125rem] pr-[3.6rem] text-Grey_06 body_03 border border-Grey_02 bg-Grey_02 rounded-[10px] outline-none focus:bg-Grey_03 focus:border-Grey placeholder:text-Grey_04 placeholder:text-[14px]'
         }
         type="text"
         placeholder="일정을 입력하세요"

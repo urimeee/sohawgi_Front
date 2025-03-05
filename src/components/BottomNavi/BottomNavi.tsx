@@ -11,14 +11,14 @@ const BottomNavi = () => {
   const isMoreActive = location.pathname === '/PlusPage';
 
   return (
-    <div className="fixed bottom-0 w-screen flex justify-around bg-White p-4 pb-8 border-t border-Grey_03 shadow-none z-[1000]">
+    <div className="fixed bottom-0 w-screen flex justify-around bg-White p-16 pb-32 border-t border-Grey_03 shadow-none z-[1000]">
       {/* 일정 영역 */}
       <Link to="/" className="no-underline">
         <div className="flex flex-col items-center cursor-pointer">
           <img
             src={isScheduleActive ? schedule_act : schedule_nonact}
             alt="일정 아이콘"
-            className="w-6 h-6 mb-1"
+            className="w-22 h-22 mb-1"
           />
           <span
             className={`text-body_05 ${isScheduleActive ? 'text-Grey_06' : 'text-Grey_02'}`}
@@ -34,7 +34,7 @@ const BottomNavi = () => {
           <img
             src={isMoreActive ? plus_act : plus_nonact}
             alt="더보기 아이콘"
-            className="w-6 h-6 mb-1"
+            className="w-22 h-22 mb-1"
           />
           <span
             className={`text-body_05 ${isMoreActive ? 'text-Grey_06' : 'text-Grey_02'}`}

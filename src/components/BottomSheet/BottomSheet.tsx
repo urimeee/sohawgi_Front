@@ -16,8 +16,8 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   return (
     <Sheet isOpen={isOpen} onClose={onClose} snapPoints={[0.5, 0.75]}>
       <Sheet.Container
-        className="w-[90vw] max-w-[500px] h-[10rem] max-h-[7.5rem]
-                   mx-[1.13rem] mb-8 p-[10px] px-5
+        className="w-[90vw] max-w-500 h-[10rem] max-h-[7.5rem]
+                   mx-[1.13rem] mb-8 p-10 px-5
                    box-border overflow-y-auto rounded-[1.3125rem]"
       >
         <Sheet.Header />
@@ -32,7 +32,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
                 alt="delete icon"
                 className="w-[2.2rem] h-[2.2rem] mr-[0.31rem]"
               />
-              <span className="text-Grey_04 text-body_03">삭제하기</span>
+              <span className="text-Grey_04 body_03">삭제하기</span>
             </div>
           </Sheet.Scroller>
         </Sheet.Content>

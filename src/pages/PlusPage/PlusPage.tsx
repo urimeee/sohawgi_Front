@@ -31,7 +31,7 @@ const PlusPage = () => {
 
   return (
     <div className="bg-white w-full h-full">
-      <div className="flex flex-col pl-[17px] pt-20 pr-[17px]">
+      <div className="flex flex-col pl-17 pt-80 pr-17">
         <UserProfile name={user?.name} email={user?.email} />
         <div className="flex flex-col gap-[2.3125rem]">
           <AddPageContainer title="정보" contentTitles={addPageInfoTitles} />

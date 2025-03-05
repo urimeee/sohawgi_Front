@@ -14,29 +14,25 @@
     html {
         @apply font-pretendard;
     }
+
+    .body_01 {
+        @apply text-[19px] leading-[150%] font-semibold;
+    }
+
+    .body_02 {
+        @apply text-[17px] leading-[150%] font-semibold;
+    }
+
+    .body_03 {
+        @apply text-[15px] leading-[150%] font-semibold;
+    }
+
+    .body_04 {
+        @apply text-[13px] leading-[1rem];
+    }
+
+    .body_05 {
+        @apply text-[13px] leading-[150%];
+    }
 }
 
-/*!* 기본 스타일 설정 *!*/
-/*html, body {*/
-/*    @apply m-0 p-0 w-full h-full overflow-auto bg-gray-100 font-sans;*/
-/*    font-family: 'Pretendard', sans-serif;*/
-/*}*/
-
-/*!* 스크롤바 숨기기 *!*/
-/*::-webkit-scrollbar {*/
-/*    display: none;*/
-/*}*/
-
-/*body {*/
-/*    scrollbar-width: none; !* Firefox 전용 *!*/
-/*}*/
-
-/*!* 전체 화면 정렬 *!*/
-/*body {*/
-/*    @apply flex justify-center items-center;*/
-/*}*/
-
-/*!* 최상위 div 스타일 *!*/
-/*#root {*/
-/*    @apply w-full h-full;*/
-/*}*/
