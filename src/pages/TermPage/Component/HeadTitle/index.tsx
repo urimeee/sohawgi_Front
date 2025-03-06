@@ -12,7 +12,7 @@ function HeadTitle({ headTitle }: Term) {
           src={arrow}
           alt="arrow"
           onClick={() => navigate(-1)}
-          className="w-6 h-6 absolute left-6 cursor-pointer"
+          className="w-24 h-24 absolute left-6 cursor-pointer"
         />
         <div className="text-[1.2rem]">{headTitle}</div>
       </div>
