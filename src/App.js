@@ -18,7 +18,7 @@ function AppContent() {
   const showBottomNavi =
     location.pathname === '/' || location.pathname === '/PlusPage';
   return (
-    <div className="w-full h-screen ">
+    <div className="w-full h-full ">
       <Routes>
         <Route path="/" element={<SchedulePage />} />
         <Route path="/PlusPage" element={<PlusPage />} />

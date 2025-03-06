@@ -38,7 +38,7 @@ const SchedulePage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col px-18 h-screen bg-Grey_01 pt-80 gap-37">
+    <div className="flex flex-col px-18 h-full bg-Grey_01">
       <TextField
         postSchedule={postSchedule}
         schedule={schedule}
