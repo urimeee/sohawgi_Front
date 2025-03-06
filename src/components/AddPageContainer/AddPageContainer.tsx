@@ -57,11 +57,7 @@ const AddPageContainer = ({ title, contentTitles, onClick }: Props) => {
             className="flex justify-between hover:cursor-pointer"
           >
             <div className="body_03">{contentTitle}</div>
-            <img
-              src={rightArrow}
-              alt="right arrow"
-              className="w-[13px] h-[13px]"
-            />
+            <img src={rightArrow} alt="right arrow" className="w-13 h-13" />
           </div>
         ))}
       </div>

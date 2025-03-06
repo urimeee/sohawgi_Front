@@ -17,7 +17,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
     <Sheet isOpen={isOpen} onClose={onClose} snapPoints={[0.5, 0.75]}>
       <Sheet.Container
         className="w-[90vw] max-w-500 h-[10rem] max-h-[7.5rem]
-                   mx-[1.13rem] mb-8 p-10 px-5
+                   mx-[1.13rem] mb-32 p-40 px-20
                    box-border overflow-y-auto rounded-[1.3125rem]"
       >
         <Sheet.Header />
