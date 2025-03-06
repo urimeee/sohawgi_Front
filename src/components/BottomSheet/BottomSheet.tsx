@@ -16,27 +16,26 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   return (
     <Sheet isOpen={isOpen} onClose={onClose} snapPoints={[0.5, 0.75]}>
       <Sheet.Container
-        className="w-[90vw] max-w-500 h-[10rem] max-h-[7.5rem]
-                   mx-[1.13rem] mb-32 p-40 px-20
-                   box-border overflow-y-auto rounded-[1.3125rem]"
+        style={{
+          maxHeight: 'min(100px, calc(100% - env(safe-area-inset-top) - 30px))',
+          borderRadius: '1.3125rem',
+          marginBottom: '44px',
+        }}
       >
         <Sheet.Header />
-        <Sheet.Content>
+        <Sheet.Content className={'h-fit'}>
           <Sheet.Scroller>
             <div
-              className="flex items-center cursor-pointer"
+              className="flex px-17 items-center gap-[0.31rem] cursor-pointer h-fit"
               onClick={onDelete}
             >
-              <img
-                src={Delete}
-                alt="delete icon"
-                className="w-[2.2rem] h-[2.2rem] mr-[0.31rem]"
-              />
+              <img src={Delete} alt="delete icon" className="w-35 h-35" />
               <span className="text-Grey_04 body_03">삭제하기</span>
             </div>
           </Sheet.Scroller>
         </Sheet.Content>
       </Sheet.Container>
+
       <Sheet.Backdrop onTap={onClose} />
     </Sheet>
   );
