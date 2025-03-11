@@ -19,7 +19,7 @@ function AppContent() {
     location.pathname === '/' || location.pathname === '/PlusPage';
   return (
     <div
-      className={`w-full flex flex-col ${showBottomNavi ? 'min-h-[calc(100vh - 64px)]' : 'min-h-screen'}`}
+      className={`w-full flex flex-col ${showBottomNavi ? 'min-h-[calc(100vh - 86px)]' : 'min-h-screen'}`}
     >
       <Routes>
         <Route path="/" element={<SchedulePage />} />
