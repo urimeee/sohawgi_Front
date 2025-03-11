@@ -31,7 +31,7 @@ const ScheduleCard = ({ deleteSchedule, scheduleList }: ScheduleCardProps) => {
   }, [scheduleList]);
 
   return (
-    <div className="flex flex-col flex-shrink-0 gap-6 bg-White p-[1.88rem] px-[1.69rem] rounded-[1.7rem] overflow-y-scroll scrollbar-none">
+    <div className="flex flex-col flex-shrink-0 gap-6 bg-White p-[1.88rem] px-[1.69rem] rounded-[1.7rem] overflow-y-scroll">
       <div className="text-Grey_06 body_01">일정</div>
       <div className="flex flex-col gap-16 w-fit ">
         {scheduleList.map((schedule) => (
