@@ -30,7 +30,7 @@ const PlusPage = () => {
   }, []);
 
   return (
-    <div className="bg-white w-full h-full">
+    <div className="bg-white w-full h-full min-h-[calc(100vh-64px)]">
       <div className="flex flex-col pl-17 pt-80 pr-17">
         <UserProfile name={user?.name} email={user?.email} />
         <div className="flex flex-col gap-[2.3125rem]">

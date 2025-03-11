@@ -11,7 +11,10 @@ const BottomNavi = () => {
   const isMoreActive = location.pathname === '/PlusPage';
 
   return (
-    <div className="fixed bottom-0 w-screen flex justify-around bg-White p-16 pb-32 border-t border-Grey_03 shadow-none z-[1000]">
+    <footer
+      id="footer"
+      className="sticky bottom-0 w-screen h-64 flex justify-around bg-White p-16 pb-32 border-t border-Grey_03 shadow-none z-[1000]"
+    >
       {/* 일정 영역 */}
       <Link to="/" className="no-underline">
         <div className="flex flex-col items-center cursor-pointer">
@@ -43,7 +46,7 @@ const BottomNavi = () => {
           </span>
         </div>
       </Link>
-    </div>
+    </footer>
   );
 };
 
