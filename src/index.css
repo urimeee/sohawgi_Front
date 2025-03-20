@@ -11,29 +11,29 @@
 }
 
 @layer base {
-    html {
+    html, body {
         @apply font-pretendard no-scrollbar;
 
     }
 
     .body_01 {
-        @apply text-[19px] leading-[150%] font-semibold;
+        @apply text-19 leading-[150%] font-semibold;
     }
 
     .body_02 {
-        @apply text-[17px] leading-[150%] font-semibold;
+        @apply text-17 leading-[150%] font-semibold;
     }
 
     .body_03 {
-        @apply text-[15px] leading-[150%] font-semibold;
+        @apply text-15 leading-[150%] font-semibold;
     }
 
     .body_04 {
-        @apply text-[13px] leading-[1rem];
+        @apply text-13 leading-[1rem];
     }
 
     .body_05 {
-        @apply text-[13px] leading-[150%];
+        @apply text-13 leading-[150%];
     }
 }
 
@@ -51,5 +51,8 @@
 
 body {
     -ms-overflow-style: none;
-    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }

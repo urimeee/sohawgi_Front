@@ -24,7 +24,7 @@ const BottomNavi = () => {
             className="w-22 h-22 mb-1"
           />
           <span
-            className={`text-body_05 ${isScheduleActive ? 'text-Grey_06' : 'text-Grey_02'}`}
+            className={`body_05 ${isScheduleActive ? 'text-Grey_06' : 'text-Grey_02'}`}
           >
             일정
           </span>
@@ -40,7 +40,7 @@ const BottomNavi = () => {
             className="w-22 h-22 mb-1"
           />
           <span
-            className={`text-body_05 ${isMoreActive ? 'text-Grey_06' : 'text-Grey_02'}`}
+            className={`body_05 ${isMoreActive ? 'text-Grey_06' : ' text-Grey_02'}`}
           >
             더보기
           </span>
