@@ -1,72 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../utils/axios';
-import { Schedule } from '../types/schedule';
 
 const useSchedules = () => {
-  const [scheduleList, setScheduleList] = useState<Schedule[]>([]);
-  const [schedule, setSchedule] = useState<string>('');
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    getSchedules();
-  }, []);
+  const postScheduleMutation = useMutation({
+    mutationFn: async (schedule: string) => {
+      await api.post('/schedules', schedule);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST'] });
+    },
+  });
 
-  useEffect(() => {
-    console.log(
-      'scheduleList 변경됨 useSchedule' + scheduleList + scheduleList.length,
-    );
-  }, [scheduleList]);
-
-  const getSchedules = async () => {
-    try {
-      const response = await api.get('/schedules');
-
-      if (response.data.length < 0) {
-        throw new Error(response.statusText);
-      }
-
-      setScheduleList((prev) =>
-        JSON.stringify(prev) === JSON.stringify(response.data)
-          ? prev
-          : [...response.data],
-      );
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const postSchedule = async (
-    e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    try {
-      setSchedule('');
-      e.preventDefault();
-
-      await api.post('/schedules', { text: schedule }).then(() => {
-        getSchedules();
-        // console.log(updatedSchedules);
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const deleteSchedule = async (clickedSchedule: number) => {
-    try {
-      await api
-        .delete(`/schedules/${clickedSchedule}`)
-        .then(() => getSchedules());
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  const deleteScheduleMutation = useMutation({
+    mutationFn: async (scheduleId: number) => {
+      await api.delete(`/schedules/${scheduleId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST'] });
+    },
+  });
 
   return {
-    scheduleList,
-    schedule,
-    setSchedule,
-    getSchedules,
-    postSchedule,
-    deleteSchedule,
+    postSchedule: postScheduleMutation.mutate,
+    deleteSchedule: deleteScheduleMutation.mutate,
   };
 };
 

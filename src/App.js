@@ -5,6 +5,7 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // 페이지 컴포넌트 import
 import SchedulePage from './pages/SchedulePage/SchedulePage.tsx';
@@ -12,6 +13,8 @@ import PlusPage from './pages/PlusPage/PlusPage.tsx';
 import UserPrivacyPage from './pages/TermPage/UserPrivacyPage';
 import UsePolicyPage from './pages/TermPage/UsePolicyPage';
 import BottomNavi from './components/BottomNavi/BottomNavi.tsx';
+
+const queryClient = new QueryClient();
 
 function AppContent() {
   const location = useLocation();
@@ -34,9 +37,11 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <AppContent />
+      </Router>
+    </QueryClientProvider>
   );
 }
 

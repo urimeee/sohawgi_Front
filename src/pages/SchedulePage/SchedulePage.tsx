@@ -6,8 +6,8 @@ import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
 import useSchedules from '../../hooks/useSchedule';
 
 const SchedulePage = () => {
-  const { postSchedule, setSchedule, deleteSchedule, scheduleList, schedule } =
-    useSchedules();
+  const { postSchedule } = useSchedules();
+
   useEffect(() => {
     if (
       window.webkit &&
@@ -38,16 +38,9 @@ const SchedulePage = () => {
   }, []);
 
   return (
-    <div className="flex w-full flex-col px-18 bg-Grey_01 h-full min-h-[calc(100vh-86px)]">
-      <TextField
-        postSchedule={postSchedule}
-        schedule={schedule}
-        setSchedule={setSchedule}
-      />
-      <ScheduleCard
-        deleteSchedule={deleteSchedule}
-        scheduleList={scheduleList}
-      />
+    <div className="flex w-full flex-col px-18 bg-Grey_01 h-full min-h-[calc(100vh-86px)] no-scrollbar">
+      <TextField postSchedule={postSchedule} />
+      <ScheduleCard />
     </div>
   );
 };
