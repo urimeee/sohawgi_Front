@@ -34,7 +34,7 @@ const ScheduleCard = () => {
   const { mutate: deleteSchedule } = useMutation({
     mutationFn: deleteScheduleAPI,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['schedules'] });
+      queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST'] });
       setSheetOpen(false);
     },
     onError: (e) => {
@@ -44,7 +44,7 @@ const ScheduleCard = () => {
 
   const handleDelete = async () => {
     if (clickedSchedule !== null) {
-      await deleteScheduleAPI(clickedSchedule);
+      deleteSchedule(clickedSchedule);
     }
   };
 
