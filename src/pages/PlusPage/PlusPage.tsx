@@ -5,6 +5,9 @@ import { api } from '../../utils/axios';
 import UserProfile from '../../components/UserProfile/UserProfile';
 import AddPageContainer from '../../components/AddPageContainer/AddPageContainer';
 import VersionInfo from '../../components/VersionInfo/VersionInfo';
+import ToastBar from '../../components/ToastBar/error'
+import TopSheet from '../../components/TopSheet/TopSheet'
+
 
 interface UserInfo {
   name: string;
@@ -15,6 +18,7 @@ const PlusPage = () => {
   const addPageInfoTitles = ['서비스 이용약관', '개인정보 처리방침'];
   const addPageSettingTitles = ['로그아웃', '회원탈퇴'];
   const [user, setUser] = useState<UserInfo | null>(null);
+  const [showSheet, setShowSheet] = useState(false);
 
   const getUserInfo = async () => {
     try {
@@ -39,7 +43,12 @@ const PlusPage = () => {
         </div>
         <VersionInfo />
       </div>
+      
+      
+      
     </div>
+
+    
   );
 };
 

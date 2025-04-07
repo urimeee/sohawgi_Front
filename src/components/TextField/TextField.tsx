@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface TextFieldProps {
-  postSchedule: (schedule: string) => void;
+  postSchedule: (
+    e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
+  ) => void;
+  schedule: string;
+  setSchedule: (e: string) => void;
 }
 
-const TextField: React.FC<TextFieldProps> = ({ postSchedule }) => {
-  const [inputValue, setInputValue] = useState<string>('');
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!inputValue.trim()) return; // 빈 값 방지
-    postSchedule(inputValue); // mutate 함수 호출
-    setInputValue(''); // 입력값 초기화
-  };
-
+const TextField: React.FC<TextFieldProps> = ({
+  postSchedule,
+  setSchedule,
+  schedule,
+}: TextFieldProps) => {
   return (
     <form
       className={'sticky pt-80 pb-37 top-0 bg-Grey_01 flex w-full'}
-      onSubmit={handleSubmit}
+      onSubmit={postSchedule}
     >
       <div className={'w-full relative'}>
         <input
@@ -26,15 +25,15 @@ const TextField: React.FC<TextFieldProps> = ({ postSchedule }) => {
           }
           type="text"
           placeholder="일정을 입력하세요"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={schedule}
+          onChange={(e) => setSchedule(e.target.value)}
         />
         <button
           className={`absolute right-10 top-1/2 -translate-y-1/2 px-[0.62rem] py-[0.31rem] 
-                      ${inputValue ? 'bg-Grey_06' : 'bg-Grey_04'} text-White 
+                      ${schedule ? 'bg-Grey_06' : 'bg-Grey_04'} text-White 
                       rounded-[1.875rem] body_04 focus:bg-Grey_06`}
-          type="submit"
-          disabled={!inputValue.trim()}
+          type="button"
+          onClick={(e) => postSchedule(e)}
         >
           등록
         </button>
