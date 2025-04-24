@@ -32,6 +32,8 @@ function AuthProvider({ children }: MyComponentProps) {
         'authorizationCode',
         JSON.stringify(info.authorizationCode),
       );
+      console.log('ff');
+      console.log(info);
       setAuthInfo(info);
     };
   }, []);
