@@ -9,7 +9,14 @@ interface MyComponentProps {
 function AuthProvider({ children }: MyComponentProps) {
   const [authInfo, setAuthInfo] = useState(null);
 
+  console.log('AuthProvider');
+
   useEffect(() => {
+    console.log('useEffect 실행');
+
+    window.receiveUserInfo = function (info) {
+      console.log('webview data: ' + JSON.stringify(info));
+    };
     if (
       window.webkit &&
       window.webkit.messageHandlers &&
