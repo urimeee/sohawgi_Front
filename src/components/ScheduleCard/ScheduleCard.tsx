@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../utils/axios';
 
 const ScheduleCard = () => {
-  const { data: scheduleList = [] } = useScheduleListQuery(); // React Query로 데이터 가져오기
+  const { data: scheduleList = [] } = useScheduleListQuery();
 
   const queryClient = useQueryClient();
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
