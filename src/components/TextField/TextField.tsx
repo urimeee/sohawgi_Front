@@ -16,13 +16,13 @@ const TextField: React.FC<TextFieldProps> = ({ postSchedule }) => {
 
   return (
     <form
-      className={'sticky pt-80 pb-37 top-0 bg-Grey_01 flex w-full'}
+      className={'sticky pt-80 pb-37 top-0 flex w-full'}
       onSubmit={handleSubmit}
     >
       <div className={'w-full relative'}>
         <input
           className={
-            ' w-full px-[1.0625rem] py-[0.8125rem] pr-[3.6rem] outline-none text-Grey_06 body_03 bg-Grey_02 rounded-10 focus:border-1 focus:border-Grey_06 placeholder:text-Grey_04 placeholder:text-14'
+            ' w-full px-[1.0625rem] py-[0.8125rem] pr-[3.6rem] outline-none text-Grey_06 body_03 bg-Grey_02 rounded-15 focus:border-1 focus:border-Grey_06 placeholder:text-Grey_04 placeholder:text-14'
           }
           type="text"
           placeholder="예 ) 오늘 오후 7시 팀플 회의"
