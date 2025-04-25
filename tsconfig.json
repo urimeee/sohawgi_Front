@@ -8,6 +8,7 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "moduleResolution": "node",
+    "module": "esnext",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -16,7 +17,8 @@
     ],
     "types": [
       "jest",
-      "node"
+      "node",
+      "vite/client"
     ]
   },
   "include": [

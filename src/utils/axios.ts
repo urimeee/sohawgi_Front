@@ -5,10 +5,14 @@ const isTest =
   typeof process.env !== 'undefined' &&
   process.env.JEST_WORKER_ID !== undefined;
 
-let baseURL: string | undefined = process.env.VITE_BASE_SERVER_URL;
+let baseURL: string | undefined;
 
-if (!isTest) {
-  baseURL = new Function('return import.meta.env.VITE_BASE_SERVER_URL')();
+if (isTest) {
+  baseURL = process.env.VITE_BASE_SERVER_URL;
+} else baseURL = import.meta.env.VITE_BASE_SERVER_URL;
+
+if (!baseURL) {
+  throw new Error('[ENV ERROR] VITE_BASE_SERVER_URL가 설정되지 않았습니다.');
 }
 
 export const api = axios.create({
