@@ -12,13 +12,18 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "typeRoots": [
-      "@types"
+      "./node_modules/@types"
+    ],
+    "types": [
+      "jest",
+      "node"
     ]
   },
   "include": [
     "src",
     "src/custom.d.ts",
-    ".eslintrc.cjs"
+    ".eslintrc.cjs",
+    "jest.setup.ts"
   ],
   "exclude": [
     "node_modules"

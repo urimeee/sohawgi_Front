@@ -1,15 +1,14 @@
 declare module '*.svg' {
-  const content: any;
-  export default content;
+  const src: string;
+  export default src;
 }
 
 declare module '*.png' {
-  const content: any;
-  export default content;
+  const src: src;
+  export default src;
 }
 
 interface Window {
-  // receiveUserInfo?: (userInfo: import('./types/userInfo').UserInfo) => void;
   receiveUserInfo?: (userInfo: any) => void;
   webkit?: {
     messageHandlers?: {

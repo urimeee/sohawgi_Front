@@ -1,7 +1,16 @@
 import axios from 'axios';
 
+const isTest = process.env.JEST_WORKER_ID !== undefined;
+
+let baseURL: string | undefined = process.env.VITE_BASE_SERVER_URL;
+
+if (!isTest) {
+  baseURL = new Function('return import.meta.env.VITE_BASE_SERVER_URL')();
+}
+
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_BASE_SERVER_URL,
+  baseURL: baseURL,
   headers: {
     'content-type': 'application/json',
   },
