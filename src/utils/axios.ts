@@ -5,11 +5,15 @@ const isTest =
   typeof process.env !== 'undefined' &&
   process.env.JEST_WORKER_ID !== undefined;
 
-let baseURL: string | undefined;
+function getBaseURL() {
+  if (isTest) {
+    return process.env.VITE_BASE_SERVER_URL;
+  } else {
+    return import.meta.env.VITE_BASE_SERVER_URL;
+  }
+}
 
-if (isTest) {
-  baseURL = process.env.VITE_BASE_SERVER_URL;
-} else baseURL = import.meta.env.VITE_BASE_SERVER_URL;
+const baseURL = getBaseURL();
 
 if (!baseURL) {
   throw new Error('[ENV ERROR] VITE_BASE_SERVER_URL가 설정되지 않았습니다.');

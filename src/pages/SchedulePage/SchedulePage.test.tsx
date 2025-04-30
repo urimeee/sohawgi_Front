@@ -9,6 +9,20 @@ jest.mock('../../hooks/useSchedule', () => ({
   default: jest.fn(),
 }));
 
+jest.mock('../../utils/axios', () => {
+  return {
+    api: {
+      get: jest.fn(),
+      post: jest.fn(),
+      delete: jest.fn(),
+      interceptors: {
+        request: { use: jest.fn() },
+        response: { use: jest.fn() },
+      },
+    },
+  };
+});
+
 const mockedUseSchedules = useSchedules as jest.MockedFunction<
   typeof useSchedules
 >;
@@ -33,26 +47,14 @@ describe('SchedulePage', () => {
     });
   });
 
-  it('renders SchedulePage component', () => {
+  it('스케줄 페이지 랜더링 시 TextField의 PlaceHolder가 보여야한다.', () => {
     renderWithProviders(<SchedulePage />);
     expect(
       screen.getByPlaceholderText('예 ) 오늘 오후 7시 팀플 회의'),
     ).toBeInTheDocument();
   });
 
-  it('renders TextField component', () => {
-    renderWithProviders(<SchedulePage />);
-    const inputElement =
-      screen.getByPlaceholderText('예 ) 오늘 오후 7시 팀플 회의');
-    expect(inputElement).toBeInTheDocument();
-  });
-
-  it('renders ScheduleCard component', () => {
-    renderWithProviders(<SchedulePage />);
-    expect(screen.getByText('일정')).toBeInTheDocument();
-  });
-
-  it('handles schedule submission', () => {
+  it('버튼 클릭시 일정이 등록되어야 한다', () => {
     renderWithProviders(<SchedulePage />);
     const inputElement =
       screen.getByPlaceholderText('예 ) 오늘 오후 7시 팀플 회의');

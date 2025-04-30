@@ -14,7 +14,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   onDelete,
 }) => {
   return (
-    <Sheet isOpen={isOpen} onClose={onClose} snapPoints={[0.5, 0.75]}>
+    <Sheet isOpen={isOpen} onClose={onClose} snapPoints={[0.75, 0.5]}>
       <Sheet.Container
         style={{
           maxHeight: 'min(100px, calc(100% - env(safe-area-inset-top) - 30px))',
