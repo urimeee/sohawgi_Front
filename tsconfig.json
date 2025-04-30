@@ -16,7 +16,7 @@
       "./node_modules/@types"
     ],
     "types": [
-      "vitest",
+      "jest",
       "node",
       "vite/client"
     ]
@@ -24,7 +24,8 @@
   "include": [
     "src",
     "src/custom.d.ts",
-    ".eslintrc.cjs"
+    ".eslintrc.cjs",
+    "jest.setup.ts"
   ],
   "exclude": [
     "node_modules"
