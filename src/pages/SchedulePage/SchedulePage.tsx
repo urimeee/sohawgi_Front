@@ -17,7 +17,7 @@ const SchedulePage = () => {
       <div className="px-8">
         <Calendar />
       </div>
-      <div className="flex h-screen justify-center">
+      <div className="flex w-full h-screen">
         <ScheduleCard />
       </div>
     </div>
