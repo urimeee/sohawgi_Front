@@ -14,7 +14,7 @@ const SchedulePage = () => {
       <div>
         <TextField postSchedule={postSchedule} />
       </div>
-      <div className="px-8">
+      <div className="">
         <Calendar />
       </div>
       <div className="flex w-full h-screen">

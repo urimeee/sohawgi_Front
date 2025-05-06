@@ -35,9 +35,9 @@ const WeeklyCalendar = () => {
 
   return (
     <div className="w-full">
-      <div className={'flex place-content-between'}>
+      <div className={'flex place-content-between pb-20'}>
         <span className={'body_01'}>{startOfWeek.format('YYYY. MM')}</span>
-        <div className={'gap-10'}>
+        <div className={'flex gap-15'}>
           <button onClick={goToPreviousWeek}>
             <img className={'w-13'} src={prevBtn} alt="prevBtn" />
           </button>
@@ -52,8 +52,7 @@ const WeeklyCalendar = () => {
           return (
             <div
               key={idx}
-              style={{ margin: '0 8px', textAlign: 'center' }}
-              className={`flex flex-col body_05  hover:cursor-pointer ${isSelected ? 'text-Grey_06' : 'text-Grey_03'}`}
+              className={`flex flex-col body_05 gap-6 hover:cursor-pointer text-center ${isSelected ? 'text-Grey_06' : 'text-Grey_03'}`}
               onClick={() => setSelectedDate(day)}
             >
               <div>{day.format('dd')}</div>

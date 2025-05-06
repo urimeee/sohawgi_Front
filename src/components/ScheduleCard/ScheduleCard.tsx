@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ScheduleDetail from '../ScheduleDetail/ScheduleDetail';
 import BottomSheet from '../BottomSheet/BottomSheet';
 import useScheduleListQuery from '../../hooks/useScheduleListQuery';
