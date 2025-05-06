@@ -1,21 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ScheduleDetail from '../ScheduleDetail/ScheduleDetail';
 import BottomSheet from '../BottomSheet/BottomSheet';
+import useScheduleListQuery from '../../hooks/useScheduleListQuery';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../utils/axios';
 import DefaultComponent from '../../pages/SchedulePage/DefaultComponent';
-import { useSchedulesByDateQuery } from '../../hooks/useSchedulesByDateQuery';
-import dayjs from 'dayjs';
 
-type Props = {
-  selectedDate: dayjs.Dayjs;
-};
-
-const ScheduleCard = ({ selectedDate }: Props) => {
-  const year = selectedDate.year();
-  const month = selectedDate.month();
-  const day = selectedDate.day();
-  const { data: schedules = [] } = useSchedulesByDateQuery(year, month, day);
+const ScheduleCard = () => {
+  const { data: scheduleList = [] } = useScheduleListQuery();
 
   const queryClient = useQueryClient();
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
@@ -56,26 +48,23 @@ const ScheduleCard = ({ selectedDate }: Props) => {
       deleteSchedule(clickedSchedule);
     }
   };
-  console.log(schedules.length);
 
   return (
-    <div className="flex flex-col w-full h-screen no-scrollbar flex-shrink-0 gap-6 bg-White rounded-[1.7rem] overflow-y-scroll">
-      <div className="flex flex-col gap-35 h-full ">
-        {schedules.length === 0 ? (
-          <div className="flex justify-center w-full h-full items-center">
-            <DefaultComponent />
-          </div>
+    <div className="flex flex-col no-scrollbar flex-shrink-0 gap-6 bg-White p-[1.88rem] px-[1.69rem] rounded-[1.7rem] overflow-y-scroll">
+      <div className="flex flex-col gap-16 w-fit ">
+        {scheduleList.length === 0 ? (
+          <DefaultComponent />
         ) : (
-          <div className="pt-40 flex flex-col gap-35">
-            {schedules.schedules.map((schedule) => (
-              <ScheduleDetail
-                key={schedule.scheduleId}
-                title={schedule.title}
-                time={schedule.time}
-                onClick={() => onClickHandler(schedule.scheduleId)}
-              />
-            ))}
-          </div>
+          scheduleList.map((schedule) => (
+            <ScheduleDetail
+              key={schedule.scheduleId}
+              title={schedule.title}
+              day={schedule.day}
+              dayOfWeek={schedule.dayOfWeek}
+              month={schedule.month}
+              onClick={() => onClickHandler(schedule.scheduleId)}
+            />
+          ))
         )}
       </div>
       <BottomSheet
