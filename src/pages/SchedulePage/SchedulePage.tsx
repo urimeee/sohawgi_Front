@@ -10,14 +10,14 @@ const SchedulePage = () => {
   const { postSchedule } = useSchedules();
 
   return (
-    <div className="flex w-full flex-col px-18 min-h-[calc(100vh-636px)] no-scrollbar">
+    <div className="flex w-full flex-col px-18 h-screen no-scrollbar">
       <div>
         <TextField postSchedule={postSchedule} />
       </div>
       <div className="">
         <Calendar />
       </div>
-      <div className="flex w-full h-screen">
+      <div className="flex-1 h-full">
         <ScheduleCard />
       </div>
     </div>
