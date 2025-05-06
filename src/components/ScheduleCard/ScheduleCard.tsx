@@ -50,14 +50,14 @@ const ScheduleCard = () => {
   };
 
   return (
-    <div className="flex flex-col w-screen h-full no-scrollbar flex-shrink-0 gap-6 bg-White p-[1.88rem] px-[1.69rem] rounded-[1.7rem] overflow-y-scroll">
+    <div className="flex flex-col w-full h-full no-scrollbar flex-shrink-0 gap-6 bg-White p-[1.88rem] px-[1.69rem] rounded-[1.7rem] overflow-y-scroll">
       <div className="flex flex-col gap-16 w-full h-full">
         {scheduleList.length === 0 ? (
           <div className="flex flex-1 w-full h-full justify-center items-center">
             <DefaultComponent />
           </div>
         ) : (
-          scheduleList.schedules.map((schedule) => (
+          scheduleList.map((schedule) => (
             <ScheduleDetail
               key={schedule.scheduleId}
               title={schedule.title}
