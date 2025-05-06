@@ -48,23 +48,26 @@ const ScheduleCard = () => {
       deleteSchedule(clickedSchedule);
     }
   };
+  console.log(scheduleList.length);
 
   return (
-    <div className="flex flex-col no-scrollbar flex-shrink-0 gap-6 bg-White p-[1.88rem] px-[1.69rem] rounded-[1.7rem] overflow-y-scroll">
-      <div className="flex flex-col gap-16 w-fit ">
+    <div className="flex flex-col w-full h-screen no-scrollbar flex-shrink-0 gap-6 bg-White rounded-[1.7rem] overflow-y-scroll">
+      <div className="flex flex-col gap-35 h-full ">
         {scheduleList.length === 0 ? (
-          <DefaultComponent />
+          <div className="flex justify-center w-full h-full items-center">
+            <DefaultComponent />
+          </div>
         ) : (
-          scheduleList.map((schedule) => (
-            <ScheduleDetail
-              key={schedule.scheduleId}
-              title={schedule.title}
-              day={schedule.day}
-              dayOfWeek={schedule.dayOfWeek}
-              month={schedule.month}
-              onClick={() => onClickHandler(schedule.scheduleId)}
-            />
-          ))
+          <div className="pt-40 flex flex-col gap-35">
+            {scheduleList.schedules.map((schedule) => (
+              <ScheduleDetail
+                key={schedule.scheduleId}
+                title={schedule.title}
+                time={schedule.time}
+                onClick={() => onClickHandler(schedule.scheduleId)}
+              />
+            ))}
+          </div>
         )}
       </div>
       <BottomSheet

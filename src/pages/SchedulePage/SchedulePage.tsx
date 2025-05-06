@@ -2,9 +2,9 @@ import React from 'react';
 
 import TextField from '../../components/TextField/TextField';
 import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
+import Calendar from './Calendar';
 
 import useSchedules from '../../hooks/useSchedule';
-import Calendar from './Calendar';
 
 const SchedulePage = () => {
   const { postSchedule } = useSchedules();
