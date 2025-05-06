@@ -16,9 +16,13 @@ import nextBtn from '../../../assets/images/Calendar/nextWeekBtn.svg';
 import selectedEmoji from '../../../assets/images/Calendar/selectedEmoji.svg';
 import defaultEmoji from '../../../assets/images/Calendar/defaultEmoji.svg';
 
-const WeeklyCalendar = () => {
+type Props = {
+  selectedDate: dayjs.Dayjs;
+  setSelectedDate: (dayjs: dayjs.Dayjs) => void;
+};
+
+const WeeklyCalendar = ({ selectedDate, setSelectedDate }: Props) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
-  const [selectedDate, setSelectedDate] = useState(dayjs());
 
   const startOfWeek = currentDate.startOf('week'); // 일요일 시작이라면 'week', 월요일 시작하고 싶으면 옵션 따로 필요
   const days = Array.from({ length: 7 }).map((_, idx) =>

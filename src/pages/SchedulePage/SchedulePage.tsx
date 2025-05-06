@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import TextField from '../../components/TextField/TextField';
 import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
 import Calendar from './Calendar';
 
 import useSchedules from '../../hooks/useSchedule';
+import dayjs from 'dayjs';
 
 const SchedulePage = () => {
+  const [selectedDate, setSelectedDate] = useState(dayjs());
   const { postSchedule } = useSchedules();
 
   return (
@@ -15,10 +17,13 @@ const SchedulePage = () => {
         <TextField postSchedule={postSchedule} />
       </div>
       <div className="px-8">
-        <Calendar />
+        <Calendar
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+        />
       </div>
       <div className="flex w-full h-screen">
-        <ScheduleCard />
+        <ScheduleCard selectedDate={selectedDate} />
       </div>
     </div>
   );
