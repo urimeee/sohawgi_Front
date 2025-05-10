@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { api } from '../../utils/axios';
+
 import ScheduleDetail from '../ScheduleDetail/ScheduleDetail';
 import BottomSheet from '../BottomSheet/BottomSheet';
+
 import useScheduleListQuery from '../../hooks/useScheduleListQuery';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '../../utils/axios';
 import DefaultComponent from '../../pages/SchedulePage/DefaultComponent';
 
 const ScheduleCard = () => {
@@ -57,7 +59,7 @@ const ScheduleCard = () => {
             <DefaultComponent />
           </div>
         ) : (
-          scheduleList.map((schedule) => (
+          scheduleList.schedules.map((schedule) => (
             <ScheduleDetail
               key={schedule.scheduleId}
               title={schedule.title}

@@ -1,7 +1,17 @@
 import { useState } from 'react';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
 import updateLocale from 'dayjs/plugin/updateLocale';
+
+import prevBtn from '../../../assets/images/Calendar/prevWeekBtn.svg';
+import nextBtn from '../../../assets/images/Calendar/nextWeekBtn.svg';
+import selectedEmoji from '../../../assets/images/Calendar/selectedEmoji.svg';
+import defaultEmoji from '../../../assets/images/Calendar/defaultEmoji.svg';
+
+type WeeklyCalendarProps = {
+  selectedDate: Dayjs;
+  setSelectedDate: (date: Dayjs) => void;
+};
 
 dayjs.locale('ko');
 dayjs.extend(updateLocale);
@@ -10,27 +20,21 @@ dayjs.updateLocale('ko', {
   weekdaysWin: ['일', '월', '화', '수', '목', '금', '토'],
 });
 
-import prevBtn from '../../../assets/images/Calendar/prevWeekBtn.svg';
-import nextBtn from '../../../assets/images/Calendar/nextWeekBtn.svg';
-
-import selectedEmoji from '../../../assets/images/Calendar/selectedEmoji.svg';
-import defaultEmoji from '../../../assets/images/Calendar/defaultEmoji.svg';
-
-const WeeklyCalendar = () => {
-  const [currentDate, setCurrentDate] = useState(dayjs());
-  const [selectedDate, setSelectedDate] = useState(dayjs());
-
-  const startOfWeek = currentDate.startOf('week'); // 일요일 시작이라면 'week', 월요일 시작하고 싶으면 옵션 따로 필요
+const WeeklyCalendar = ({
+  selectedDate,
+  setSelectedDate,
+}: WeeklyCalendarProps) => {
+  const startOfWeek = selectedDate.startOf('week'); // 일요일 시작이라면 'week', 월요일 시작하고 싶으면 옵션 따로 필요
   const days = Array.from({ length: 7 }).map((_, idx) =>
     startOfWeek.add(idx, 'day'),
   );
 
   const goToPreviousWeek = () => {
-    setCurrentDate((prev) => prev.subtract(1, 'week'));
+    setSelectedDate(selectedDate.subtract(1, 'week'));
   };
 
   const goToNextWeek = () => {
-    setCurrentDate((prev) => prev.add(1, 'week'));
+    setSelectedDate(selectedDate.add(1, 'week'));
   };
 
   return (
