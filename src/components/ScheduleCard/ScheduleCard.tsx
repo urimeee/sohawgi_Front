@@ -59,7 +59,7 @@ const ScheduleCard = () => {
             <DefaultComponent />
           </div>
         ) : (
-          scheduleList.schedules.map((schedule) => (
+          scheduleList.map((schedule) => (
             <ScheduleDetail
               key={schedule.scheduleId}
               title={schedule.title}

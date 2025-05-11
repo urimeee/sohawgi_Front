@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import TextField from '../../components/TextField/TextField';
 import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
@@ -11,19 +11,33 @@ import dayjs from 'dayjs';
 const SchedulePage = () => {
   const { postSchedule } = useSchedules();
   const [selectedDate, setSelectedDate] = useState(dayjs());
+  const [selectedScheduleList, setSelectedScheduleList] = useState([]);
 
   const getSelectedSchedule = async (
     year: number,
     month: number,
     day: number,
   ) => {
-    const response = await api.get('/schedules', {
-      params: { year, month, day },
-    });
-    return response.data;
+    try {
+      const response = await api.get('/schedules', {
+        params: { year, month, day },
+      });
+      setSelectedScheduleList(response.data.schedules);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   console.log(getSelectedSchedule);
+
+  useEffect(() => {
+    const year = selectedDate.year();
+    const month = selectedDate.month() + 1;
+    const day = selectedDate.day();
+
+    getSelectedSchedule(year, month, day);
+    console.log(year, month, day);
+  }, [selectedDate]);
 
   return (
     <div className="flex w-full flex-col px-18 h-screen no-scrollbar">
