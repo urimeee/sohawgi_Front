@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 
 const SchedulePage = () => {
   const { postSchedule } = useSchedules();
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState(dayjs());
   const [selectedScheduleList, setSelectedScheduleList] = useState([]);
 
   const getSelectedSchedule = async (
@@ -31,19 +31,22 @@ const SchedulePage = () => {
   console.log(getSelectedSchedule);
 
   useEffect(() => {
-    setSelectedDate(dayjs());
-    console.log('g');
-  }, []);
-
-  useEffect(() => {
     const year = selectedDate.year();
     const month = selectedDate.month() + 1;
-    const day = selectedDate.day();
+    const day = selectedDate.date();
 
     getSelectedSchedule(year, month, day);
     console.log(year, month, day);
   }, [selectedDate]);
 
+  useEffect(() => {
+    const year = selectedDate.year();
+    const month = selectedDate.month() + 1;
+    const day = selectedDate.date();
+
+    getSelectedSchedule(year, month, day);
+    console.log(getSelectedSchedule(year, month, day));
+  }, []);
   return (
     <div className="flex w-full flex-col px-18 h-screen no-scrollbar">
       <div>
