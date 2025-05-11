@@ -7,6 +7,7 @@ import Calendar from './Calendar';
 import useSchedules from '../../hooks/useSchedule';
 import { api } from '../../utils/axios';
 import dayjs, { Dayjs } from 'dayjs';
+import { convertDateFormat } from '../../utils';
 
 const SchedulePage = () => {
   const { postSchedule } = useSchedules();
@@ -34,8 +35,11 @@ const SchedulePage = () => {
 
   const getScheduleCounts = async (startDate, endDate) => {
     try {
+      const formattedStartDate = convertDateFormat(startDate);
+      const formattedEndDate = convertDateFormat(endDate);
+
       const response = await api.get('/schedules/counts', {
-        params: { startDate, endDate },
+        params: { startDate: formattedStartDate, endDate: formattedEndDate },
       });
       setScheduleCount(response.data.scheduleCounts);
       console.log(scheduleCount);
