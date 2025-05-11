@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
 import updateLocale from 'dayjs/plugin/updateLocale';
@@ -11,6 +11,8 @@ import defaultEmoji from '../../../assets/images/Calendar/defaultEmoji.svg';
 type WeeklyCalendarProps = {
   selectedDate: Dayjs;
   setSelectedDate: (date: Dayjs) => void;
+  setStartDate: (date: Dayjs) => void;
+  setEndDate: (date: Dayjs) => void;
 };
 
 dayjs.locale('ko');
@@ -23,8 +25,12 @@ dayjs.updateLocale('ko', {
 const WeeklyCalendar = ({
   selectedDate,
   setSelectedDate,
+  setStartDate,
+  setEndDate,
 }: WeeklyCalendarProps) => {
-  const startOfWeek = selectedDate.startOf('week'); // 일요일 시작이라면 'week', 월요일 시작하고 싶으면 옵션 따로 필요
+  const startOfWeek = selectedDate.startOf('week');
+  const endOfWeek = selectedDate.endOf('week');
+  
   const days = Array.from({ length: 7 }).map((_, idx) =>
     startOfWeek.add(idx, 'day'),
   );
@@ -36,6 +42,11 @@ const WeeklyCalendar = ({
   const goToNextWeek = () => {
     setSelectedDate(selectedDate.add(1, 'week'));
   };
+
+  useEffect(() => {
+    setStartDate(startOfWeek);
+    setEndDate(endOfWeek);
+  }, [selectedDate, setStartDate, setEndDate]);
 
   return (
     <div className="w-full">
