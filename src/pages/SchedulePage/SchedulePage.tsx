@@ -38,7 +38,9 @@ const SchedulePage = () => {
     getSelectedSchedule(year, month, day);
     console.log(year, month, day);
   }, [selectedDate]);
-
+  useEffect(() => {
+    console.log('g');
+  }, []);
   return (
     <div className="flex w-full flex-col px-18 h-screen no-scrollbar">
       <div>
