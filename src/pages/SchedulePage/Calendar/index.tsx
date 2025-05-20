@@ -54,20 +54,12 @@ const WeeklyCalendar = ({
       const formattedStartDate = startOfweek.format('YYYY-MM-DD');
       const formattedEndDate = endOfweek.format('YYYY-MM-DD');
 
-      console.log("formattedStartDate, formattedEndDate : " + formattedStartDate, formattedEndDate);
-
       const response = await api.get('/schedules/counts', {
         params: { startDate: formattedStartDate, endDate: formattedEndDate },
       });
 
-      console.log("Calendar/ response: ", response);
-
       const countingData = response.data.scheduleCounts;
-      console.log("Calendar/ countingData: "+countingData)
-
       setScheduleCount(countingData);
-      console.log("Calendar/ countingData: "+countingData)
-
     } catch (error) {
       console.error(error);
     }
@@ -75,7 +67,6 @@ const WeeklyCalendar = ({
 
   useEffect(() => {
     getScheduleCounts(startOfWeek, endOfWeek);
-    console.log(scheduleCount);
   }, [selectedDate, startOfWeek, endOfWeek, scheduleCount]);
 
   useEffect(() => {
