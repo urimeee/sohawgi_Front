@@ -8,7 +8,7 @@ import {
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // 페이지 컴포넌트 import
-import SchedulePage from './pages/SchedulePage/SchedulePage';
+import SchedulePage from './pages/SchedulePage';
 import PlusPage from './pages/PlusPage/PlusPage';
 import UserPrivacyPage from './pages/TermPage/UserPrivacyPage';
 import UsePolicyPage from './pages/TermPage/UsePolicyPage';
