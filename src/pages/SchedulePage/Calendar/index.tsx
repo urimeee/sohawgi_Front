@@ -53,14 +53,17 @@ const WeeklyCalendar = ({
     try {
       const formattedStartDate = startOfweek.format('YYYY-MM-DD');
       const formattedEndDate = endOfweek.format('YYYY-MM-DD');
-      
+
       console.log("formattedStartDate, formattedEndDate : " + formattedStartDate, formattedEndDate);
 
       const response = await api.get('/schedules/counts', {
         params: { startDate: formattedStartDate, endDate: formattedEndDate },
       });
 
+      console.log("Calendar/ response: ", response);
+
       const countingData = response.data.scheduleCounts;
+      console.log("Calendar/ countingData: "+countingData)
 
       const formattedCounts = countingData.reduce((acc: { [key: string]: number }, curr) => {
         acc[curr.date] = curr.counts;
@@ -69,7 +72,7 @@ const WeeklyCalendar = ({
 
       setScheduleCount(formattedCounts);
 
-      console.log(scheduleCount);
+      console.log("Calendar/ formattedCounts: "+scheduleCount);
     } catch (error) {
       console.error(error);
     }
