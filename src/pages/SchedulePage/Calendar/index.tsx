@@ -65,14 +65,9 @@ const WeeklyCalendar = ({
       const countingData = response.data.scheduleCounts;
       console.log("Calendar/ countingData: "+countingData)
 
-      const formattedCounts = countingData.reduce((acc: { [key: string]: number }, curr) => {
-        acc[curr.date] = curr.counts;
-        return acc;
-      }, {});
+      setScheduleCount(countingData);
+      console.log("Calendar/ countingData: "+countingData)
 
-      setScheduleCount(formattedCounts);
-
-      console.log("Calendar/ formattedCounts: "+scheduleCount);
     } catch (error) {
       console.error(error);
     }
