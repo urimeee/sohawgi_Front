@@ -67,7 +67,7 @@ const WeeklyCalendar = ({
 
   useEffect(() => {
     getScheduleCounts(startOfWeek, endOfWeek);
-  }, [selectedDate, startOfWeek, endOfWeek, scheduleCount]);
+  }, [selectedDate, startOfWeek, endOfWeek]);
 
   useEffect(() => {
     setStartDate(startOfWeek);
