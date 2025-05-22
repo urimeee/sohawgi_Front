@@ -24,8 +24,6 @@ dayjs.updateLocale('ko', {
   weekdaysWin: ['일', '월', '화', '수', '목', '금', '토'],
 });
 
-
-
 const WeeklyCalendar = ({
                           selectedDate,
                           setSelectedDate,
@@ -69,10 +67,6 @@ const WeeklyCalendar = ({
     getScheduleCounts(startOfWeek, endOfWeek);
   }, [selectedDate, startOfWeek, endOfWeek]);
 
-  useEffect(() => {
-    setStartDate(startOfWeek);
-    setEndDate(endOfWeek);
-  }, [selectedDate, setStartDate, setEndDate]);
 
   return (
       <div className="w-full">
