@@ -1,4 +1,6 @@
 import React from 'react';
+import { formatTime } from '../../utils';
+
 import hamtori from '../../assets/images/hamtori.svg';
 
 type Props = {
@@ -16,7 +18,7 @@ const ScheduleDetail = ({ time, title, onClick }: Props) => {
       <img src={hamtori} alt="Hamtori" className="w-40 h-40" />
       <div className="flex flex-col gap-[0.05rem]">
         <div className="text-Grey_05 body_05">
-          {time}
+          {formatTime(time)}
         </div>
         <div className="text-Grey_06 body_02">{title}</div>
       </div>
