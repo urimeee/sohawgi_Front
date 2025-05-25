@@ -103,7 +103,7 @@ const WeeklyCalendar = ({
                     <div
                         className={`absolute inset-0 flex items-center justify-center  ${isSelected ? 'text-white' : 'text-Grey_04'}`}
                     >
-                      {count}
+                      {count === 0 ?  null : count}
                     </div>
                   </div>
                   <div>{day.format('D') + '일 '}</div>
