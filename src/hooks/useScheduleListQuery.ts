@@ -6,7 +6,7 @@ const getSchedules = async ({ queryKey }: { queryKey:[string, number, number, nu
   const response = await api.get('/schedules', {
     params: { year, month, day },
   });
-  return response.data;
+  return response.data.schedules;
 };
 
 const useScheduleListQuery = (year: number, month:number, day:number) => {
