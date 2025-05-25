@@ -85,7 +85,7 @@ const WeeklyCalendar = ({
           {days.map((day, idx) => {
             const isSelected = selectedDate?.isSame(day, 'day');
             const formattedDate = day.format('YYYY-MM-DD');
-            const count = scheduleCount[formattedDate] ?? 0;
+            const count = scheduleCount[formattedDate] ?? null;
 
             return (
                 <div
