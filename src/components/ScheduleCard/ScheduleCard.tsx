@@ -73,9 +73,7 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
             <ScheduleDetail
               key={schedule.scheduleId}
               title={schedule.title}
-              day={schedule.day}
-              dayOfWeek={schedule.dayOfWeek}
-              month={schedule.month}
+              time = {schedule.time}
               onClick={() => onClickHandler(schedule.scheduleId)}
             />
           ))
