@@ -8,8 +8,18 @@ import useScheduleListQuery from '../../hooks/useScheduleListQuery';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import DefaultComponent from '../../pages/SchedulePage/DefaultComponent';
 
-const ScheduleCard = () => {
-  const { data: scheduleList = [] } = useScheduleListQuery();
+import { Dayjs } from 'dayjs';
+
+type ScheduleCardProps = {
+  selectedDate: Dayjs;
+}
+
+const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
+  const year = selectedDate.year();
+  const month = selectedDate.month() + 1;
+  const day = selectedDate.date();
+
+  const { data: scheduleList = [] } = useScheduleListQuery(year, month, day);
 
   const queryClient = useQueryClient();
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
@@ -37,7 +47,7 @@ const ScheduleCard = () => {
   const { mutate: deleteSchedule } = useMutation({
     mutationFn: deleteScheduleAPI,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST'] });
+      queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST', year, month, day] });
       setSheetOpen(false);
     },
     onError: (e) => {
