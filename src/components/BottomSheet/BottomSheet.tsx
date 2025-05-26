@@ -20,13 +20,15 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
           maxHeight: 'min(100px, calc(100% - env(safe-area-inset-top) - 30px))',
           borderRadius: '1.3125rem',
           marginBottom: '44px',
+          left: '10%',
+          width:'80%'
         }}
       >
         <Sheet.Header />
         <Sheet.Content className={'h-fit'}>
           <Sheet.Scroller>
             <div
-              className="flex px-17 items-center gap-[0.31rem] cursor-pointer h-fit"
+              className="flex px-20 items-center gap-[0.31rem] cursor-pointer h-fit"
               onClick={onDelete}
             >
               <img src={Delete} alt="delete icon" className="w-35 h-35" />

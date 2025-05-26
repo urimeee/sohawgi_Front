@@ -12,7 +12,7 @@ import { Dayjs } from 'dayjs';
 
 type ScheduleCardProps = {
   selectedDate: Dayjs;
-}
+};
 
 const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
   const year = selectedDate.year();
@@ -47,7 +47,9 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
   const { mutate: deleteSchedule } = useMutation({
     mutationFn: deleteScheduleAPI,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST', year, month, day] });
+      queryClient.invalidateQueries({
+        queryKey: ['SCHEDULE_LIST', year, month, day],
+      });
       setSheetOpen(false);
     },
     onError: (e) => {
@@ -62,21 +64,23 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
   };
 
   return (
-    <div className="flex flex-col w-full h-full no-scrollbar flex-shrink-0 gap-6 bg-White p-[1.88rem] px-[1.69rem] rounded-[1.7rem] overflow-y-scroll">
+    <div className="flex flex-col w-full h-full no-scrollbar flex-shrink-0 gap-6 bg-White rounded-[1.7rem] overflow-y-scroll">
       <div className="flex flex-col gap-16 w-full h-full">
         {scheduleList.length === 0 ? (
           <div className="flex flex-1 w-full h-full justify-center items-center">
             <DefaultComponent />
           </div>
         ) : (
-          scheduleList.map((schedule) => (
-            <ScheduleDetail
-              key={schedule.scheduleId}
-              title={schedule.title}
-              time = {schedule.time}
-              onClick={() => onClickHandler(schedule.scheduleId)}
-            />
-          ))
+          <div className="flex flex-col gap-35 pt-40">
+            {scheduleList.map((schedule) => (
+              <ScheduleDetail
+                key={schedule.scheduleId}
+                title={schedule.title}
+                time={schedule.time}
+                onClick={() => onClickHandler(schedule.scheduleId)}
+              />
+            ))}
+          </div>
         )}
       </div>
       <BottomSheet
