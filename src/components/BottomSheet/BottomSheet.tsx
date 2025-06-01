@@ -20,8 +20,8 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
           maxHeight: 'min(100px, calc(100% - env(safe-area-inset-top) - 30px))',
           borderRadius: '1.3125rem',
           marginBottom: '44px',
-          left: '10%',
-          width:'80%'
+          left: '5%',
+          width:'90%'
         }}
       >
         <Sheet.Header />
