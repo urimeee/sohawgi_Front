@@ -20,6 +20,8 @@ declare module 'styled-components' {
       Body_04: CSSProp;
       Body_05: CSSProp;
 
+      Contents_01: CSSProp;
+      Contents_02: CSSProp;
     };
   }
 }

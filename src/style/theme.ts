@@ -50,6 +50,20 @@ const theme: DefaultTheme = {
       font-weight: 500;
       line-height: 150%;
     `,
+    Contents_01: css`
+      font-family: 'Pretendard';
+      font-size: 17px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+    `,
+    Contents_02: css`
+      font-family: 'Pretendard';
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%;
+    `,
 
   }
 };
