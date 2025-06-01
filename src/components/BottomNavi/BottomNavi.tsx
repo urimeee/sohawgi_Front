@@ -13,7 +13,7 @@ const BottomNavi = () => {
   return (
     <footer
       id="footer"
-      className="sticky bottom-0 w-screen h-86 flex justify-around bg-White p-16 pb-60 border-t border-Grey_03 shadow-none z-[1000]"
+      className="sticky bottom-0 w-screen h-86 flex justify-around bg-White p-16 pb-60 border-t border-Grey_03 shadow-none z-[1000] overflow-hidden"
     >
       {/* 일정 영역 */}
       <Link to="/" className="no-underline">
