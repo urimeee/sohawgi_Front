@@ -71,7 +71,7 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
             <DefaultComponent />
           </div>
         ) : (
-          <div className="flex flex-col gap-35 pt-40">
+          <div className="flex flex-col gap-35 pt-40 pb-100">
             {scheduleList.map((schedule) => (
               <ScheduleDetail
                 key={schedule.scheduleId}
