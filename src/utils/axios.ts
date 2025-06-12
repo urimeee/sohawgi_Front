@@ -1,7 +1,26 @@
 import axios from 'axios';
 
+const isTest =
+  typeof process !== 'undefined' &&
+  typeof process.env !== 'undefined' &&
+  process.env.JEST_WORKER_ID !== undefined;
+
+function getBaseURL() {
+  if (isTest) {
+    return process.env.VITE_BASE_SERVER_URL;
+  } else {
+    return import.meta.env.VITE_BASE_SERVER_URL;
+  }
+}
+
+const baseURL = getBaseURL();
+
+if (!baseURL) {
+  throw new Error('[ENV ERROR] VITE_BASE_SERVER_URL가 설정되지 않았습니다.');
+}
+
 export const api = axios.create({
-  baseURL: `${process.env.REACT_APP_BASE_SERVER_URL}`,
+  baseURL: baseURL,
   headers: {
     'content-type': 'application/json',
   },
