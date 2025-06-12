@@ -29,11 +29,17 @@
     }
 
     .body_04 {
-        @apply text-13 leading-[1rem];
+        @apply text-13 leading-[1rem] font-semibold;
     }
 
     .body_05 {
         @apply text-13 leading-[150%];
+    }
+    .Content_01{
+        @apply text-17 leading-[150%];
+    }
+    .Content_02{
+        @apply text-15 leading-[150%];
     }
 }
 
