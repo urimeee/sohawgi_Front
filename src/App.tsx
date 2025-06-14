@@ -21,14 +21,19 @@ const queryClient = new QueryClient();
 function AppContent() {
   const location = useLocation();
   const isDev = import.meta.env.DEV;
-  const isiOSDevApp = isDev && isIOSWebView();
+  const isiOSDevApp= isIOSWebView();     // 이후 함수 결과로 업데이트
+
 
   const showBottomNavi =
     (!isDev && location.pathname === '/') || location.pathname === '/PlusPage';
 
   function isIOSWebView() {
     const ua = navigator.userAgent || '';
-    return /iPhone|iPad|iPod/.test(ua) && !ua.includes('Safari');
+    if (/iPhone|iPad|iPod/.test(ua)) {
+      console.log('iPhone');
+      return true;
+    }
+    return false;
   }
 
 
