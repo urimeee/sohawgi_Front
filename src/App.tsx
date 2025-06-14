@@ -21,16 +21,27 @@ const queryClient = new QueryClient();
 function AppContent() {
   const location = useLocation();
   const isDev = import.meta.env.DEV;
+  const isiOSDevApp = isDev && isIOSWebView();
 
   const showBottomNavi =
     (!isDev && location.pathname === '/') || location.pathname === '/PlusPage';
+
+  function isIOSWebView() {
+    const ua = navigator.userAgent || '';
+    return /iPhone|iPad|iPod/.test(ua) && !ua.includes('Safari');
+  }
+
 
   return (
     <div
       className={`w-full flex flex-col ${showBottomNavi ? 'min-h-[calc(100vh - 86px)]' : 'min-h-screen'}`}
     >
       <Routes>
-        <Route path="/" element={isDev ? <LoginPage /> : <SchedulePage />} />
+        <Route path="/" element={isiOSDevApp
+          ? <LoginPage />
+          : isDev
+            ? <LoginPage />
+            : <SchedulePage />} />
         <Route path="/PlusPage" element={<PlusPage />} />
         <Route path="/info/usePolicy" element={<UsePolicyPage />} />
         <Route path="/info/privacy" element={<UserPrivacyPage />} />
