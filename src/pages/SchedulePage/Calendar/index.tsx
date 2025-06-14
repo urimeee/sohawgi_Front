@@ -27,8 +27,6 @@ dayjs.updateLocale('ko', {
 const WeeklyCalendar = ({
                           selectedDate,
                           setSelectedDate,
-                          setStartDate,
-                          setEndDate,
                         }: WeeklyCalendarProps) => {
   const [scheduleCount, setScheduleCount] = useState<{[key:string]:number}>({});
 
