@@ -1,44 +1,12 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
 } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-// 페이지 컴포넌트 import
-import SchedulePage from './pages/SchedulePage';
-import PlusPage from './pages/PlusPage/PlusPage';
-import UserPrivacyPage from './pages/TermPage/UserPrivacyPage';
-import UsePolicyPage from './pages/TermPage/UsePolicyPage';
-import BottomNavi from './components/BottomNavi/BottomNavi';
-import AuthProvider from './contexts/AuthProvider';
-import LoginPage from './pages/LoginPage';
+import { AuthProvider } from './contexts/AuthProvider';
+import { AppContent } from './layout/AppContent';
 
 const queryClient = new QueryClient();
-
-function AppContent() {
-  const location = useLocation();
-  const isDev = import.meta.env.DEV;
-
-  const showBottomNavi =
-    (!isDev && location.pathname === '/') || location.pathname === '/PlusPage';
-
-  return (
-    <div
-      className={`w-full flex flex-col ${showBottomNavi ? 'min-h-[calc(100vh - 86px)]' : 'min-h-screen'}`}
-    >
-      <Routes>
-        <Route path="/" element={isDev ? <LoginPage /> : <SchedulePage />} />
-        <Route path="/PlusPage" element={<PlusPage />} />
-        <Route path="/info/usePolicy" element={<UsePolicyPage />} />
-        <Route path="/info/privacy" element={<UserPrivacyPage />} />
-      </Routes>
-      {showBottomNavi && <BottomNavi />}
-    </div>
-  );
-}
 
 function App() {
   return (
