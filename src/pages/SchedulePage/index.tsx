@@ -5,13 +5,11 @@ import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
 import Calendar from './Calendar';
 
 import useSchedules from '../../hooks/useSchedule';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 const SchedulePage = () => {
   const { postSchedule } = useSchedules();
   const [selectedDate, setSelectedDate] = useState(dayjs());
-  const [startDate, setStartDate] = useState<Dayjs>(dayjs().startOf('week'));
-  const [endDate, setEndDate] = useState<Dayjs>(dayjs().endOf('week'));
 
   return (
     <div className="flex w-full flex-col px-18 h-screen no-scrollbar ">
@@ -23,8 +21,6 @@ const SchedulePage = () => {
           <Calendar
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
-            setStartDate={setStartDate}
-            setEndDate={setEndDate}
           />
         </div>
       </div>

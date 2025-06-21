@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { api } from '../../utils/axios';
 
-import ScheduleDetail from '../ScheduleDetail/ScheduleDetail';
+import ScheduleDetail from '../ScheduleDetail';
 import BottomSheet from '../BottomSheet/BottomSheet';
 
 import useScheduleListQuery from '../../hooks/useScheduleListQuery';
@@ -63,6 +63,24 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
     }
   };
 
+  const toggleCheckAPI = async ({ scheduleId }:{scheduleId: number}) => {
+    await api.post(`/schedules/${scheduleId}/actions/toggle-checked`);
+  }
+
+  const { mutate: toggleCheck} = useMutation({
+    mutationFn: toggleCheckAPI,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['SCHEDULE_LIST', year, month, day],
+      })
+    }
+  })
+
+  const handleToggleCheck = (scheduleId: number) => {
+    toggleCheck({ scheduleId });
+  };
+
+
   return (
     <div className="flex flex-col w-full h-full no-scrollbar flex-shrink-0 gap-6 bg-White rounded-[1.7rem] overflow-y-scroll">
       <div className="flex flex-col gap-16 w-full h-full">
@@ -75,9 +93,12 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
             {scheduleList.map((schedule) => (
               <ScheduleDetail
                 key={schedule.scheduleId}
+                scheduleId={schedule.scheduleId}
                 title={schedule.title}
                 time={schedule.time}
+                checked={schedule.checked}
                 onClick={() => onClickHandler(schedule.scheduleId)}
+                onToggleChecked={handleToggleCheck}
               />
             ))}
           </div>
