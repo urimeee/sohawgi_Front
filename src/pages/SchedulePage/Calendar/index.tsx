@@ -91,7 +91,7 @@ const Calendar = ({
             const isSelected = selectedDate?.isSame(day, 'day');
 
             const currentDateStr = day.format('YYYY-MM-DD');
-            const matchingData = weeklyScheduleData.find(item => item.date === currentDateStr);
+            const matchingData = weeklyScheduleData?.find(item => item.date === currentDateStr);
             const count = matchingData?.counts ?? null;
             const status = matchingData?.status ?? null;
 
