@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
 import updateLocale from 'dayjs/plugin/updateLocale';
@@ -7,15 +8,20 @@ import prevBtn from '../../../assets/images/Calendar/prevWeekBtn.svg';
 import nextBtn from '../../../assets/images/Calendar/nextWeekBtn.svg';
 import selectedEmoji from '../../../assets/images/Calendar/selectedEmoji.svg';
 import defaultEmoji from '../../../assets/images/Calendar/defaultEmoji.svg';
+import CheckEmoji from '../../../assets/images/check.svg?react';
 
 import {api} from "../../../utils/axios";
 
 type WeeklyCalendarProps = {
   selectedDate: Dayjs;
   setSelectedDate: (date: Dayjs) => void;
-  setStartDate: (date: Dayjs) => void;
-  setEndDate: (date: Dayjs) => void;
 };
+
+type WeekData = {
+  date: string,
+  counts: number,
+  status: string
+}
 
 dayjs.locale('ko');
 dayjs.extend(updateLocale);
@@ -24,14 +30,14 @@ dayjs.updateLocale('ko', {
   weekdaysWin: ['일', '월', '화', '수', '목', '금', '토'],
 });
 
-const WeeklyCalendar = ({
+const Calendar = ({
                           selectedDate,
                           setSelectedDate,
                         }: WeeklyCalendarProps) => {
-  const [scheduleCount, setScheduleCount] = useState<{[key:string]:number}>({});
+  const [weeklyScheduleData, setWeeklyScheduleData] = useState<WeekData[]>([]);
 
-  const startOfWeek = selectedDate.startOf('week');
-  const endOfWeek = selectedDate.endOf('week');
+  const startOfWeek = useMemo(() => selectedDate.startOf('week'), [selectedDate]);
+  const endOfWeek = useMemo(() => selectedDate.endOf('week'), [selectedDate]);
 
   const days = Array.from({ length: 7 }).map((_, idx) =>
       startOfWeek.add(idx, 'day'),
@@ -53,16 +59,17 @@ const WeeklyCalendar = ({
       const response = await api.get('/schedules/counts', {
         params: { startDate: formattedStartDate, endDate: formattedEndDate },
       });
-
-      const countingData = response.data.scheduleCounts;
-      setScheduleCount(countingData);
+      setWeeklyScheduleData(response.data.scheduleCounts);
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    getScheduleCounts(startOfWeek, endOfWeek);
+    const response = async () => {
+      await getScheduleCounts(startOfWeek, endOfWeek);
+    }
+    response();
   }, [startOfWeek, endOfWeek]);
 
 
@@ -82,8 +89,11 @@ const WeeklyCalendar = ({
         <div className={'flex place-content-between'}>
           {days.map((day, idx) => {
             const isSelected = selectedDate?.isSame(day, 'day');
-            const formattedDate = day.format('YYYY-MM-DD');
-            const count = scheduleCount[formattedDate] ?? null;
+
+            const currentDateStr = day.format('YYYY-MM-DD');
+            const matchingData = weeklyScheduleData.find(item => item.date === currentDateStr);
+            const count = matchingData?.counts ?? null;
+            const status = matchingData?.status ?? null;
 
             return (
                 <div
@@ -101,7 +111,7 @@ const WeeklyCalendar = ({
                     <div
                         className={`absolute inset-0 flex items-center justify-center  ${isSelected ? 'text-white' : 'text-Grey_04'}`}
                     >
-                      {count === 0 ?  null : count}
+                      {status=== "DONE" ? <CheckEmoji style={{ color: isSelected ? '#ffffff' : '#DADDE0', cursor: 'pointer' }} className="w-18 h-16 white"/> :count !==0 ? count : null }
                     </div>
                   </div>
                   <div>{day.format('D') + '일 '}</div>
@@ -113,4 +123,4 @@ const WeeklyCalendar = ({
   );
 };
 
-export default WeeklyCalendar;
+export default Calendar;

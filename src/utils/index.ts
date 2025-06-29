@@ -10,3 +10,5 @@ export const formatTime=(time: string) => {
   const [, period, hour, minute] = match;
   return `${period} ${hour}:${minute}`;
 }
+
+export const getRandomIndex = (max: number) => Math.floor(Math.random() * max);
