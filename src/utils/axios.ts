@@ -51,10 +51,11 @@ api.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-
+    console.log(error.response);
     if (error.response?.status === 403 && !originalRequest._retry) {
       //만료된 access token일 때
       originalRequest._retry = true;
+      console.log("authorization error occured");
 
       try {
         const refreshToken = localStorage.getItem('refreshToken');
