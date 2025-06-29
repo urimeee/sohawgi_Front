@@ -53,6 +53,7 @@ const TextField = () => {
         </button>
       </div>
       {postError && isOpenToast && <ToastBar msg={"GPT가 일정을 만드는 데 실패했습니다."} onClose={closeToast} />}
+      {isPosting && <LoadingSpinner />}
     </form>
     </>
 );
