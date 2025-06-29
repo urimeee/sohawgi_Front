@@ -4,18 +4,16 @@ import TextField from '../../components/TextField/TextField';
 import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
 import Calendar from './Calendar';
 
-import useSchedules from '../../hooks/useSchedule';
 import dayjs from 'dayjs';
 
 const SchedulePage = () => {
-  const { postSchedule } = useSchedules();
   const [selectedDate, setSelectedDate] = useState(dayjs());
 
   return (
     <div className="flex w-full flex-col px-18 h-screen no-scrollbar ">
       <div className="sticky bg-white top-0 z-9">
         <div>
-          <TextField postSchedule={postSchedule} />
+          <TextField />
         </div>
         <div>
           <Calendar
