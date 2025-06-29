@@ -4,12 +4,9 @@ import warning from './assets/images/warning.svg';
 
 interface ToastBarProps {
   msg: string;
-  onClose : () => void;
 }
 
-const ToastBar: React.FC<ToastBarProps> = ({ msg, onClose }) => {
-
-
+const ToastBar: React.FC<ToastBarProps> = ({ msg }) => {
   return (
     <div className="fixed bottom-[7rem] w-[calc(100%-2rem)] 
                 px-[1rem] py-[1.25rem] bg-Grey_06 
@@ -20,11 +17,12 @@ const ToastBar: React.FC<ToastBarProps> = ({ msg, onClose }) => {
           <div className="w-[1.875rem] h-[1.875rem] relative overflow-hidden">
             <img src={warning} alt="경고 아이콘" className="w-full h-full" />
           </div>
-          <p className="text-White Content_01 break-words">
+          <div className="text-White Content_01 break-words">
             {msg}
-          </p>
+          </div>
         </div>
-        <div className="w-[1.875rem] h-[1.875rem] relative overflow-hidden cursor-pointer" onClick={onClose}>
+
+        <div className="w-[1.875rem] h-[1.875rem] relative overflow-hidden cursor-pointer">
           <img src={close} alt="닫기 아이콘" className="w-full h-full" />
         </div>
       </div>

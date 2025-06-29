@@ -5,11 +5,14 @@ const useSchedules = () => {
   const queryClient = useQueryClient();
 
   const postScheduleMutation = useMutation({
-    mutationFn: async (text: string) => {
-        await api.post('/schedules', { text });
+    mutationFn: async (schedule: string) => {
+      await api.post('/schedules', schedule);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST'] });
+    },
+    onError:(error) => {
+      console.log(error);
     },
   });
 
@@ -24,9 +27,7 @@ const useSchedules = () => {
 
   return {
     postSchedule: postScheduleMutation.mutate,
-    isPosting: postScheduleMutation.isPending,
-    postError: postScheduleMutation.error,
-    deleteScheduleMutation
+    deleteSchedule: deleteScheduleMutation.mutate,
   };
 };
 

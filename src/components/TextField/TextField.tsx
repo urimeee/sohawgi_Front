@@ -1,33 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import useSchedules from '../../hooks/useSchedule';
-import LoadingSpinner from '../LoadingSpinner';
-import ToastBar from '../ToastBar';
+import React, { useState } from 'react';
 
+interface TextFieldProps {
+  postSchedule: (schedule: string) => void;
+}
 
-const TextField = () => {
-  const { postSchedule, isPosting, postError } = useSchedules()
-  const [isOpenToast, setIsOpenToast] = useState(true);
+const TextField: React.FC<TextFieldProps> = ({ postSchedule }) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postSchedule(inputValue.trim());
-    setInputValue('');
+    if (!inputValue.trim()) return; // 빈 값 방지
+    postSchedule(inputValue); // mutate 함수 호출
+    setInputValue(''); // 입력값 초기화
   };
 
-  const closeToast = () => {
-    setIsOpenToast(!isOpenToast);
-  }
-
-  useEffect(() => {
-    if (postError) {
-      setIsOpenToast(false); // 👈 먼저 꺼주고
-      setTimeout(() => setIsOpenToast(true), 10); // 👈 다시 true로 (delay로 리렌더 보장)
-    }
-  }, [postError]);
-
   return (
-    <>
     <form
       className={'sticky pt-80 pb-37 top-0 flex w-full'}
       onSubmit={handleSubmit}
@@ -52,11 +39,8 @@ const TextField = () => {
           등록
         </button>
       </div>
-      {postError && isOpenToast && <ToastBar msg={"GPT가 일정을 만드는 데 실패했습니다."} onClose={closeToast} />}
-      {isPosting && <LoadingSpinner />}
     </form>
-    </>
-);
+  );
 };
 
 export default TextField;
