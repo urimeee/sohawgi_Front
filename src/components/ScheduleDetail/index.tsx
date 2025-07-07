@@ -3,6 +3,7 @@ import { formatTime, getRandomIndex } from '../../utils';
 import defaultCheckBox from './img/defaultCheckbox.svg';
 import CheckedBox from './CheckedBox';
 import {api} from '../../utils/axios';
+import DefaultBox from './DefaultBox';
 
 type Props = {
   scheduleId: string;
@@ -30,18 +31,13 @@ const ScheduleDetail = ({ scheduleId, time, title, onClick, checked, onToggleChe
       setDone(!done);
       const randomIndex = getRandomIndex(5);
       setColorIndex(randomIndex);
-      onToggleChecked(scheduleId)
+      //onToggleChecked(scheduleId)
   }
 
   return (
     <div className="flex items-center justify-start gap-[0.9rem] w-full ">
-      { done?  <CheckedBox className="w-40 h-40" bgColor={colorPairs[colorIndex].bg} iconColor={colorPairs[colorIndex].icon} onClick={onCheckClick}/> :
-        <img
-          onClick={onCheckClick}
-          src={defaultCheckBox}
-          alt="defaultCheckbox"
-          className="w-40 h-40"
-        />
+      { done?  <CheckedBox className="w-28 h-28" bgColor={colorPairs[colorIndex].bg} iconColor={colorPairs[colorIndex].icon} onClick={onCheckClick}/> :
+        <DefaultBox onClick={onCheckClick} className={"cursor-pointer"}/>
       }
       <div
         onClick={onClick}
