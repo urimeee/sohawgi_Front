@@ -10,6 +10,7 @@ const useSchedules = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST'] });
+      queryClient.invalidateQueries({ queryKey: ['WEEKLY_SCHEDULE']})
     },
   });
 
@@ -19,14 +20,16 @@ const useSchedules = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST'] });
+      queryClient.invalidateQueries({ queryKey: ['WEEKLY_SCHEDULE']})
     },
   });
+
 
   return {
     postSchedule: postScheduleMutation.mutate,
     isPosting: postScheduleMutation.isPending,
     postError: postScheduleMutation.error,
-    deleteScheduleMutation
+    deleteSchedule: deleteScheduleMutation.mutate,
   };
 };
 

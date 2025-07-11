@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
 import updateLocale from 'dayjs/plugin/updateLocale';
@@ -9,19 +8,13 @@ import nextBtn from '../../../assets/images/Calendar/nextWeekBtn.svg';
 import selectedEmoji from '../../../assets/images/Calendar/selectedEmoji.svg';
 import defaultEmoji from '../../../assets/images/Calendar/defaultEmoji.svg';
 import CheckEmoji from '../../../assets/images/check.svg?react';
-
-import {api} from "../../../utils/axios";
+import useWeeklySchedules from '../../../hooks/useWeeklySchedules';
 
 type WeeklyCalendarProps = {
   selectedDate: Dayjs;
   setSelectedDate: (date: Dayjs) => void;
 };
 
-type WeekData = {
-  date: string,
-  counts: number,
-  status: string
-}
 
 dayjs.locale('ko');
 dayjs.extend(updateLocale);
@@ -34,10 +27,10 @@ const Calendar = ({
                           selectedDate,
                           setSelectedDate,
                         }: WeeklyCalendarProps) => {
-  const [weeklyScheduleData, setWeeklyScheduleData] = useState<WeekData[]>([]);
-
   const startOfWeek = useMemo(() => selectedDate.startOf('week'), [selectedDate]);
   const endOfWeek = useMemo(() => selectedDate.endOf('week'), [selectedDate]);
+
+  const { data: weeklyScheduleCounts } = useWeeklySchedules(startOfWeek, endOfWeek);
 
   const days = Array.from({ length: 7 }).map((_, idx) =>
       startOfWeek.add(idx, 'day'),
@@ -50,28 +43,6 @@ const Calendar = ({
   const goToNextWeek = () => {
     setSelectedDate(selectedDate.add(1, 'week'));
   };
-
-  const getScheduleCounts = async (startOfweek:Dayjs, endOfweek:Dayjs) => {
-    try {
-      const formattedStartDate = startOfweek.format('YYYY-MM-DD');
-      const formattedEndDate = endOfweek.format('YYYY-MM-DD');
-
-      const response = await api.get('/schedules/counts', {
-        params: { startDate: formattedStartDate, endDate: formattedEndDate },
-      });
-      setWeeklyScheduleData(response.data.scheduleCounts);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    const response = async () => {
-      await getScheduleCounts(startOfWeek, endOfWeek);
-    }
-    response();
-  }, [startOfWeek, endOfWeek]);
-
 
   return (
       <div className="w-full">
@@ -91,7 +62,7 @@ const Calendar = ({
             const isSelected = selectedDate?.isSame(day, 'day');
 
             const currentDateStr = day.format('YYYY-MM-DD');
-            const matchingData = weeklyScheduleData.find(item => item.date === currentDateStr);
+            const matchingData = weeklyScheduleCounts?.find(item => item.date === currentDateStr);
             const count = matchingData?.counts ?? null;
             const status = matchingData?.status ?? null;
 

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { api } from '../../utils/axios';
 
 import ScheduleDetail from '../ScheduleDetail';
 import BottomSheet from '../BottomSheet/BottomSheet';
 
 import useScheduleListQuery from '../../hooks/useScheduleListQuery';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import DefaultComponent from '../../pages/SchedulePage/DefaultComponent';
 
 import { Dayjs } from 'dayjs';
+import useSchedule from '../../hooks/useScheduleMutation';
 
 type ScheduleCardProps = {
   selectedDate: Dayjs;
@@ -20,8 +19,8 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
   const day = selectedDate.date();
 
   const { data: scheduleList = [] } = useScheduleListQuery(year, month, day);
+  const  { deleteSchedule } = useSchedule();
 
-  const queryClient = useQueryClient();
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
   const [clickedSchedule, setClickedSchedule] = useState<number | null>(null);
 
@@ -35,51 +34,12 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
     setSheetOpen(true);
   };
 
-  const deleteScheduleAPI = async (id: number) => {
-    try {
-      await api.delete(`/schedules/${id}`);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
-
-  const { mutate: deleteSchedule } = useMutation({
-    mutationFn: deleteScheduleAPI,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['SCHEDULE_LIST', year, month, day],
-      });
-      setSheetOpen(false);
-    },
-    onError: (e) => {
-      console.log(e);
-    },
-  });
 
   const handleDelete = async () => {
     if (clickedSchedule !== null) {
       deleteSchedule(clickedSchedule);
     }
   };
-
-  const toggleCheckAPI = async ({ scheduleId }:{scheduleId: number}) => {
-    await api.post(`/schedules/${scheduleId}/actions/toggle-checked`);
-  }
-
-  const { mutate: toggleCheck} = useMutation({
-    mutationFn: toggleCheckAPI,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['SCHEDULE_LIST', year, month, day],
-      })
-    }
-  })
-
-  const handleToggleCheck = (scheduleId: number) => {
-    toggleCheck({ scheduleId });
-  };
-
 
   return (
     <div className="flex flex-col w-full h-full no-scrollbar flex-shrink-0 gap-6 bg-White rounded-[1.7rem] overflow-y-scroll">
@@ -98,7 +58,6 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
                 time={schedule.time}
                 checked={schedule.checked}
                 onClick={() => onClickHandler(schedule.scheduleId)}
-                onToggleChecked={handleToggleCheck}
               />
             ))}
           </div>
