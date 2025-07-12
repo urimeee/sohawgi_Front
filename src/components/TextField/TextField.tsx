@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useSchedules from '../../hooks/useSchedule';
+import useSchedules from '../../hooks/useScheduleMutation';
 import LoadingSpinner from '../LoadingSpinner';
 import ToastBar from '../ToastBar';
 
@@ -52,7 +52,7 @@ const TextField = () => {
           등록
         </button>
       </div>
-      {postError && isOpenToast && <ToastBar msg={"GPT가 일정을 만드는 데 실패했습니다."} onClose={closeToast} />}
+      {postError && isOpenToast && <ToastBar msg={"잠시후에 다시 시도해주세요!"} onClose={closeToast} />}
       {isPosting && <LoadingSpinner />}
     </form>
     </>

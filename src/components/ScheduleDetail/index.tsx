@@ -1,47 +1,52 @@
 import React, { useState } from 'react';
+
 import { formatTime, getRandomIndex } from '../../utils';
-import defaultCheckBox from './img/defaultCheckbox.svg';
+import { colorPairs } from './constants';
+
 import CheckedBox from './CheckedBox';
-import {api} from '../../utils/axios';
+import DefaultBox from './DefaultBox';
+import { api } from '../../utils/axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type Props = {
-  scheduleId: string;
+  scheduleId: number;
   time:string;
   title: string;
   checked: boolean;
   onClick: () => void;
-  onToggleChecked:(scheduleId: number, checked: boolean) => void;
 };
 
-const colorPairs = [
-  {bg: '#E3F1F2', icon:'#6FC6CF'},
-  {bg:'#E9F3E3', icon:'#9ED87E'},
-  {bg:'#E4ECF4', icon:'#72A8DD'},
-  {bg:'#F4E7EE', icon:'#DF86B7'},
-  {bg:'#F8EAEA', icon:'#F59B9C'},
-  {bg: '#F9F4DE', icon:'#FFE477'}
-]
-
-const ScheduleDetail = ({ scheduleId, time, title, onClick, checked, onToggleChecked }: Props) => {
+const ScheduleDetail = ({ scheduleId, time, title, onClick, checked }: Props) => {
   const [done, setDone] = useState<boolean>(checked);
   const [colorIndex, setColorIndex] = useState(getRandomIndex(colorPairs.length));
 
   const onCheckClick = () => {
-      setDone(!done);
-      const randomIndex = getRandomIndex(5);
+    const newDone = !done;
+    setDone(newDone);
+    toggleCheck();
+
+    if (newDone) {
+      const randomIndex = getRandomIndex(colorPairs.length);
       setColorIndex(randomIndex);
-      onToggleChecked(scheduleId)
+    }
   }
+
+  const queryClient = useQueryClient();
+
+  const { mutate: toggleCheck } = useMutation({
+    mutationFn: async () => {
+      await api.post(`/schedules/${scheduleId}/actions/toggle-checked`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST'] });
+      queryClient.invalidateQueries({ queryKey: ['WEEKLY_SCHEDULE'] });
+    },
+  })
 
   return (
     <div className="flex items-center justify-start gap-[0.9rem] w-full ">
-      { done?  <CheckedBox className="w-40 h-40" bgColor={colorPairs[colorIndex].bg} iconColor={colorPairs[colorIndex].icon} onClick={onCheckClick}/> :
-        <img
-          onClick={onCheckClick}
-          src={defaultCheckBox}
-          alt="defaultCheckbox"
-          className="w-40 h-40"
-        />
+      { done?  <CheckedBox className="w-28 h-28" bgColor={colorPairs[colorIndex].bg} iconColor={colorPairs[colorIndex].icon} onClick={onCheckClick}/> :
+        <DefaultBox onClick={onCheckClick} className={"cursor-pointer"}/>
       }
       <div
         onClick={onClick}
