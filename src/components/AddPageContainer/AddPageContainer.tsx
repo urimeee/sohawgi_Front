@@ -5,7 +5,6 @@ import rightArrow from '../../assets/images/rightArrow.svg';
 type Props = {
   title: string;
   contentTitles: string[];
-  onClick?: () => void;
 };
 
 const AddPageContainer = ({ title, contentTitles }: Props) => {
