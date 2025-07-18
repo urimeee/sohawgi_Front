@@ -6,17 +6,16 @@ import BottomSheet from '../BottomSheet/BottomSheet';
 import useScheduleListQuery from '../../hooks/useScheduleListQuery';
 import DefaultComponent from '../../pages/SchedulePage/DefaultComponent';
 
-import { Dayjs } from 'dayjs';
 import useSchedule from '../../hooks/useScheduleMutation';
 
 type ScheduleCardProps = {
-  selectedDate: Dayjs;
+  selectedDate: string;
 };
 
 const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
-  const year = selectedDate.year();
-  const month = selectedDate.month() + 1;
-  const day = selectedDate.date();
+  const year = selectedDate.split('-')[0];
+  const month = selectedDate.split('-')[1];
+  const day = selectedDate.split('-')[2];
 
   const { data: scheduleList = [] } = useScheduleListQuery(year, month, day);
   const  { deleteSchedule } = useSchedule();
@@ -40,6 +39,8 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
       deleteSchedule(clickedSchedule);
     }
   };
+
+
 
   return (
     <div className="flex flex-col w-full h-full no-scrollbar flex-shrink-0 gap-6 bg-White rounded-[1.7rem] overflow-y-scroll">
@@ -72,4 +73,4 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
   );
 };
 
-export default ScheduleCard;
+export default React.memo(ScheduleCard);

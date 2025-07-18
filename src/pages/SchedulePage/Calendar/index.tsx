@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
 import updateLocale from 'dayjs/plugin/updateLocale';
@@ -36,13 +36,8 @@ const Calendar = ({
       startOfWeek.add(idx, 'day'),
   );
 
-  const goToPreviousWeek = () => {
-    setSelectedDate(selectedDate.subtract(1, 'week'));
-  };
-
-  const goToNextWeek = () => {
-    setSelectedDate(selectedDate.add(1, 'week'));
-  };
+  const goToPreviousWeek = useCallback(() =>  setSelectedDate(selectedDate.subtract(1, 'week')), [])
+  const goToNextWeek = useCallback(() =>  setSelectedDate(selectedDate.add(1, 'week')), []);
 
   return (
       <div className="w-full">
@@ -60,7 +55,6 @@ const Calendar = ({
         <div className={'flex place-content-between'}>
           {days.map((day, idx) => {
             const isSelected = selectedDate?.isSame(day, 'day');
-
             const currentDateStr = day.format('YYYY-MM-DD');
             const matchingData = weeklyScheduleCounts?.find(item => item.date === currentDateStr);
             const count = matchingData?.counts ?? null;
@@ -94,4 +88,4 @@ const Calendar = ({
   );
 };
 
-export default Calendar;
+export default React.memo(Calendar);
