@@ -1,13 +1,13 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import rightArrow from '../../assets/images/rightArrow.svg';
 
 type Props = {
   title: string;
   contentTitles: string[];
-  onClick?: () => void;
 };
 
-const AddPageContainer = ({ title, contentTitles, onClick }: Props) => {
+const AddPageContainer = ({ title, contentTitles }: Props) => {
   const navigate = useNavigate();
 
   const onClickHandler = (contentTitle: string) => {
@@ -45,10 +45,7 @@ const AddPageContainer = ({ title, contentTitles, onClick }: Props) => {
 
   return (
     <div className="flex flex-col gap-5">
-      {/* Title */}
       <div className="body_05">{title}</div>
-
-      {/* Content Title List */}
       <div className="flex flex-col gap-[1.6875rem]">
         {contentTitles.map((contentTitle, index) => (
           <div
