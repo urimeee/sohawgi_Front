@@ -36,8 +36,8 @@ const Calendar = ({
       startOfWeek.add(idx, 'day'),
   );
 
-  const goToPreviousWeek = useCallback(() =>  setSelectedDate(selectedDate.subtract(1, 'week')), [])
-  const goToNextWeek = useCallback(() =>  setSelectedDate(selectedDate.add(1, 'week')), []);
+  const goToPreviousWeek = useCallback(() =>  setSelectedDate(selectedDate.subtract(1, 'week')), [selectedDate, setSelectedDate]);
+  const goToNextWeek = useCallback(() =>  setSelectedDate(selectedDate.add(1, 'week')), [selectedDate, setSelectedDate]);
 
   return (
       <div className="w-full">
