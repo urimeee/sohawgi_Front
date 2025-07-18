@@ -24,7 +24,8 @@
   "include": [
     "src",
     "src/custom.d.ts",
-    ".eslintrc.cjs"
+    ".eslintrc.cjs",
+    "node_modules/vitest/globals.d.ts"
   ],
   "exclude": [
     "node_modules"
