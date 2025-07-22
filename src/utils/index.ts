@@ -1,6 +1,6 @@
-import dayjs from 'dayjs';
+import dayjs, {Dayjs} from 'dayjs';
 
-export const convertDateFormat = (dateString: string) => {
+export const convertDateFormat = (dateString: Dayjs) => {
   return dayjs(dateString).format('YYYY-MM-DD');
 };
 
@@ -12,3 +12,14 @@ export const formatTime=(time: string) => {
 }
 
 export const getRandomIndex = (max: number) => Math.floor(Math.random() * max);
+
+export const getDailyDateObject = (date: Dayjs) => ({
+  year : date.year().toString(),
+  month : (date.month() + 1).toString(),
+  day : date.date().toString()
+})
+
+export const getWeeklyDateObject = (date: Dayjs) => ({
+  start : date.startOf('week').format('YYYY-MM-DD'),
+  end : date.endOf('week').format('YYYY-MM-DD'),
+})
