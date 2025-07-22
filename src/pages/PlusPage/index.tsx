@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { api } from '../../utils/axios';
 
 // Import Components
-import UserProfile from '../../components/UserProfile/UserProfile';
-import AddPageContainer from '../../components/AddPageContainer/AddPageContainer';
-import VersionInfo from '../../components/VersionInfo/VersionInfo';
+import UserProfile from '../../components/UserProfile';
+import AddPageContainer from '../../components/AddPageContainer';
+import VersionInfo from '../../components/VersionInfo';
 
 interface UserInfo {
   name: string;
   email: string;
 }
 
-const PlusPage = () => {
+const LoadingSpinner = () => {
   const addPageInfoTitles = ['서비스 이용약관', '개인정보 처리방침'];
   const addPageSettingTitles = ['로그아웃', '회원탈퇴'];
   const [user, setUser] = useState<UserInfo | null>(null);
@@ -43,4 +43,4 @@ const PlusPage = () => {
   );
 };
 
-export default PlusPage;
+export default LoadingSpinner;

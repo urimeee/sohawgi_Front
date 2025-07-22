@@ -1,7 +1,15 @@
-export type Schedule = {
-  scheduleId: number;
-  month: number;
-  day: number;
-  dayOfWeek: string;
-  title: string;
-};
+export type DailyScheduleDate = {
+  year: string,
+  month: string,
+  day: string
+}
+
+export type WeeklyScheduleRange = {
+  start: string,
+  end: string,
+}
+
+export type UseSchedulesProps = {
+  dailyDate ?: DailyScheduleDate,
+  weekRangeDate ?: WeeklyScheduleRange,
+}

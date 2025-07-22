@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 
 import ScheduleDetail from '../ScheduleDetail';
-import BottomSheet from '../BottomSheet/BottomSheet';
+import BottomSheet from '../BottomSheet';
 
-import useScheduleListQuery from '../../hooks/useScheduleListQuery';
+import {getDailyScheduleListQuery} from '../../hooks/useDailySchedulesQuery';
 import DefaultComponent from '../../pages/SchedulePage/DefaultComponent';
 
-import useSchedule from '../../hooks/useScheduleMutation';
+import useSchedule from '../../hooks/useScheduleMutations';
+import { Dayjs } from 'dayjs';
+import { getDailyDateObject, getWeeklyDateObject } from '../../utils';
 
 type ScheduleCardProps = {
-  selectedDate: string;
+  selectedDate: Dayjs;
 };
 
 const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
-  const year = selectedDate.split('-')[0];
-  const month = selectedDate.split('-')[1];
-  const day = selectedDate.split('-')[2];
+  const dailyObj = getDailyDateObject(selectedDate);
+  const weeklyObj = getWeeklyDateObject(selectedDate);
 
-  const { data: scheduleList = [] } = useScheduleListQuery(year, month, day);
+  const { data: scheduleList = [] } = getDailyScheduleListQuery(dailyObj);
   const  { deleteSchedule } = useSchedule();
 
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
@@ -33,14 +34,11 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
     setSheetOpen(true);
   };
 
-
   const handleDelete = async () => {
     if (clickedSchedule !== null) {
       deleteSchedule(clickedSchedule);
     }
   };
-
-
 
   return (
     <div className="flex flex-col w-full h-full no-scrollbar flex-shrink-0 gap-6 bg-White rounded-[1.7rem] overflow-y-scroll">
@@ -58,6 +56,8 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
                 title={schedule.title}
                 time={schedule.time}
                 checked={schedule.checked}
+                dailyDate={dailyObj}
+                weekRangeDate={weeklyObj}
                 onClick={() => onClickHandler(schedule.scheduleId)}
               />
             ))}

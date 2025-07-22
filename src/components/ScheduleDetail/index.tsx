@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import { formatTime, getRandomIndex } from '../../utils';
 import { colorPairs } from './constants';
+import {useHandleChecked} from '../../hooks/useHandleChecked';
 
 import CheckedBox from './CheckedBox';
 import DefaultBox from './DefaultBox';
-import { api } from '../../utils/axios';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { DailyScheduleDate, WeeklyScheduleRange } from '../../types/schedule';
 
 type Props = {
   scheduleId: number;
@@ -14,34 +14,26 @@ type Props = {
   title: string;
   checked: boolean;
   onClick: () => void;
+  dailyDate : DailyScheduleDate,
+  weekRangeDate : WeeklyScheduleRange
 };
 
-const ScheduleDetail = ({ scheduleId, time, title, onClick, checked }: Props) => {
+const ScheduleDetail = ({ scheduleId, time, title, onClick, checked, dailyDate, weekRangeDate }: Props) => {
   const [done, setDone] = useState<boolean>(checked);
   const [colorIndex, setColorIndex] = useState(getRandomIndex(colorPairs.length));
+
+  const { mutate: toggleCheck } = useHandleChecked({ dailyDate, weekRangeDate });
 
   const onCheckClick = () => {
     const newDone = !done;
     setDone(newDone);
-    toggleCheck();
+    toggleCheck(scheduleId);
 
     if (newDone) {
       const randomIndex = getRandomIndex(colorPairs.length);
       setColorIndex(randomIndex);
     }
   }
-
-  const queryClient = useQueryClient();
-
-  const { mutate: toggleCheck } = useMutation({
-    mutationFn: async () => {
-      await api.post(`/schedules/${scheduleId}/actions/toggle-checked`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST'] });
-      queryClient.invalidateQueries({ queryKey: ['WEEKLY_SCHEDULE'] });
-    },
-  })
 
   return (
     <div className="flex items-center justify-start gap-[0.9rem] w-full ">

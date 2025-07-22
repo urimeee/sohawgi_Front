@@ -1,5 +1,6 @@
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
 import plus_act from '../../assets/images/BottomNavi/plus_act.svg';
 import plus_nonact from '../../assets/images/BottomNavi/plus_nonact.svg';
 import schedule_act from '../../assets/images/BottomNavi/schedule_act.svg';
@@ -8,7 +9,7 @@ import schedule_nonact from '../../assets/images/BottomNavi/schedule_nonact.svg'
 const BottomNavi = () => {
   const location = useLocation();
   const isScheduleActive = location.pathname === '/';
-  const isMoreActive = location.pathname === '/PlusPage';
+  const isMoreActive = location.pathname === '/info';
 
   return (
     <footer
@@ -32,7 +33,7 @@ const BottomNavi = () => {
       </Link>
 
       {/* 더보기 영역 */}
-      <Link to="/PlusPage" className="no-underline">
+      <Link to="/info" className="no-underline">
         <div className="flex flex-col items-center cursor-pointer">
           <img
             src={isMoreActive ? plus_act : plus_nonact}

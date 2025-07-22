@@ -1,9 +1,8 @@
 import React, { useCallback, useState } from 'react';
 
-import TextField from '../../components/TextField/TextField';
-import ScheduleCard from '../../components/ScheduleCard/ScheduleCard';
+import TextField from '../../components/TextField';
+import ScheduleCard from '../../components/ScheduleCard';
 import Calendar from './Calendar';
-
 import dayjs, { Dayjs } from 'dayjs';
 
 const SchedulePage = () => {
@@ -14,7 +13,7 @@ const SchedulePage = () => {
     <div className="flex w-full flex-col px-18 h-screen no-scrollbar ">
       <div className="sticky bg-white top-0 z-9">
         <div>
-          <TextField />
+          <TextField selectedDate = {selectedDate} />
         </div>
         <div>
           <Calendar
@@ -24,7 +23,7 @@ const SchedulePage = () => {
         </div>
       </div>
       <div className="flex-1 h-full overflow-y-auto">
-        <ScheduleCard selectedDate = {selectedDate.format('YYYY-MM-DD')} />
+        <ScheduleCard selectedDate = {selectedDate} />
       </div>
     </div>
   );

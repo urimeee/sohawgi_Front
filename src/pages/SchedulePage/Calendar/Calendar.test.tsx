@@ -10,8 +10,8 @@ vi.mock('../../../assets/images/check.svg?react', () => ({
 }));
 
 
-// ✅ useWeeklySchedules 훅 mock
-vi.mock('../../../hooks/useWeeklySchedules', () => {
+// ✅ useWeeklyScheduleCountsQuery 훅 mock
+vi.mock('../../../hooks/useWeeklyScheduleCountsQuery', () => {
   const today = dayjs();
   const startOfWeek = today.startOf('week');
   return {

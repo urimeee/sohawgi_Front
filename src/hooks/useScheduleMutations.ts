@@ -1,7 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../utils/axios';
+import { SCHEDULE_QUERY_KEY } from '../constants/queryKeys';
+import { UseSchedulesProps } from '../types/schedule';
 
-const useSchedules = () => {
+
+const useSchedules = (props : UseSchedulesProps = {}) => {
+  const { dailyDate, weekRangeDate } = props;
   const queryClient = useQueryClient();
 
   const postScheduleMutation = useMutation({
@@ -9,8 +13,8 @@ const useSchedules = () => {
         await api.post('/schedules', { text });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST'] });
-      queryClient.invalidateQueries({ queryKey: ['WEEKLY_SCHEDULE']})
+      queryClient.invalidateQueries({ queryKey: SCHEDULE_QUERY_KEY.daily(dailyDate) });
+      queryClient.invalidateQueries({ queryKey: SCHEDULE_QUERY_KEY.weekly(weekRangeDate) });
     },
   });
 
@@ -19,8 +23,8 @@ const useSchedules = () => {
       await api.delete(`/schedules/${scheduleId}`);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['SCHEDULE_LIST'] });
-      queryClient.invalidateQueries({ queryKey: ['WEEKLY_SCHEDULE']})
+      queryClient.invalidateQueries({ queryKey: SCHEDULE_QUERY_KEY.daily(dailyDate) });
+      queryClient.invalidateQueries({ queryKey: SCHEDULE_QUERY_KEY.weekly(weekRangeDate) });
     },
   });
 

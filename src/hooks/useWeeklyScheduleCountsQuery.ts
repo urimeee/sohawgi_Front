@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../utils/axios';
-import { scheduleKeys } from '../constants/queryKeys';
+import { SCHEDULE_QUERY_KEY } from '../constants/queryKeys';
 import { Dayjs } from 'dayjs';
 
 type WeekData = {
@@ -9,6 +9,7 @@ type WeekData = {
   status: string;
 };
 
+// 일정 수 조회 API
 const getScheduleCounts = async (startOfWeek: Dayjs, endOfWeek: Dayjs) => {
   const start = startOfWeek.format('YYYY-MM-DD');
   const end = endOfWeek.format('YYYY-MM-DD');
@@ -20,14 +21,14 @@ const getScheduleCounts = async (startOfWeek: Dayjs, endOfWeek: Dayjs) => {
   return response.data.scheduleCounts as WeekData[];
 };
 
-const useWeeklySchedules = (startOfWeek: Dayjs, endOfWeek: Dayjs) => {
+const useWeeklyScheduleCountsQuery = (startOfWeek: Dayjs, endOfWeek: Dayjs) => {
   const start = startOfWeek.format('YYYY-MM-DD');
   const end = endOfWeek.format('YYYY-MM-DD');
 
   return useQuery({
-    queryKey: scheduleKeys.weekly(start, end),
+    queryKey: SCHEDULE_QUERY_KEY.weekly({ start, end }),
     queryFn: () => getScheduleCounts(startOfWeek, endOfWeek),
   });
 };
 
-export default useWeeklySchedules;
+export default useWeeklyScheduleCountsQuery;
