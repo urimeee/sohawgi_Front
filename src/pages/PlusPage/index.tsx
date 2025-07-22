@@ -11,7 +11,7 @@ interface UserInfo {
   email: string;
 }
 
-const LoadingSpinner = () => {
+const PlusPage = () => {
   const addPageInfoTitles = ['서비스 이용약관', '개인정보 처리방침'];
   const addPageSettingTitles = ['로그아웃', '회원탈퇴'];
   const [user, setUser] = useState<UserInfo | null>(null);
@@ -43,4 +43,4 @@ const LoadingSpinner = () => {
   );
 };
 
-export default LoadingSpinner;
+export default PlusPage;
