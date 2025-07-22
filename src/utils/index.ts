@@ -1,7 +1,7 @@
 import dayjs, {Dayjs} from 'dayjs';
 
 export const convertDateFormat = (dateString: Dayjs) => {
-  return dayjs(dateString).format('YYYY-MM-DD');
+  return dayjs(dateString).format('YYYY-MM-DD').toString();
 };
 
 export const formatTime=(time: string) => {

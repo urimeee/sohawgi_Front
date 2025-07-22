@@ -10,15 +10,13 @@ type Props = {
   day: Dayjs;
   selectedDate: Dayjs;
   setSelectedDate: (date: Dayjs) => void;
-  matchingDate: WeekData;
+  status: string;
+  counts: number;
 };
 
-function CalendarCell({day, selectedDate, setSelectedDate, matchingDate} : Props) {
+function CalendarCell({day, selectedDate, setSelectedDate, status, counts} : Props) {
 
   const isSelected = selectedDate?.isSame(day, 'day');
-
-  const count = matchingDate?.counts ?? null;
-  const status = matchingDate?.status ?? null;
   return (
     <div
     className={`flex flex-col body_05 gap-6 hover:cursor-pointer text-center ${isSelected ? 'text-Grey_06' : 'text-Grey_03'}`}
@@ -34,7 +32,7 @@ function CalendarCell({day, selectedDate, setSelectedDate, matchingDate} : Props
       <div
         className={`absolute inset-0 flex items-center justify-center  ${isSelected ? 'text-white' : 'text-Grey_04'}`}
       >
-        {status=== "DONE" ? <CheckEmoji style={{ color: isSelected ? '#ffffff' : '#DADDE0', cursor: 'pointer' }} className="w-18 h-16 white"/> :count !==0 ? count : null }
+        {status === "DONE" ? <CheckEmoji style={{ color: isSelected ? '#ffffff' : '#DADDE0', cursor: 'pointer' }} className="w-18 h-16 white"/> :counts !==0 ? counts : null }
       </div>
     </div>
     <div>{day.format('D') + '일 '}</div>

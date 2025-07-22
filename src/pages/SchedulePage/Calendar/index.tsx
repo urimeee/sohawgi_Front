@@ -8,6 +8,7 @@ import nextBtn from '../../../assets/images/Calendar/nextWeekBtn.svg';
 
 import useWeeklyScheduleCountsQuery from '../../../hooks/useWeeklyScheduleCountsQuery';
 import CalendarCell from './CalendarCell';
+import { convertDateFormat } from '../../../utils';
 
 type WeeklyCalendarProps = {
   selectedDate: Dayjs;
@@ -57,9 +58,11 @@ const Calendar = ({
         </div>
         <div className={'flex place-content-between'}>
           {days.map((day, idx) => {
-            const matchingDate = weeklyScheduleMap.get(day);
+            const certainDay = convertDateFormat(day);
+            const matchingDate = weeklyScheduleMap.get(certainDay);
+
             return (
-                <CalendarCell key={idx} day={day} selectedDate={selectedDate} setSelectedDate={setSelectedDate} matchingDate = {matchingDate}  />
+                <CalendarCell key={idx} day={day} selectedDate={selectedDate} setSelectedDate={setSelectedDate} status={matchingDate?.status} counts={matchingDate?.counts} />
             );
           })}
         </div>

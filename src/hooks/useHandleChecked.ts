@@ -9,7 +9,7 @@ export const useHandleChecked = ({dailyDate, weekRangeDate} : UseSchedulesProps)
 
   return useMutation({
     mutationFn: async (scheduleId: number) => {
-      await api.post(`\`/schedules/${scheduleId}/actions/toggle-checked\``);
+      await api.post(`/schedules/${scheduleId}/actions/toggle-checked`);
     },
 
     onSuccess: () => {
