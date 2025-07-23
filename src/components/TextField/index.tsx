@@ -3,7 +3,7 @@ import useSchedules from '../../hooks/useScheduleMutations';
 import LoadingSpinner from '../LoadingSpinner';
 import ToastBar from '../ToastBar';
 import { Dayjs } from 'dayjs';
-import { getDailyDateObject } from '../../utils';
+import { getDailyDateObject, getWeeklyDateObject } from '../../utils';
 import { trackEvent } from '../../lib/amplitude';
 
 type TextFieldProps = {
@@ -15,8 +15,9 @@ const TextField = ({ selectedDate }: TextFieldProps) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   const dailyObject = getDailyDateObject(selectedDate);
+  const weeklyObj = getWeeklyDateObject(selectedDate);
 
-  const { postSchedule, isPosting, postError } = useSchedules({dailyDate : dailyObject});
+  const { postSchedule, isPosting, postError } = useSchedules({dailyDate : dailyObject, weekRangeDate: weeklyObj});
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
