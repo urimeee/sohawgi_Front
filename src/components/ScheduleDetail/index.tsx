@@ -7,6 +7,7 @@ import {useHandleChecked} from '../../hooks/useHandleChecked';
 import CheckedBox from './CheckedBox';
 import DefaultBox from './DefaultBox';
 import { DailyScheduleDate, WeeklyScheduleRange } from '../../types/schedule';
+import { trackEvent } from '../../lib/amplitude';
 
 type Props = {
   scheduleId: number;
@@ -28,6 +29,11 @@ const ScheduleDetail = ({ scheduleId, time, title, onClick, checked, dailyDate, 
     const newDone = !done;
     setDone(newDone);
     toggleCheck(scheduleId);
+
+    trackEvent('complete_schedule', {
+      schedule_id: scheduleId,
+      timestamp: new Date().toISOString(),
+    })
 
     if (newDone) {
       const randomIndex = getRandomIndex(colorPairs.length);

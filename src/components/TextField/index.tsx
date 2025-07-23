@@ -4,6 +4,7 @@ import LoadingSpinner from '../LoadingSpinner';
 import ToastBar from '../ToastBar';
 import { Dayjs } from 'dayjs';
 import { getDailyDateObject } from '../../utils';
+import { trackEvent } from '../../lib/amplitude';
 
 type TextFieldProps = {
   selectedDate: Dayjs
@@ -19,7 +20,16 @@ const TextField = ({ selectedDate }: TextFieldProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postSchedule(inputValue.trim());
+    const trimmedValue = inputValue.trim();
+
+    if (!trimmedValue) return;
+
+    postSchedule(trimmedValue);
+
+    trackEvent('register_button', {
+      input_length: trimmedValue.length,
+    })
+
     setInputValue('');
   };
 

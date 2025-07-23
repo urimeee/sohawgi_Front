@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { trackEvent } from '../../lib/amplitude';
 
 import TextField from '../../components/TextField';
 import ScheduleCard from '../../components/ScheduleCard';
@@ -8,6 +9,10 @@ import dayjs, { Dayjs } from 'dayjs';
 const SchedulePage = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const setDate = useCallback((date: Dayjs) => setSelectedDate(date), []);
+
+  useEffect(() => {
+    trackEvent('view_home', { page: '/'})
+  }, [])
 
   return (
     <div className="flex w-full flex-col px-18 h-screen no-scrollbar ">

@@ -8,6 +8,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { AuthProvider } from './contexts/AuthProvider';
 import { AppContent } from './layout/AppContent';
 
+import { initAmplitude } from './lib/amplitude';
+initAmplitude();
+
 const queryClient = new QueryClient();
 const isDev = import.meta.env.DEV;
 

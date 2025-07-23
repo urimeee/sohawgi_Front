@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { trackEvent } from '../lib/amplitude';
 
 const isTest =
   typeof process !== 'undefined' &&
@@ -72,6 +73,18 @@ api.interceptors.response.use(
         return Promise.reject(error);
       }
     }
+
+    const config = error.config;
+    const url = config?.url;
+    const method = config?.method;
+
+    trackEvent('network_error', {
+        url,
+      method,
+      status: error.response?.status,
+      error_message: error.message,
+      timestamp: new Date().toISOString(),
+    })
     return Promise.reject(error);
   },
 );
