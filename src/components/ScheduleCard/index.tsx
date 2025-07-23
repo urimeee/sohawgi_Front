@@ -19,7 +19,7 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
   const weeklyObj = getWeeklyDateObject(selectedDate);
 
   const { data: scheduleList = [] } = getDailyScheduleListQuery(dailyObj);
-  const  { deleteSchedule } = useSchedule();
+  const  { deleteSchedule } = useSchedule({dailyDate : dailyObj, weekRangeDate: weeklyObj });
 
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
   const [clickedSchedule, setClickedSchedule] = useState<number | null>(null);
