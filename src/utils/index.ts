@@ -20,6 +20,6 @@ export const getDailyDateObject = (date: Dayjs) => ({
 })
 
 export const getWeeklyDateObject = (date: Dayjs) => ({
-  start : date.format('YYYY-MM-DD'),
-  end : date.format('YYYY-MM-DD'),
+  start : date.startOf('week').format('YYYY-MM-DD'),
+  end : date.endOf('week').format('YYYY-MM-DD'),
 })

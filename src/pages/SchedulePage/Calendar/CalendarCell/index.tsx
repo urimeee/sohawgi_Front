@@ -4,7 +4,6 @@ import selectedEmoji from '../../../../assets/images/Calendar/selectedEmoji.svg'
 import defaultEmoji from '../../../../assets/images/Calendar/defaultEmoji.svg';
 import CheckEmoji from '../../../../assets/images/check.svg?react';
 import { Dayjs } from 'dayjs';
-import { WeekData } from '../../../../types/weeklyCalendar';
 
 type Props = {
   day: Dayjs;
