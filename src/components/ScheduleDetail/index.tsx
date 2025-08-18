@@ -11,7 +11,7 @@ import { trackEvent } from '../../lib/amplitude';
 
 type Props = {
   scheduleId: number;
-  time:string;
+  time?:string;
   title: string;
   checked: boolean;
   onClick: () => void;
@@ -43,14 +43,21 @@ const ScheduleDetail = ({ scheduleId, time, title, onClick, checked, dailyDate, 
 
   return (
     <div className="flex items-center justify-start gap-[0.9rem] w-full ">
-      { done?  <CheckedBox className="w-28 h-28" bgColor={colorPairs[colorIndex].bg} iconColor={colorPairs[colorIndex].icon} onClick={onCheckClick}/> :
-        <DefaultBox onClick={onCheckClick} className={"cursor-pointer"}/>
-      }
+      {done ? (
+        <CheckedBox
+          className="w-28 h-28"
+          bgColor={colorPairs[colorIndex].bg}
+          iconColor={colorPairs[colorIndex].icon}
+          onClick={onCheckClick}
+        />
+      ) : (
+        <DefaultBox onClick={onCheckClick} className={'cursor-pointer'} />
+      )}
       <div
         onClick={onClick}
         className="flex flex-col cursor-pointer w-full gap-[0.05rem]"
       >
-        <div className="text-Grey_05 body_05">{formatTime(time)}</div>
+        {time && (<div className="text-Grey_05 body_05">{formatTime(time)}</div>)}
         <div className="text-Grey_06 body_02">{title}</div>
       </div>
     </div>

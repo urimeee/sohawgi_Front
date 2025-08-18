@@ -7,7 +7,20 @@ const getSchedules = async ({ year, month, day }: DailyScheduleDate) => {
   const response = await api.get('/schedules', {
     params: { year, month, day },
   });
-  return response.data.schedules;
+  const { todo = [], schedules = [] } = response.data;
+
+  const normalizedTodo = todo.map((t: any) => ({
+    ...t,
+    time: null,
+    type: 'todo',
+  }));
+
+  const normalizedSchedules = schedules.map((s: any) => ({
+    ...s,
+    type: 'schedule',
+  }));
+
+  return [...normalizedTodo, ...normalizedSchedules];
 };
 
 // 특정 날짜의 일정을 불러오는 react query

@@ -46,7 +46,7 @@ const Calendar = ({
   return (
       <div className="w-full">
         <div className={'flex place-content-between pb-20'}>
-          <span className={'body_01'}>{startOfWeek.format('YYYY. MM')}</span>
+          <span className={'body_01'}>{selectedDate.format('YYYY. MM')}</span>
           <div className={'flex gap-15'}>
             <button onClick={goToPreviousWeek}>
               <img className={'w-13'} src={prevBtn} alt="prevBtn" />
