@@ -21,7 +21,6 @@ function CalendarCell({day, selectedDate, setSelectedDate, status, counts} : Pro
     className={`flex flex-col body_05 gap-6 hover:cursor-pointer text-center ${isSelected ? 'text-Grey_06' : 'text-Grey_03'}`}
     onClick={() => setSelectedDate(day)}
   >
-    <div>{day.format('dd')}</div>
     <div className={'relative'}>
       <img
         alt={'emoji'}

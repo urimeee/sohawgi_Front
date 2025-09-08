@@ -60,7 +60,7 @@ const AddPageContainer = ({ title, contentTitles }: Props) => {
       <div className="flex flex-col gap-[1.6875rem]">
         {contentTitles.map((contentTitle, index) => (
           <div
-            key={index}
+            key={`content-${index}`}
             onClick={() => onClickHandler(contentTitle)}
             className="flex justify-between hover:cursor-pointer"
           >

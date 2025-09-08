@@ -23,7 +23,7 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
 
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
   const [clickedSchedule, setClickedSchedule] = useState<number | null>(null);
-
+  
   const handleSheet = () => {
     setSheetOpen(!isSheetOpen);
     setClickedSchedule(null);
@@ -49,9 +49,9 @@ const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
           </div>
         ) : (
           <div className="flex flex-col gap-35 pt-40 pb-100">
-            {scheduleList.map((schedule) => (
+            {scheduleList.map((schedule, idx) => (
               <ScheduleDetail
-                key={schedule.scheduleId}
+                key={`sched-${schedule.scheduleId}-${schedule.time ?? 'no-time'}-${idx}`}
                 scheduleId={schedule.scheduleId}
                 title={schedule.title}
                 time={schedule.time}
