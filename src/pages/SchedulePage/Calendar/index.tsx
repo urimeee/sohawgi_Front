@@ -6,7 +6,7 @@ import updateLocale from 'dayjs/plugin/updateLocale';
 import prevBtn from '../../../assets/images/Calendar/prevWeekBtn.svg';
 import nextBtn from '../../../assets/images/Calendar/nextWeekBtn.svg';
 
-import useWeeklyScheduleCountsQuery from '../../../hooks/useWeeklyScheduleCountsQuery';
+import { useWeeklyScheduleCountsQuery, useMonthlyScheduleCountsQuery } from '../../../hooks/useWeeklyScheduleCountsQuery';
 import CalendarCell from './CalendarCell';
 import { convertDateFormat } from '../../../utils';
 
@@ -31,11 +31,14 @@ const Calendar = ({
   const endOfWeek = useMemo(() => selectedDate.endOf('week'), [selectedDate]);
 
   const { data: weeklyScheduleCounts } = useWeeklyScheduleCountsQuery(startOfWeek, endOfWeek);
+  const { data: monthlyScheduleCounts } = useMonthlyScheduleCountsQuery(selectedDate);
 
-  const weeklyScheduleMap = useMemo(() => {
-    if(!weeklyScheduleCounts) return new Map();
-    return new Map(weeklyScheduleCounts.map(item => [item.date, item]));
-  }, [weeklyScheduleCounts]);
+  const scheduleData = isViewMonthly ? monthlyScheduleCounts : weeklyScheduleCounts;
+
+  const scheduleMap = useMemo(() => {
+    if(!scheduleData) return new Map();
+    return new Map(scheduleData.map(item => [item.date, item]));
+  }, [scheduleData]);
 
   const days = Array.from({ length: 7 }).map((_, idx) =>
       startOfWeek.add(idx, 'day'),
@@ -103,7 +106,7 @@ const Calendar = ({
                const isCurrentMonth = day.isSame(selectedDate, 'month');
                 const certainDay = convertDateFormat(day);
 
-                const matchingDate = weeklyScheduleMap.get(certainDay);
+                const matchingDate = scheduleMap.get(certainDay);
 
                 return (
                   <div key={`day-${day.format('YYYY-MM-DD')}`}
@@ -126,7 +129,7 @@ const Calendar = ({
         <div className={'flex place-content-between'}>
           {days.map((day) => {
             const certainDay = convertDateFormat(day);
-            const matchingDate = weeklyScheduleMap.get(certainDay);
+            const matchingDate = scheduleMap.get(certainDay);
 
             return (
               <CalendarCell

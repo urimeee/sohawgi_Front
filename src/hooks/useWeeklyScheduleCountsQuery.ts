@@ -21,7 +21,7 @@ const getScheduleCounts = async (startOfWeek: Dayjs, endOfWeek: Dayjs) => {
   return response.data.scheduleCounts as WeekData[];
 };
 
-const useWeeklyScheduleCountsQuery = (startOfWeek: Dayjs, endOfWeek: Dayjs) => {
+export const useWeeklyScheduleCountsQuery = (startOfWeek: Dayjs, endOfWeek: Dayjs) => {
   const start = startOfWeek.format('YYYY-MM-DD');
   const end = endOfWeek.format('YYYY-MM-DD');
 
@@ -31,4 +31,15 @@ const useWeeklyScheduleCountsQuery = (startOfWeek: Dayjs, endOfWeek: Dayjs) => {
   });
 };
 
-export default useWeeklyScheduleCountsQuery;
+export const useMonthlyScheduleCountsQuery = (selectedDate: Dayjs) => {
+  const startOfMonth = selectedDate.startOf('month');
+  const endOfMonth = selectedDate.endOf('month');
+
+  const start = startOfMonth.format('YYYY-MM-DD');
+  const end = endOfMonth.format('YYYY-MM-DD');
+
+  return useQuery({
+    queryKey: SCHEDULE_QUERY_KEY.monthly({ start, end }),
+    queryFn: () => getScheduleCounts(startOfMonth, endOfMonth),
+  });
+};

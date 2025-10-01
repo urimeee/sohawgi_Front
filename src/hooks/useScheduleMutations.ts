@@ -28,8 +28,7 @@ const useSchedules = (props : UseSchedulesProps = {}) => {
         input_length: text?.length ?? 0,
       })
       // 데이터 최신화
-      queryClient.invalidateQueries({ queryKey: SCHEDULE_QUERY_KEY.daily(dailyDate) });
-      queryClient.invalidateQueries({ queryKey: SCHEDULE_QUERY_KEY.weekly(weekRangeDate) });
+      queryClient.invalidateQueries({ queryKey: SCHEDULE_QUERY_KEY.all });
     },
     onError: (error: any, text) => {
       // 실패 이밴트
