@@ -13,8 +13,7 @@ export const useHandleChecked = ({dailyDate, weekRangeDate} : UseSchedulesProps)
     },
 
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: SCHEDULE_QUERY_KEY.daily(dailyDate)})
-      queryClient.invalidateQueries({queryKey: SCHEDULE_QUERY_KEY.weekly(weekRangeDate)})
+      queryClient.invalidateQueries({queryKey: SCHEDULE_QUERY_KEY.all})
     }
   })
 }
