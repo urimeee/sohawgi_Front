@@ -101,7 +101,7 @@ const Calendar = ({
       {isViewMonthly ? (
         <div key={`month-${selectedDate.format('YYYY-MM')}`}>
           {monthWeeks.map((week) =>(
-            <div key = {`week-${week[0].format('YYYY-MM-DD')}`} className='grid grid-cols-7 gap-x-8'>
+            <div key = {`week-${week[0].format('YYYY-MM-DD')}`} className='grid grid-cols-7'>
               {week.map((day) => {
                const isCurrentMonth = day.isSame(selectedDate, 'month');
                 const certainDay = convertDateFormat(day);
@@ -126,7 +126,7 @@ const Calendar = ({
           ))}
         </div>
       ): (
-        <div className={'flex place-content-between'}>
+        <div className={'grid grid-cols-7'}>
           {days.map((day) => {
             const certainDay = convertDateFormat(day);
             const matchingDate = scheduleMap.get(certainDay);

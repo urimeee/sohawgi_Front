@@ -18,10 +18,10 @@ function CalendarCell({day, selectedDate, setSelectedDate, status, counts} : Pro
   const isSelected = selectedDate?.isSame(day, 'day');
   return (
     <div
-    className={`flex flex-col body_05 gap-6 hover:cursor-pointer text-center ${isSelected ? 'text-Grey_06' : 'text-Grey_03'}`}
+    className={`flex flex-col items-center body_05 gap-6 hover:cursor-pointer text-center ${isSelected ? 'text-Grey_06' : 'text-Grey_03'}`}
     onClick={() => setSelectedDate(day)}
   >
-    <div className={'relative'}>
+    <div className={'relative '}>
       <img
         alt={'emoji'}
         src={isSelected ? selectedEmoji : defaultEmoji}

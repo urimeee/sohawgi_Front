@@ -1,10 +1,9 @@
 import { api } from '../utils/axios';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
-import { UseSchedulesProps } from '../types/schedule';
 import { SCHEDULE_QUERY_KEY } from '../constants/queryKeys';
 
 
-export const useHandleChecked = ({dailyDate, weekRangeDate} : UseSchedulesProps) => {
+export const useHandleChecked = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
