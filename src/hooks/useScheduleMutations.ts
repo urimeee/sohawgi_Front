@@ -29,6 +29,10 @@ const useSchedules = (props : UseSchedulesProps = {}) => {
       })
       // 데이터 최신화
       queryClient.invalidateQueries({ queryKey: SCHEDULE_QUERY_KEY.all });
+      // 일정 개수 쿼리도 무효화하여 말풍선 상태 업데이트
+      queryClient.invalidateQueries({ queryKey: ['scheduleCount'] });
+      // 온보딩 쿼리도 무효화하여 말풍선이 사라지도록 함
+      queryClient.invalidateQueries({ queryKey: ['onboarding'] });
     },
     onError: (error: any, text) => {
       // 실패 이밴트
