@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import useSchedules from '../../hooks/useScheduleMutations';
 import LoadingSpinner from '../LoadingSpinner';
 import ToastBar from '../ToastBar';
@@ -12,6 +12,8 @@ type TextFieldProps = {
   selectedDate: Dayjs;
   needsOnboarding?: boolean;
 }
+
+const DEFAULT_TOAST_MESSAGE = '잠시후에 다시 시도해주세요!';
 
 const TextField = ({ selectedDate, needsOnboarding = false }: TextFieldProps) => {
   const [isOpenToast, setIsOpenToast] = useState(true);
@@ -52,6 +54,20 @@ const TextField = ({ selectedDate, needsOnboarding = false }: TextFieldProps) =>
     setIsOpenToast(!isOpenToast);
   };
 
+  const toastMessage = useMemo(() => {
+    if (!postError) return DEFAULT_TOAST_MESSAGE;
+
+    if (postError instanceof Error && postError.message) {
+      return postError.message;
+    }
+
+    if (typeof postError === 'string') {
+      return postError;
+    }
+
+    return DEFAULT_TOAST_MESSAGE;
+  }, [postError]);
+
   useEffect(() => {
     if (postError) {
       setIsOpenToast(false);
@@ -87,7 +103,7 @@ const TextField = ({ selectedDate, needsOnboarding = false }: TextFieldProps) =>
         </button>
       </div>
       {postError && isOpenToast && (
-        <ToastBar msg={'잠시후에 다시 시도해주세요!'} onClose={closeToast} />
+        <ToastBar msg={toastMessage} onClose={closeToast} />
       )}
       {isPosting && <LoadingSpinner />}
     </form>

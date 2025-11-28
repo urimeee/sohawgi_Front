@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { api } from '../utils/axios';
 import { SCHEDULE_QUERY_KEY } from '../constants/queryKeys';
 import { UseSchedulesProps } from '../types/schedule';
@@ -11,6 +12,17 @@ type CreatedSchedule = {
   endsAt?: string;
 }
 
+type ScheduleErrorResponse = {
+  status?: number;
+  code?: string;
+  message?: string;
+  newAccessToken?: string;
+}
+
+type ScheduleMutationError = Error & ScheduleErrorResponse;
+
+const DEFAULT_ERROR_MESSAGE = '잠시후에 다시 시도해주세요!';
+
 
 const useSchedules = (props : UseSchedulesProps = {}) => {
   const { dailyDate, weekRangeDate } = props;
@@ -18,8 +30,33 @@ const useSchedules = (props : UseSchedulesProps = {}) => {
 
   const postScheduleMutation = useMutation({
     mutationFn: async (text: string) => {
+      try {
         const res = await api.post('/schedules', { text });
         return res.data as CreatedSchedule;
+      } catch (err) {
+        const axiosError = err as AxiosError<ScheduleErrorResponse>;
+        if (axiosError?.response) {
+          const { status, code, message, newAccessToken } = axiosError.response.data ?? {};
+          const scheduleError: ScheduleMutationError = Object.assign(
+            new Error(message ?? DEFAULT_ERROR_MESSAGE),
+            {
+              status,
+              code,
+              newAccessToken,
+            },
+          );
+          throw scheduleError;
+        }
+
+        if (err instanceof Error) {
+          if (!err.message) {
+            err.message = DEFAULT_ERROR_MESSAGE;
+          }
+          throw err;
+        }
+
+        throw new Error(DEFAULT_ERROR_MESSAGE);
+      }
     },
     onSuccess: (data, text) => {
       // 성공 이벤트
