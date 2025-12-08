@@ -25,7 +25,7 @@ const DEFAULT_ERROR_MESSAGE = '잠시후에 다시 시도해주세요!';
 
 
 const useSchedules = (props : UseSchedulesProps = {}) => {
-  const { dailyDate, weekRangeDate } = props;
+  const { dailyDate, weekRangeDate, monthRangeDate } = props;
   const queryClient = useQueryClient();
 
   const postScheduleMutation = useMutation({
@@ -89,6 +89,9 @@ const useSchedules = (props : UseSchedulesProps = {}) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: SCHEDULE_QUERY_KEY.daily(dailyDate) });
       queryClient.invalidateQueries({ queryKey: SCHEDULE_QUERY_KEY.weekly(weekRangeDate) });
+      if (monthRangeDate) {
+        queryClient.invalidateQueries({ queryKey: SCHEDULE_QUERY_KEY.monthly(monthRangeDate) });
+      }
     },
   });
 

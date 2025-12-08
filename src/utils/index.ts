@@ -23,3 +23,8 @@ export const getWeeklyDateObject = (date: Dayjs) => ({
   start : date.startOf('week').format('YYYY-MM-DD'),
   end : date.endOf('week').format('YYYY-MM-DD'),
 })
+
+export const getMonthlyDateObject = (date: Dayjs) => ({
+  start : date.startOf('month').format('YYYY-MM-DD'),
+  end : date.endOf('month').format('YYYY-MM-DD'),
+})

@@ -8,7 +8,7 @@ import DefaultComponent from '../../pages/SchedulePage/DefaultComponent';
 
 import useSchedule from '../../hooks/useScheduleMutations';
 import { Dayjs } from 'dayjs';
-import { getDailyDateObject, getWeeklyDateObject } from '../../utils';
+import { getDailyDateObject, getWeeklyDateObject, getMonthlyDateObject } from '../../utils';
 
 type ScheduleCardProps = {
   selectedDate: Dayjs;
@@ -17,9 +17,10 @@ type ScheduleCardProps = {
 const ScheduleCard = ({ selectedDate }: ScheduleCardProps) => {
   const dailyObj = getDailyDateObject(selectedDate);
   const weeklyObj = getWeeklyDateObject(selectedDate);
+  const monthlyObj = getMonthlyDateObject(selectedDate);
 
   const { data: scheduleList = [] } = getDailyScheduleListQuery(dailyObj);
-  const  { deleteSchedule } = useSchedule({dailyDate : dailyObj, weekRangeDate: weeklyObj });
+  const  { deleteSchedule } = useSchedule({dailyDate : dailyObj, weekRangeDate: weeklyObj, monthRangeDate: monthlyObj });
 
   const [isSheetOpen, setSheetOpen] = useState<boolean>(false);
   const [clickedSchedule, setClickedSchedule] = useState<number | null>(null);

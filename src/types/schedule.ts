@@ -9,7 +9,13 @@ export type WeeklyScheduleRange = {
   end: string,
 }
 
+export type MonthlyScheduleRange = {
+  start: string,
+  end: string,
+}
+
 export type UseSchedulesProps = {
   dailyDate ?: DailyScheduleDate,
   weekRangeDate ?: WeeklyScheduleRange,
+  monthRangeDate ?: MonthlyScheduleRange,
 }
