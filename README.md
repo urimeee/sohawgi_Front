@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+# 🧯 소화기 (SoHwaGi)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 메모하듯 적으면, AI가 알아서 캘린더에 등록해주는 일정 관리 서비스
 
-## Available Scripts
+[![Vercel](https://img.shields.io/badge/배포-Vercel-black?logo=vercel)](https://sohawgi-front.vercel.app)
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.9-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18-61dafb?logo=react)](https://reactjs.org/)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 서비스 소개
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+"3시에 팀 미팅, 내일 오후 보고서 제출" — 이렇게 자연어로 메모하면 AI가 자동으로 일정을 파악해 캘린더에 등록해줍니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+별도의 폼 입력 없이, 평소 메모하듯 적는 것만으로 일정 관리가 완성됩니다.
 
-### `npm test`
+**→ 서비스 바로가기: [sohawgi-front.vercel.app](https://sohawgi-front.vercel.app)**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 주요 기능
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **자연어 일정 등록** — 자유로운 텍스트 입력을 AI가 분석해 날짜·시간·제목을 자동 추출
+- **캘린더 자동 등록** — 분석된 일정이 캘린더에 즉시 반영
+- **반응형 지원** — 모바일·데스크톱 모두 최적화된 UI
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 기술 스택
 
-### `npm run eject`
+| 분류 | 기술 |
+|------|------|
+| 언어 | TypeScript |
+| 프레임워크 | React 18 |
+| 빌드 도구 | Vite |
+| 스타일링 | Tailwind CSS |
+| 상태·데이터 페칭 | TanStack Query (React Query v5) |
+| HTTP | Axios |
+| 날짜 처리 | Day.js |
+| 분석 | Amplitude |
+| 테스트 | Vitest, Testing Library, MSW |
+| 배포 | Vercel |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 시작하기
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 사전 요구사항
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Node.js 18 이상
+- npm 또는 yarn
 
-## Learn More
+### 설치 및 실행
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+# 저장소 클론
+git clone https://github.com/scheduler-SoHwaGi/sohawgi_Front.git
+cd sohawgi_Front
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# 의존성 설치
+npm install
 
-### Code Splitting
+# 개발 서버 실행 (http://localhost:5173)
+npm run dev
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 환경변수 설정
 
-### Analyzing the Bundle Size
+`.env` 파일을 루트에 생성하고 필요한 환경변수를 설정하세요.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```env
+VITE_API_BASE_URL=your_api_url
+```
 
-### Making a Progressive Web App
+### 빌드
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm run build
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 스크립트
 
-### Deployment
+| 명령어 | 설명 |
+|--------|------|
+| `npm run dev` | 개발 서버 실행 |
+| `npm run build` | 프로덕션 빌드 |
+| `npm run preview` | 빌드 결과물 미리보기 |
+| `npm run test` | 테스트 실행 |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 프로젝트 구조
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+src/
+├── components/     # 재사용 컴포넌트
+├── pages/          # 페이지 컴포넌트
+├── hooks/          # 커스텀 훅
+├── api/            # API 요청 함수
+├── types/          # TypeScript 타입 정의
+└── utils/          # 유틸리티 함수
+```
+
+---
+
+## 기여 방법
+
+PR 전 `.github/pull_request_template.md`를 참고해 주세요.
+
+1. 브랜치 생성 (`feat/기능명`)
+2. 변경사항 커밋
+3. PR 생성 및 리뷰 요청
+
+---
+
+## 팀
+
+| 역할 | 담당 |
+|------|------|
+| Frontend | 김유림, 구나연 |
+| Backend | 서예진 |
